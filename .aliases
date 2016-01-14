@@ -1,0 +1,43 @@
+# ----------------- ALIAS --------------------
+
+
+# This alias do colored output on ls (linux)
+alias ls="ls --color"
+
+# Simple shortcut to clear
+alias c="clear"
+
+# Asks before overwrite existing file
+alias mv="mv -i"
+
+# This alias reloads this file. Change to your specific file.
+#alias reload_bashrc=". ~/.bashrc"
+
+# To move upp one folder
+alias ..="cd ../"
+
+# Compiles C using C99 Standard and extra warnings
+alias cc='cc -std=c99 -pedantic -Wextra'
+
+# Opens file with default app (linux)
+alias open='xdg-open'
+
+# gcc Developer alias
+alias gcc='gcc -std=c99 -pedantic -Wall \
+    -Wno-missing-braces -Wextra -Wno-missing-field-initializers -Wformat=2 \
+    -Wswitch-default -Wswitch-enum -Wcast-align -Wpointer-arith \
+    -Wbad-function-cast -Wstrict-overflow=5 -Wstrict-prototypes -Winline \
+    -Wundef -Wnested-externs -Wcast-qual -Wshadow -Wunreachable-code \
+    -Wlogical-op -Wfloat-equal -Wstrict-aliasing=2 -Wredundant-decls \
+    -Wold-style-definition -Werror \
+    -ggdb3 \
+    -O0 \
+    -fno-omit-frame-pointer -ffloat-store -fno-common -fstrict-aliasing \
+    -lm'
+
+# gcc release alias
+alias rgcc='gcc -std=c99 -pedantic -O3 -DNDEBUG -flto -lm'
+
+
+# --------------- END ALIAS ------------------
+
