@@ -1,0 +1,43 @@
+[global_config]
+  title_transmit_bg_color = "#8C99A3"
+  focus = system
+  title_inactive_bg_color = "#65737E"
+[keybindings]
+  go_left = <Super>Left
+  go_down = <Super>Down
+  go_up = <Super>Up
+  go_right = <Super>Right
+  full_screen = section
+[profiles]
+  [[default]]
+    scrollbar_position = hidden
+    palette = "#1b2b34:#ec5f67:#99c794:#fac863:#6699cc:#c594c5:#5fb3b3:#c0c5ce:#65737e:#ec5f67:#99c794:#fac863:#6699cc:#c594c5:#5fb3b3:#d8dee9"
+    copy_on_selection = True
+    background_image = None
+    background_darkness = 0.97
+    background_type = transparent
+    use_system_font = False
+    cursor_color = "#C0C5CE"
+    foreground_color = "#c0c5ce"
+    show_titlebar = False
+    font = Droid Sans Mono for Powerline 12
+    background_color = "#1b2b34"
+    allow_bold = False
+  [[Base16 OceanicNext Dark]]
+    palette = "#1b2b34:#ec5f67:#99c794:#fac863:#6699cc:#c594c5:#5fb3b3:#c0c5ce:#65737e:#ec5f67:#99c794:#fac863:#6699cc:#c594c5:#5fb3b3:#d8dee9"
+    background_image = None
+    cursor_color = "#C0C5CE"
+    foreground_color = "#c0c5ce"
+    copy_on_selection = True
+    background_color = "#1b2b34"
+    allow_bold = False
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
