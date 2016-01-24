@@ -25,7 +25,8 @@ set hlsearch			" highlight search
 set showmatch			" highlight matching brackets
 set visualbell			" no beeping
 set showcmd			" show partial command at bottom
-
+set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+set encoding=utf-8
 
 " Pathogen plugin handle
 execute pathogen#infect()
@@ -49,4 +50,7 @@ let g:airline_theme='bubblegum'
 
 """ fugitive
 nnoremap <Leader>gs :Gstatus<CR>
+
+""" tcomment
+map <Leader>c <C-_><C-_>
 
