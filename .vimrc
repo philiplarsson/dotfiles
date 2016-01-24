@@ -54,3 +54,8 @@ nnoremap <Leader>gs :Gstatus<CR>
 """ tcomment
 map <Leader>c <C-_><C-_>
 
+""" ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
