@@ -6,3 +6,4 @@ export TERM="xterm-256color"
 # make Vim the default editor
 set --export EDITOR "vim -f"
 
+set PATH ~/Applications $PATH

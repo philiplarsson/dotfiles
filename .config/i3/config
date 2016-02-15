@@ -179,6 +179,9 @@ exec --no-startup-id "feh --bg-scale ~/Dropbox/Photos/wallpaper/facetsred.jpg"
 # exec_always --no-startup-id "xrandr --output HDMI-0 --rotate right --right-of DVI-D-0"
 # exec_always --no-startup-id "xrandr --output DVI-I-1 --right-of HDMI-0"
 
+exec_always --no-startup-id "xrandr --output HDMI-0 --rotate normal"
+exec_always --no-startup-id "xrandr --output HDMI-0 --right-of DVI-I-1"
+
 
 ## Set position
 #exec --no-startup-id "xrandr --output DVI-I-1 --pos 3000x400"

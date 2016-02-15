@@ -1,13 +1,17 @@
 [global_config]
-  title_transmit_bg_color = "#8C99A3"
   focus = system
+  always_on_top = True
+  borderless = True
+  title_transmit_bg_color = "#8C99A3"
+  hide_from_taskbar = True
   title_inactive_bg_color = "#65737E"
 [keybindings]
-  go_left = <Super>Left
-  go_down = <Super>Down
   go_up = <Super>Up
+  full_screen = <Alt>Return
+  go_down = <Super>Down
   go_right = <Super>Right
-  full_screen = section
+  go_left = <Super>Left
+  hide_window = section
 [profiles]
   [[default]]
     scrollbar_position = hidden
@@ -28,6 +32,7 @@
     background_image = None
     cursor_color = "#C0C5CE"
     foreground_color = "#c0c5ce"
+    show_titlebar = False
     copy_on_selection = True
     background_color = "#1b2b34"
     allow_bold = False
