@@ -27,6 +27,11 @@ set visualbell			" no beeping
 set showcmd			" show partial command at bottom
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set encoding=utf-8
+set spelllang=en_us             " Set spell region to USA
+
+" Spellbinding
+nmap <silent> <leader>s :set spell!<CR>
+
 
 " Pathogen plugin handle
 execute pathogen#infect()
