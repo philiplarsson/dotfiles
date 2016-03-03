@@ -1,9 +1,7 @@
 [global_config]
-  focus = system
-  always_on_top = True
-  borderless = True
   title_transmit_bg_color = "#8C99A3"
-  hide_from_taskbar = True
+  borderless = True
+  focus = system
   title_inactive_bg_color = "#65737E"
 [keybindings]
   go_up = <Super>Up

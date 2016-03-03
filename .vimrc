@@ -16,8 +16,8 @@ set number			" show line number
 set showmode			" show current mode
 set expandtab			" use space instead of tab
 set autoindent			" smart indenting
-set shiftwidth=4		" set number of spaces as tab
-set softtabstop=4		" correct indent for tab in insert mode
+set shiftwidth=2		" set number of spaces as tab
+set softtabstop=2		" correct indent for tab in insert mode
 set smartcase			" smarter search, capital letters case sent
 set ignorecase			" ignore case when searching
 set incsearch                   " incremental search
@@ -28,6 +28,9 @@ set showcmd			" show partial command at bottom
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set encoding=utf-8
 set spelllang=en_us             " Set spell region to USA
+
+" Paste toggle
+set pastetoggle=<F2>
 
 " Spellbinding
 nmap <silent> <leader>s :set spell!<CR>
@@ -66,4 +69,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 """ CTRL-P
 map <Leader>p <c-p>
+
+""" vim-rails
+" map <Leader>t :Rake<CR>
 
