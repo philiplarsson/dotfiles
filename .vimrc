@@ -35,6 +35,8 @@ set pastetoggle=<F2>
 " Spellbinding
 nmap <silent> <leader>s :set spell!<CR>
 
+" Indent file
+map <LEADER>i mzgg=G`z
 
 " Pathogen plugin handle
 execute pathogen#infect()
@@ -70,6 +72,10 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 """ CTRL-P
 map <Leader>p <c-p>
 
+""" Emmet-vim
+let g:user_emmet_leader_key='<C-L>'
+
 """ vim-rails
 " map <Leader>t :Rake<CR>
+
 
