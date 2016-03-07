@@ -26,10 +26,20 @@ set showmatch			" highlight matching brackets
 set visualbell			" no beeping
 set showcmd			" show partial command at bottom
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
-set encoding=utf-8
+set encoding=utf-8              " utf-8 all the way
+set fileencoding=utf-8
+set termencoding=utf-8
 set spelllang=en_us             " Set spell region to USA
 
+set background=dark             " dark background
+
+" Highlight line 80 and onward
+set colorcolumn=80
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+
+
 " Paste toggle
+
 set pastetoggle=<F2>
 
 " Spellbinding
@@ -78,4 +88,17 @@ let g:user_emmet_leader_key='<C-L>'
 """ vim-rails
 " map <Leader>t :Rake<CR>
 
+""" syntastic (syntax checker)
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -pedantic-errors -Wold-style-cast -std=c++11' 
 
