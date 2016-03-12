@@ -16,10 +16,11 @@ fi
 
 mdfile=$1'.md'
 file=$1'.html'
+mathjaxlink='http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'
 
 echo ' Converting using pandoc.'
 # Table of contents, mathjax, css file, output to .html file.
-pandoc $mdfile --toc --mathjax -c $cssfile -o $file
+pandoc $mdfile --toc --mathjax=$mathjaxlink -c $cssfile -o $file
 echo " Created $file"
 
 echo ' Add container div after body tag.'

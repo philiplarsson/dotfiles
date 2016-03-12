@@ -38,6 +38,9 @@ set colorcolumn=80
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 
 
+" VIM find do end on ruby files (use %)
+runtime macros/matchit.vim
+
 " Paste toggle
 
 set pastetoggle=<F2>
@@ -97,7 +100,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['jshint']
 
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -pedantic-errors -Wold-style-cast -std=c++11' 
