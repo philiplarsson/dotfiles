@@ -9,3 +9,6 @@ export TERM="screen-256color"
 set --export EDITOR "vim -f"
 
 set PATH ~/Applications $PATH
+set fisher_home ~/.local/share/fisherman
+set fisher_config ~/.config/fisherman
+source $fisher_home/config.fish
