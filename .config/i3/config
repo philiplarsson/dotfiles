@@ -213,11 +213,12 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Set Background
-exec_always feh --bg-scale /home/yoda/Wallpapers/wp-lambo.jpg
+exec_always feh --bg-scale /home/yoda/Dropbox/Photos/wallpaper/wp-mountain.jpg
 
 exec compton -f
 
-# Run programs
+# Run programs (find class with xprop)
 assign [class="OVPN"] $workspace8
 exec /opt/openvpnclient/runclient.sh
 
+assign [class="Skype"] $workspace9
