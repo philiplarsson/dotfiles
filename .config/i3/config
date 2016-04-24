@@ -217,6 +217,8 @@ exec_always feh --bg-scale /home/yoda/Dropbox/Photos/wallpaper/wp-mountain.jpg
 
 exec compton -f
 
+# Dropbox
+exec dropbox start
 # Run programs (find class with xprop)
 assign [class="OVPN"] $workspace8
 exec /opt/openvpnclient/runclient.sh
