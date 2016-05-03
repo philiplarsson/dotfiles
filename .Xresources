@@ -1,45 +1,43 @@
-URxvt.font: xft:Droid Sans Mono for Powerline:size=13
+URxvt.font: xft:Monospace:size=12
 URxvt.scrollBar: false
 
-! urxvt*depth: 32 
-! urxvt*background: rgba:0000/0000/0200/c800
 URxvt.transparent: true
-URxvt.shading: 5 
+URxvt.shading: 10
 
 URxvt.foreground: #eeeeee
 
-! Base16 Solarized
-! Scheme: Ethan Schoonover (http://ethanschoonover.com/solarized)
+! Base16 Tomorrow
+! Scheme: Chris Kempson (http://chriskempson.com)
 
-URxvt*background:                     #002b36
-URxvt*foreground:                     #93a1a1
-URxvt*cursorColor:                    #93a1a1
+URxvt*background:                     #1d1f21
+URxvt*foreground:                     #c5c8c6
+URxvt*cursorColor:                    #c5c8c6
 
-URxvt*scrollColor:                    #93a1a1
-URxvt*highlightColor:                 #586e75
-URxvt*highlightTextColor:             #839496
+URxvt*scrollColor:                    #c5c8c6
+URxvt*highlightColor:                 #373b41
+URxvt*highlightTextColor:             #b4b7b4
 
-URxvt*color0:                         #002b36
-URxvt*color1:                         #dc322f
-URxvt*color2:                         #859900
-URxvt*color3:                         #b58900
-URxvt*color4:                         #268bd2
-URxvt*color5:                         #6c71c4
-URxvt*color6:                         #2aa198
-URxvt*color7:                         #93a1a1
-URxvt*color8:                         #657b83
-URxvt*color9:                         #dc322f
-URxvt*color10:                        #859900
-URxvt*color11:                        #b58900
-URxvt*color12:                        #268bd2
-URxvt*color13:                        #6c71c4
-URxvt*color14:                        #2aa198
-URxvt*color15:                        #fdf6e3
+URxvt*color0:                         #1d1f21
+URxvt*color1:                         #cc6666
+URxvt*color2:                         #b5bd68
+URxvt*color3:                         #f0c674
+URxvt*color4:                         #81a2be
+URxvt*color5:                         #b294bb
+URxvt*color6:                         #8abeb7
+URxvt*color7:                         #c5c8c6
+URxvt*color8:                         #969896
+URxvt*color9:                         #cc6666
+URxvt*color10:                        #b5bd68
+URxvt*color11:                        #f0c674
+URxvt*color12:                        #81a2be
+URxvt*color13:                        #b294bb
+URxvt*color14:                        #8abeb7
+URxvt*color15:                        #ffffff
 
-URxvt*color16:                        #cb4b16
-URxvt*color17:                        #d33682
-URxvt*color18:                        #073642
-URxvt*color19:                        #586e75
-URxvt*color20:                        #839496
-URxvt*color21:                        #eee8d5
+URxvt*color16:                        #de935f
+URxvt*color17:                        #a3685a
+URxvt*color18:                        #282a2e
+URxvt*color19:                        #373b41
+URxvt*color20:                        #b4b7b4
+URxvt*color21:                        #e0e0e0
 
