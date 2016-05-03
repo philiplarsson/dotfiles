@@ -1,0 +1,1 @@
+/home/vin1/.config/fisherman/bass/functions/bass.fish
