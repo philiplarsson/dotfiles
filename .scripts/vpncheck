@@ -1,0 +1,11 @@
+#!/bin/bash
+
+value=$( ifconfig -a | grep -ic "tun0" )
+if [ $value -eq 1 ]
+then
+#	echo "It is known."
+	echo "<span color='#59a659'> UP</span>"
+else
+#	echo "It is not known."
+	echo "<span color='red'> Down</span>"
+fi
