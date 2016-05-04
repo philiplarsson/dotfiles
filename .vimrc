@@ -5,11 +5,11 @@ let mapleader="ö"
 
 " Clear hlsearch when pressing enter
 nnoremap <silent> <CR> :noh<CR><CR>
+
 " Bind Q to :
 nnoremap Q :
 
 scriptencoding utf-8
-
 syntax on
 
 set number			" show line number
@@ -30,8 +30,9 @@ set encoding=utf-8              " utf-8 all the way
 set fileencoding=utf-8
 set termencoding=utf-8
 set spelllang=en_us             " Set spell region to USA
-
 set background=dark             " dark background
+set history=500			" set number of history lines for vim to remember
+set autoread			" auto read when a file has changed from the outside
 
 " Highlight line 80 and onward
 set colorcolumn=80
@@ -42,7 +43,6 @@ highlight ColorColumn ctermbg=235 guibg=#2c2d27
 runtime macros/matchit.vim
 
 " Paste toggle
-
 set pastetoggle=<F2>
 
 " Spellbinding
@@ -58,51 +58,47 @@ filetype plugin indent on
 
 """"" Plugins
 """ Easymotion
-map <Leader> <Plug>(easymotion-prefix)
-nmap <LEADER><SPACE> <Plug>(easymotion-s)
-let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-let g:EasyMotion_smartcase = 1
+"map <Leader> <Plug>(easymotion-prefix)
+"nmap <LEADER><SPACE> <Plug>(easymotion-s)
+"let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+"let g:EasyMotion_smartcase = 1
 
 """ NERDTree
-nmap <Leader>nt :NERDTreeToggle<CR>
+"nmap <Leader>nt :NERDTreeToggle<CR>
 
 """ vim-airline
-set laststatus=2
-let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
+"set laststatus=2
+"let g:airline_powerline_fonts = 1
+"let g:airline_theme='bubblegum'
 
-""" fugitive
-nnoremap <Leader>gs :Gstatus<CR>
 
 """ tcomment
-map <Leader>c <C-_><C-_>
+"map <Leader>c <C-_><C-_>
 
 """ ultisnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 """ CTRL-P
-map <Leader>p <c-p>
+"map <Leader>p <c-p>
 
 """ Emmet-vim
-let g:user_emmet_leader_key='<C-L>'
+"let g:user_emmet_leader_key='<C-L>'
 
-""" vim-rails
-" map <Leader>t :Rake<CR>
 
 """ syntastic (syntax checker)
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['jshint']
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_checkers = ['jshint']
 
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -pedantic-errors -Wold-style-cast -std=c++11' 
-let g:syntastic_scss_sass_quiet_messages = {
-    \ "regex": 'File to import not found or unreadable', }
+"let g:syntastic_cpp_compiler = 'g++'
+"let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -pedantic-errors -Wold-style-cast -std=c++11' 
+"let g:syntastic_scss_sass_quiet_messages = {
+"    \ "regex": 'File to import not found or unreadable', }
