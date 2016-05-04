@@ -33,11 +33,12 @@ set spelllang=en_us             " Set spell region to USA
 set background=dark             " dark theme background (used by vim-airline)
 set history=500			" set number of history lines for vim to remember
 set autoread			" auto read when a file has changed from the outside
+set undofile                    " use undo file for persistent undoes
+set undodir=/home/vin1/.vimundo/
 
 " Highlight line 80 and onward
 set colorcolumn=80
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-
 
 " VIM find do end on ruby files (use %)
 runtime macros/matchit.vim
