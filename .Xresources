@@ -1,4 +1,4 @@
-URxvt.font: xft:Monospace:size=12
+URxvt.font: xft:DejaVu Sans Mono for Powerline:size=12
 URxvt.scrollBar: false
 
 URxvt.transparent: true

@@ -30,7 +30,7 @@ set encoding=utf-8              " utf-8 all the way
 set fileencoding=utf-8
 set termencoding=utf-8
 set spelllang=en_us             " Set spell region to USA
-set background=dark             " dark background
+set background=dark             " dark theme background (used by vim-airline)
 set history=500			" set number of history lines for vim to remember
 set autoread			" auto read when a file has changed from the outside
 
@@ -53,39 +53,54 @@ map <LEADER>i mzgg=G`z
 
 " Pathogen plugin handle
 execute pathogen#infect()
-
 filetype plugin indent on
 
-""""" Plugins
-""" Easymotion
-"map <Leader> <Plug>(easymotion-prefix)
-"nmap <LEADER><SPACE> <Plug>(easymotion-s)
-"let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
-"let g:EasyMotion_smartcase = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                  Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""" Installed """"""""
+" 1. CTRL-P 
+" 2. Supertab
+" 3. Easymotion
+" 4. multiple-cursors
+" 5. goyo
+" 6. vim-airline
+" 7. vim-airline-themes
+" 8. tcomment
+""""""""""""""""""""""""
+
+"1. CTRL-P
+map <Leader>p <c-p>
+
+"3. Easymotion
+map <Leader> <Plug>(easymotion-prefix)
+nmap <LEADER><SPACE> <Plug>(easymotion-s)
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+let g:EasyMotion_smartcase = 1
+
+"5. Goyo
+nmap <Leader>g :Goyo<CR>
+
+"6. vim-airline
+set laststatus=2
+let g:airline_powerline_fonts = 1
+let g:airline_theme='bubblegum'
+
+"8. tcomment
+map <Leader>c <C-_><C-_>
+
 
 """ NERDTree
 "nmap <Leader>nt :NERDTreeToggle<CR>
-
-""" vim-airline
-"set laststatus=2
-"let g:airline_powerline_fonts = 1
-"let g:airline_theme='bubblegum'
-
-
-""" tcomment
-"map <Leader>c <C-_><C-_>
 
 """ ultisnips
 "let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<tab>"
 "let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-""" CTRL-P
-"map <Leader>p <c-p>
-
 """ Emmet-vim
 "let g:user_emmet_leader_key='<C-L>'
-
 
 """ syntastic (syntax checker)
 "set statusline+=%#warningmsg#
