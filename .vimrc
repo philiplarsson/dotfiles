@@ -47,7 +47,7 @@ runtime macros/matchit.vim
 set pastetoggle=<F2>
 
 " Spellbinding
-nmap <silent> <leader>s :set spell!<CR>
+nmap <silent> <LEADER>s :set spell!<CR>
 
 " Indent file
 map <LEADER>i mzgg=G`z
@@ -72,16 +72,16 @@ filetype plugin indent on
 """"""""""""""""""""""""
 
 "1. CTRL-P
-map <Leader>p <c-p>
+map <LEADER>p <c-p>
 
 "3. Easymotion
-map <Leader> <Plug>(easymotion-prefix)
+map <LEADER> <Plug>(easymotion-prefix)
 nmap <LEADER><SPACE> <Plug>(easymotion-s)
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:EasyMotion_smartcase = 1
 
 "5. Goyo
-nmap <Leader>g :Goyo<CR>
+nmap <LEADER>g :Goyo<CR>
 
 "6. vim-airline
 set laststatus=2
@@ -89,11 +89,11 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 
 "8. tcomment
-map <Leader>c <C-_><C-_>
+map <LEADER>c <C-_><C-_>
 
 
 """ NERDTree
-"nmap <Leader>nt :NERDTreeToggle<CR>
+"nmap <LEADER>nt :NERDTreeToggle<CR>
 
 """ ultisnips
 "let g:UltiSnipsExpandTrigger="<tab>"
