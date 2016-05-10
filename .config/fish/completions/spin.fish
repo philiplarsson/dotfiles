@@ -1,0 +1,1 @@
+/home/vin1/.config/fisherman/spin/completions/spin.fish
