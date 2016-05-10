@@ -3,6 +3,9 @@ URxvt.font: xft:Droid Sans Mono for Powerline:size=11
 ! URxvt.font: xft:Ubuntu Mono derivative Powerline:size=12
 URxvt.scrollBar: false
 
+URxvt.cursorBlink: 1
+URxvt.cursorUnderline: 1
+
 URxvt.transparent: true
 URxvt.shading: 10
 
