@@ -69,6 +69,7 @@ filetype plugin indent on
 " 6. vim-airline
 " 7. vim-airline-themes
 " 8. tcomment
+" 9. vim-javascript-syntax
 """"""""""""""""""""""""
 
 "1. CTRL-P
