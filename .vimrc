@@ -70,6 +70,9 @@ filetype plugin indent on
 " 7. vim-airline-themes
 " 8. tcomment
 " 9. vim-javascript-syntax
+" 10. delimitMate
+" 11. YouCompleteMe
+" 12. tern-for-vim
 """"""""""""""""""""""""
 
 "1. CTRL-P
@@ -92,6 +95,11 @@ let g:airline_theme='bubblegum'
 "8. tcomment
 map <LEADER>c <C-_><C-_>
 
+"10. delimitMate
+" go to end of line with <C-g>g
+
+"11. YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 """ NERDTree
 "nmap <LEADER>nt :NERDTreeToggle<CR>
