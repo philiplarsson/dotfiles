@@ -6,6 +6,8 @@ URxvt.scrollBar: false
 URxvt.cursorBlink: 1
 URxvt.cursorUnderline: 1
 
+URxvt.termName: rxvt-256color
+
 URxvt.transparent: true
 URxvt.shading: 10
 

@@ -36,7 +36,7 @@ bindsym $mod+Return exec --no-startup-id urxvt
 bindsym $mod+Shift+q kill
 
 # start rofi (replaces dmenu)
-bindsym $mod+d exec "rofi -modi \\"run,drun\\" -show run -lines 3 -eh 2 -width 100 -padding 480 -opacity \\"85\\" -bw 0 -bc \\"$bg-color\\" -bg \\"$bg-color\\" -fg \\"$text-color\\" -hlbg \\"$bg-color\\" -hlfg \\"#9575cd\\" -font \\"System San Francisco Display 18\\""
+bindsym $mod+space exec "rofi -modi \\"run,drun\\" -show run -lines 3 -eh 2 -width 100 -padding 480 -opacity \\"85\\" -bw 0 -bc \\"$bg-color\\" -bg \\"$bg-color\\" -fg \\"$text-color\\" -hlbg \\"$bg-color\\" -hlfg \\"#9575cd\\" -font \\"System San Francisco Display 18\\""
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec dmenu_run
@@ -84,10 +84,11 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+# bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+t floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+t focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -201,7 +202,7 @@ assign [class="OVPN"] $workspace8
 assign [class="Skype"] $workspace9
 
 # ---------  Custom startups ------------
-exec_always feh --bg-scale ~/Dropbox/Photos/wallpaper/wp-mountain.jpg
+exec_always feh --bg-scale ~/Dropbox/Photos/wallpaper/nissangtr.jpg
 exec_always compton -f
 exec dropbox start
 exec /opt/openvpnclient/runclient.sh
