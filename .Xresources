@@ -1,4 +1,3 @@
-! URxvt.font: xft:DejaVu Sans Mono for Powerline:size=12
 URxvt.font: xft:Droid Sans Mono for Powerline:size=11
 ! URxvt.font: xft:Ubuntu Mono derivative Powerline:size=12
 URxvt.scrollBar: false
