@@ -102,7 +102,9 @@ bindsym $mod+a focus parent
 set $workspace1 "1:  "
 set $workspace2 "2:  "
 set $workspace3 "3:  "
-set $workspace4 "4:  "
+set $workspace4 "4:  "
+set $workspace6 "6: "
+set $workspace7 "7: "
 set $workspace8 "8: "
 set $workspace9 "9: "
 set $workspace10 "10: "
@@ -113,8 +115,8 @@ bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
 bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
+bindsym $mod+6 workspace $workspace6 
+bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
 bindsym $mod+9 workspace $workspace9
 bindsym $mod+0 workspace $workspace10 
@@ -203,7 +205,7 @@ assign [class="OVPN"] $workspace8
 assign [class="Skype"] $workspace9
 
 # ---------  Custom startups ------------
-exec_always feh --bg-scale ~/Dropbox/Photos/wallpaper/nissangtr.jpg
+exec_always feh --bg-scale ~/Dropbox/Photos/wallpaper/DARKWING.jpg
 exec_always compton -f
 exec dropbox start
 exec /opt/openvpnclient/runclient.sh
