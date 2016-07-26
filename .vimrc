@@ -35,6 +35,11 @@ set history=500			" set number of history lines for vim to remember
 set autoread			" auto read when a file has changed from the outside
 set undofile                    " use undo file for persistent undoes
 set undodir=/home/vin1/.vimundo/
+set foldmethod=indent           " enable folding"
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <SPACE> za
 
 " Highlight line 80 and onward
 set colorcolumn=80
@@ -51,6 +56,29 @@ nmap <silent> <LEADER>s :set spell!<CR>
 
 " Indent file
 map <LEADER>i mzgg=G`z
+
+" Pretty python code
+let python_highlight_all=1
+
+"""" PEP8 (python) indentation
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+"python with virtualenv support
+py3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+   project_base_dir = os.environ['VIRTUAL_ENV']
+   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+   execfile(activate_this, dict(__file__=activate_this))
+EOF
 
 " Pathogen plugin handle
 execute pathogen#infect()
@@ -73,6 +101,10 @@ filetype plugin indent on
 " 10. delimitMate
 " 11. YouCompleteMe
 " 12. tern-for-vim
+" 13. vim-indent-guides
+" 14. simplyfold - better python folding
+" 15. indentpython - better pep8 indent in python
+" 16. syntastic 
 """"""""""""""""""""""""
 
 "1. CTRL-P
@@ -99,7 +131,30 @@ map <LEADER>c <C-_><C-_>
 " go to end of line with <C-g>g
 
 "11. YouCompleteMe
+"" Let autocomplete window go away when done
 let g:ycm_autoclose_preview_window_after_completion = 1
+map <LEADER>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+
+"13. vim-indent-guides
+" toggle with <Leader>ig
+
+"14. simplyfold
+let g:SimpylFold_docstring_preview = 1
+
+
+"16.  syntastic (syntax checker)
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_python_checkers = ["pylint"]
+let g:syntastic_python_pylint_args = '--disable=unused-wildcard-import,missing-docstring,wildcard-import'
 
 """ NERDTree
 "nmap <LEADER>nt :NERDTreeToggle<CR>
@@ -112,15 +167,6 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 """ Emmet-vim
 "let g:user_emmet_leader_key='<C-L>'
 
-""" syntastic (syntax checker)
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
 "let g:syntastic_javascript_checkers = ['jshint']
 
 "let g:syntastic_cpp_compiler = 'g++'
