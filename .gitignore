@@ -2,3 +2,5 @@
 fishd.*
 fish_history
 
+# vimundo files
+.nvimundo/

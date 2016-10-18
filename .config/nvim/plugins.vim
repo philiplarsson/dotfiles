@@ -11,7 +11,15 @@ Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'pbogut/deoplete-padawan'
 Plug 'ervandew/supertab'
+Plug 'stephpy/vim-php-cs-fixer'
+Plug 'godlygeek/tabular'
+Plug 'tomtom/tcomment_vim'
+Plug 'jwalton512/vim-blade'
+Plug 'mattn/emmet-vim'
+Plug 'Raimondi/delimitMate'
+Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -26,7 +34,11 @@ let g:EasyMotion_smartcase = 1
 map <LEADER>p <C-P>
 nmap <LEADER>yp :CtrlPBufTag<CR>     "Find functions. Requires exuberant-ctags
 nmap <LEADER>rf :CtrlPMRUFiles<CR>   "Recently used files
-
+"" Speed up CTRL-P
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " Vim airline
 set laststatus=2
@@ -73,4 +85,25 @@ inoremap <silent><expr> <C-Space> deoplete#mappings#manual_complete()
 inoremap <silent><expr> <Esc> pumvisible() ? "<C-e><Esc>" : "<Esc>"
 
 " Supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<c-n>"       " Cycle completion list in opposite direction
+
+" Vim-php-cs-fixer
+let g:php_cs_fixer_level = "psr2"
+nnoremap <silent><leader>fp :call PhpCsFixerFixFile()<CR>
+let g:php_cs_fixer_enable_default_mapping = 0
+
+" tcomment_vim
+map <LEADER>c <C-_><C-_>
+
+" emmet-vim
+" let g:user_emmet_leader_key='<C-e>'
+let g:user_emmet_expandabbr_key='<C-@>'
+
+" vim-indent-guides
+map <LEADER>si <LEADER>ig
+
+" indentLine
+let g:indentLine_color_term = 248 
+let g:indentLine_char = '┆'
+map <LEADER>ti :IndentLinesToggle<CR>
+let g:indentLine_enabled = 0
