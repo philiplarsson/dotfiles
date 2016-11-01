@@ -20,14 +20,16 @@ set autowriteall                     " automatically write the file when switchi
 set undofile                         " use undo file
 set undodir=~/.config/nvim/.nvimundo
 set splitright                       " open new splits to the right
+set visualbell                       " don't beep
+set noerrorbells                     " don't beep
+
 so ~/.config/nvim/plugins.vim        " Source plugins
 
 "----------Split Management----------"
-nmap <C-J> <C-W><C-J>
-nmap <C-K> <C-W><C-K>
-nmap <C-H> <C-W><C-H>
-nmap <C-L> <C-W><C-L>
-
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
 "----------Mappings----------"
 nmap <LEADER>es :UltiSnipsEdit<CR>

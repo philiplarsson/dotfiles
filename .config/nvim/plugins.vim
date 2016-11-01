@@ -18,8 +18,8 @@ Plug 'godlygeek/tabular'
 Plug 'tomtom/tcomment_vim'
 Plug 'jwalton512/vim-blade'
 Plug 'mattn/emmet-vim'
-Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
