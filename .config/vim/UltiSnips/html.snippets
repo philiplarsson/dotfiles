@@ -1,0 +1,16 @@
+snippet div "<div>" w
+<div>
+	${0:${VISUAL}}
+</div>
+endsnippet
+
+snippet div. "<div> with class" w
+<div`!p snip.rv=' class="' if t[1] else ""`${1:name}`!p snip.rv = '"' if t[1] else ""`>
+	${0:${VISUAL}}
+</div>
+endsnippet
+
+snippet img
+<img src="$1"${2: alt="$3"}/>
+endsnippet
+
