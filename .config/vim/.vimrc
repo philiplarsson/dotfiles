@@ -35,7 +35,7 @@ set background=dark             " dark theme background (used by vim-airline)
 set history=500			" set number of history lines for vim to remember
 set autoread			" auto read when a file has changed from the outside
 set undofile                    " use undo file for persistent undoes
-set undodir=/home/vin1/.vimundo/
+set undodir=~/.config/vim/.vimundo/
 set foldmethod=indent           " enable folding"
 set foldlevel=99
 so ~/.config/vim/plugins.vim               " Source plugins
