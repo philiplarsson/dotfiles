@@ -9,12 +9,12 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-# font pango:System San Francisco Display 10 
-font pango:System San Francisco Display, FontAwesome 10 
+# font pango:monospace 8
+font pango:System San Francisco Display, FontAwesome 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -31,16 +31,16 @@ font pango:System San Francisco Display, FontAwesome 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvt
+bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start rofi (replaces dmenu)
-bindsym $mod+space exec "rofi -modi \\"run,drun\\" -show run -lines 3 -eh 2 -width 100 -padding 480 -opacity \\"85\\" -bw 0 -bc \\"$bg-color\\" -bg \\"$bg-color\\" -fg \\"$text-color\\" -hlbg \\"$bg-color\\" -hlfg \\"#9575cd\\" -font \\"System San Francisco Display 18\\""
+# rofi instead of dmenu
+bindsym $mod+space exec rofi -show drun -config $HOME/.config/rofi.conf
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -85,8 +85,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
-bindsym $mod+Shift+t floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+t focus mode_toggle
@@ -95,18 +94,17 @@ bindsym $mod+t focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-
 #bindsym $mod+d focus child
 
-# Variables
 set $workspace1 "1:  "
 set $workspace2 "2:  "
 set $workspace3 "3:  "
-set $workspace4 "4:  "
-set $workspace6 "6: "
-set $workspace7 "7: "
-set $workspace8 "8: "
-set $workspace9 "9: "
+set $workspace4 "4:  "
+set $workspace5 "5:  "
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace8 "8: "
+set $workspace9 "9:  "
 set $workspace10 "10: "
 
 # switch to workspace
@@ -114,7 +112,7 @@ bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2 
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace 5
+bindsym $mod+5 workspace $workspace5
 bindsym $mod+6 workspace $workspace6 
 bindsym $mod+7 workspace $workspace7
 bindsym $mod+8 workspace $workspace8
@@ -126,12 +124,16 @@ bindsym $mod+Shift+1 move container to workspace $workspace1
 bindsym $mod+Shift+2 move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace $workspace3
 bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
 bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
+
+# Move to next/previous workspace
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -148,10 +150,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym h resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -171,54 +173,40 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
         tray_output primary
-	colors {
-		background $bg-color
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
 }
 
-# ---------  Colors ---------------------
 
-# Colors
+# --------- Keyboard Layout ---------- # 
+exec_always "setxkbmap -layout 'se,se' -variant 'dvorak,'"
+exec_always "setxkbmap -option grp:shifts_toggle,ctrl:swap_lalt_lctl"
 
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
-set $text-color          #f3f4f5
-set $inactive-text-color #676E7D
-set $urgent-bg-color     #E53935
-set $indicator-color     #0077CC
-
-# window colors
-#                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          $indicator-color 
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator-color 
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $indicator-color 
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator-color 
-
-
-# --------- Run programs in window (use xprop) ---------
-assign [class="OVPN"] $workspace8
-assign [class="Skype"] $workspace9
-
-# ---------  Custom startups ------------
-exec_always feh --bg-scale ~/Dropbox/Photos/wallpaper/DARKWING.jpg
+# --------- Startup-Applications ------------ #
+## Compton
 exec_always compton -f
+## Dropbox
 exec dropbox start
-exec /opt/openvpnclient/runclient.sh
 
-# --------- Custom keybindings ----------
-bindsym $mod+shift+x exec ~/dotfiles/.scripts/locki3.sh 
-bindsym --release $mod+shift+p exec --no-startup-id gnome-screenshot -a
-bindsym $mod+shift+i exec ~/dotfiles/.scripts/gpick.sh
- 
-### ------- Audio keybindings ----------
-# Pulse Audio controls
+# --------- Audio keybindings ------------ #
+## Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
 
+# ------------------ i3 gaps -----------------#
+for_window [class="^.*"] border pixel 0
+smart_gaps on
+## Gaps (inner = adjacent containers, outer = edge of screen and container)
+gaps inner 10
+gaps outer 1
+
+# ------------- Miscellaneous --------------- #
+
+## Lock i3
+bindsym $mod+shift+x exec i3lock
+
+## Background
+exec_always --no-startup-id feh --bg-scale $HOME/Dropbox/Photos/wallpaper/DARKWING.jpg
+
+## Auto send back to workspace when pressing same workspace key
+workspace_auto_back_and_forth yes
 
