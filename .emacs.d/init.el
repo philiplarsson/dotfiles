@@ -7,14 +7,24 @@
 (package-initialize)
 
 ;;; ---------- Plugins ----------
-(require 'flx-ido)
-(ido-mode 1)
-(ido-everywhere 1)
-(flx-ido-mode 1)
-;; disable ido faces to see flx highlights.
-(setq ido-enable-flex-matching t)
-(setq ido-use-faces nil)
+;; Evil mode
+(require 'evil)
+(evil-mode 1)
 
+;; Powerline
+(require 'powerline)
+(powerline-center-evil-theme)
+
+;; Scala mode
+(require 'scala-mode)
+
+;; Auto Complete
+(require 'auto-complete-config)
+(ac-config-default)
+
+;; Yasnippet
+(require 'yasnippet)
+(yas-global-mode t)
 ;;; ---------- Keybindings ----------
 (global-set-key (kbd "M-h") 'backward-char)
 (global-set-key (kbd "M-n") 'forward-char)
