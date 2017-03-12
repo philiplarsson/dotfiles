@@ -6,6 +6,11 @@
   (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 
+;; ---------- Evil Settings ----------
+; As per manual instruction, these should be done before Evil is
+; loaded.
+(setq evil-shift-width 2)
+
 ;;; ---------- Plugins ----------
 ;; Evil mode
 (require 'evil)
@@ -26,11 +31,35 @@
 (require 'yasnippet)
 (yas-global-mode t)
 
+;; Helm
+(require 'helm)
+(require 'helm-config)
+
+;; Golden Ratio
+(require 'golden-ratio)
+(golden-ratio-mode 1)
+(setq golden-ratio-auto-scale t)
 ;;; ---------- Keybindings ----------
 (global-set-key (kbd "M-h") 'backward-char)
 (global-set-key (kbd "M-n") 'forward-char)
 (global-set-key (kbd "M-c") 'previous-line)
 (global-set-key (kbd "M-t") 'next-line)
+
+;; Helm Keybindings
+;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
+;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+;; Replace M-x with helm-M-x
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
+(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+(global-set-key (kbd "M-x") 'helm-M-x)
+;; Helm Kill ring
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
 
 (global-set-key (kbd "C-c C-SPC") 'ace-jump-mode)
 
@@ -40,6 +69,8 @@
 ;; Evil Keybindings
 ;; Use C-e to go to end of line
 (define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-line)
+(define-key evil-insert-state-map (kbd "C-e") 'evil-end-of-line)
+(define-key evil-insert-state-map (kbd "C-<return>") 'evil-open-below)
 ; Make movement keys work like they should
 (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
@@ -82,6 +113,18 @@
 
 ;; windmove Package to move to window using shift+arrow keys
 (windmove-default-keybindings)
+
+;; Always insert matching brackets & parenthesis
+(electric-pair-mode 1)
+
+;; Helm Settings
+
+;; Golden ratio and helm
+(defun pl/helm-alive-p ()
+  (if (boundp 'helm-alive-p)
+      (symbol-value 'helm-alive-p)))
+
+(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
 
 ;; ---------- Mouse ----------
 ;;; scroll one line at a time (less "jumpy" than defaults) 

@@ -185,6 +185,7 @@ exec_always "setxkbmap -option grp:shifts_toggle,ctrl:swap_lalt_lctl"
 exec_always compton -f
 ## Dropbox
 exec dropbox start
+exec --no-startup-id emacs --daemon
 
 # --------- Audio keybindings ------------ #
 ## Pulse Audio controls
@@ -205,7 +206,8 @@ gaps outer 1
 bindsym $mod+shift+x exec i3lock
 
 ## Background
-exec_always --no-startup-id feh --bg-scale $HOME/Dropbox/Photos/wallpaper/DARKWING.jpg
+exec_always --no-startup-id feh --bg-scale /home/tuxtux/Dropbox/Photos/wallpaper/DARKWING.jpg
+exec_always --no-startup-id albert
 
 ## Auto send back to workspace when pressing same workspace key
 workspace_auto_back_and_forth yes
