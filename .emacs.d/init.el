@@ -35,10 +35,9 @@
 (require 'helm)
 (require 'helm-config)
 
-;; Golden Ratio
-(require 'golden-ratio)
-(golden-ratio-mode 1)
-(setq golden-ratio-auto-scale t)
+;; PHP mode
+(require 'php-mode)
+
 ;;; ---------- Keybindings ----------
 (global-set-key (kbd "M-h") 'backward-char)
 (global-set-key (kbd "M-n") 'forward-char)
@@ -68,8 +67,8 @@
 
 ;; Evil Keybindings
 ;; Use C-e to go to end of line
-(define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-line)
-(define-key evil-insert-state-map (kbd "C-e") 'evil-end-of-line)
+(define-key evil-normal-state-map (kbd "C-e") 'evil-append-line)
+(define-key evil-insert-state-map (kbd "C-e") 'evil-append-line)
 (define-key evil-insert-state-map (kbd "C-<return>") 'evil-open-below)
 ; Make movement keys work like they should
 (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
@@ -117,14 +116,8 @@
 ;; Always insert matching brackets & parenthesis
 (electric-pair-mode 1)
 
-;; Helm Settings
-
-;; Golden ratio and helm
-(defun pl/helm-alive-p ()
-  (if (boundp 'helm-alive-p)
-      (symbol-value 'helm-alive-p)))
-
-(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+;; Use Hippie Expand
+(global-set-key [remap dabbrev-expand] 'hippie-expand)
 
 ;; ---------- Mouse ----------
 ;;; scroll one line at a time (less "jumpy" than defaults) 
