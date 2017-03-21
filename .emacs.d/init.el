@@ -35,8 +35,27 @@
 (require 'helm)
 (require 'helm-config)
 
+;; Projectile
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+(setq projectile-switch-project-action 'helm-projectile)
+
 ;; PHP mode
 (require 'php-mode)
+
+;; Web Mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+;; Dumb Jump
+(dumb-jump-mode)
 
 ;;; ---------- Keybindings ----------
 (global-set-key (kbd "M-h") 'backward-char)
@@ -96,7 +115,7 @@
 
 ;; Use 2 spaces for tab
 (setq-default tab-width 2)
-(setq-default ident-tabl-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Allow y and n instead of yes and no
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -118,6 +137,9 @@
 
 ;; Use Hippie Expand
 (global-set-key [remap dabbrev-expand] 'hippie-expand)
+
+;; Use ibuffer instead of buff-menu
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; ---------- Mouse ----------
 ;;; scroll one line at a time (less "jumpy" than defaults) 
