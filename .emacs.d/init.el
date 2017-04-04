@@ -7,7 +7,13 @@
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
-;;; ---------- Plugins using use-package  ----------
+;;; ---------- mac specific ----------
+(when (eq system-type 'darwin)
+  (setq mac-option-modifier nil)
+  (mac-command-modifier 'meta)
+  (x-select-enable-clipboard t))
+
+  ;;; ---------- Plugins using use-package  ----------
 (use-package dracula-theme
   :ensure t)
 
