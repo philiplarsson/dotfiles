@@ -186,7 +186,7 @@ exec_always "setxkbmap -layout se"
 exec_always compton -f
 ## Dropbox
 exec dropbox start
-exec --no-startup-id emacs --daemon
+#exec --no-startup-id emacs --daemon
 
 # --------- Audio keybindings ------------ #
 ## Pulse Audio controls
