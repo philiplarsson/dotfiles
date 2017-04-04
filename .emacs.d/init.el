@@ -43,6 +43,12 @@
 (use-package avy
   :ensure t)
 
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode t))
+
+
 ;;; ---------- Keybindings ----------
 
 ;; ---  Helm Keybindings ---
