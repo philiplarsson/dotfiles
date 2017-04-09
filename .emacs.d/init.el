@@ -54,8 +54,19 @@
   :config
   (yas-global-mode t))
 
+(use-package web-mode
+  :ensure t
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-code-indent-offset 2))
 
 ;;; ---------- Keybindings ----------
+
+;; --- General Keybindings --------
+;; Use M-o to change to other window
+(global-set-key (kbd "M-o") 'other-window)
+;; Use Shift and arrow keys to get to other windows
+(windmove-default-keybindings)
 
 ;; ---  Helm Keybindings ---
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
@@ -96,6 +107,12 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 ;; Scroll 5 lines instead of default
 (setq scroll-step 5)
+;; Sort Apropos result by relevancy
+(setq apropos-sort-by-scores t)
+
+;;; ---------- Plugin Settings ----------
+(add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
+
 ;;; ---------- Settings Set By configuration ----------
 
 (custom-set-variables
