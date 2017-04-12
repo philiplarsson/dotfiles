@@ -27,6 +27,12 @@
   :config
   (require 'helm-config))
 
+(use-package helm-ag
+  :ensure t)
+
+(use-package ag
+  :ensure t)
+
 (use-package projectile
   :ensure t
   :config
@@ -141,7 +147,15 @@
 
 ;;; ---------- Hooks ----------
 (add-hook 'php-mode-hook 'electric-pair-mode)
-
+(add-hook 'sqml-mode-hook 'emmet-mode) ;; auto start on any markup modes
+(add-hook 'web-mode-hook 'emmet-mode)
+;; remove {} auto pairing in electric-pair-pairs for web-mode
+(add-hook
+ 'web-mode-hook
+ '(lambda ()
+    (setq-local electric-pair-inhibit-predicate
+                (lambda (c)
+                  (if (char-equal c ?{) t (electric-pair-default-inhibit c))))))
 ;;; ---------- Settings Set By configuration ----------
 
 (custom-set-variables
