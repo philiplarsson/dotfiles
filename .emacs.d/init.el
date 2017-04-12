@@ -13,7 +13,7 @@
   mac-command-modifier 'meta
   x-select-enable-clipboard t))
 
-  ;;; ---------- Plugins using use-package  ----------
+;;; ---------- Plugins using use-package  ----------
 (use-package dracula-theme
   :ensure t)
 
@@ -39,7 +39,8 @@
 (use-package auto-complete
   :ensure t
   :config
-  (ac-config-default))
+  (ac-config-default)
+  (setq ac-auto-start 4))
 
 (use-package dumb-jump
   :ensure t
@@ -60,6 +61,21 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-code-indent-offset 2))
 
+(use-package emmet-mode
+  :ensure t)
+
+(use-package all-the-icons
+  :ensure t)
+;; Install fonts manually for all the icons  https://github.com/domtronn/all-the-icons.el
+
+(use-package neotree
+  :ensure t
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq projectile-switch-project-action 'neotree-projectile-action))
+
+(use-package expand-region
+  :ensure t)
 ;;; ---------- Keybindings ----------
 
 ;; --- General Keybindings --------
@@ -87,6 +103,14 @@
 ;; --- Avy Keybindings ---
 (global-set-key (kbd "C-c C-SPC") 'avy-goto-word-or-subword-1)
 
+;; --- NeoTree Keybindings
+(global-set-key (kbd "C-c n t") 'neotree-toggle)
+(global-set-key (kbd "C-c n v") 'neotree-enter-vertical-split)
+(global-set-key (kbd "C-c n h") 'neotree-enter-horizontal-split)
+
+;; --- Expand Region ---
+(global-set-key (kbd "C-c e") 'er/expand-region)
+
 ;;; ---------- General Settings ----------
 ;; Remove Toolbar
 (tool-bar-mode -1)
@@ -96,6 +120,8 @@
 (scroll-bar-mode -1)
 ;; Highlight Parenthesis
 (show-paren-mode t)
+;; Add linespacing
+(setq-default line-spacing 5)
 ;; Wrap text on words
 (global-visual-line-mode t)
 ;; Remove selected text when typing
@@ -113,6 +139,9 @@
 ;;; ---------- Plugin Settings ----------
 (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
 
+;;; ---------- Hooks ----------
+(add-hook 'php-mode-hook 'electric-pair-mode)
+
 ;;; ---------- Settings Set By configuration ----------
 
 (custom-set-variables
@@ -120,6 +149,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(neo-window-fixed-size t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
