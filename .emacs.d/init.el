@@ -39,6 +39,12 @@
   (projectile-global-mode)
   (setq projectile-completion-system 'helm))
 
+(use-package helm-projectile
+  :ensure t
+  :config
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on))
+
 (use-package php-mode
   :ensure t)
 
@@ -82,6 +88,10 @@
 
 (use-package expand-region
   :ensure t)
+
+(use-package markdown-mode
+  :ensure t)
+
 ;;; ---------- Keybindings ----------
 
 ;; --- General Keybindings --------
@@ -127,7 +137,7 @@
 ;; Highlight Parenthesis
 (show-paren-mode t)
 ;; Add linespacing
-(setq-default line-spacing 5)
+(setq-default line-spacing 12)
 ;; Wrap text on words
 (global-visual-line-mode t)
 ;; Remove selected text when typing
@@ -145,6 +155,11 @@
 ;;; ---------- Plugin Settings ----------
 (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
 
+;;; ---------- Custom Faces ----------
+(custom-set-faces
+ (set-face-attribute 'neo-file-link-face nil :height 110)
+ (set-face-attribute 'neo-dir-link-face nil :height 115)
+)
 ;;; ---------- Hooks ----------
 (add-hook 'php-mode-hook 'electric-pair-mode)
 (add-hook 'sqml-mode-hook 'emmet-mode) ;; auto start on any markup modes
@@ -164,10 +179,12 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(neo-window-fixed-size t)
+ '(neo-window-width 40)
+ '(show-paren-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Meslo LG L DZ for Powerline" :foundry "PfEd" :slant normal :weight normal :height 123 :width normal)))))
+ '(default ((t (:family "Fira Code" :foundry "CTDB" :slant normal :weight normal :height 123 :width normal)))))
