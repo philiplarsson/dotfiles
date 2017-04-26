@@ -1,6 +1,8 @@
 ;;; ---------- MELPA ----------
 (require 'package)
 (add-to-list 'package-archives
+             '("marmalade" . "https://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
@@ -92,6 +94,13 @@
 (use-package markdown-mode
   :ensure t)
 
+(use-package php-extras
+  :ensure t)
+
+(use-package php-auto-yasnippets
+  :ensure t)
+
+
 ;;; ---------- Keybindings ----------
 
 ;; --- General Keybindings --------
@@ -100,6 +109,10 @@
 ;; Use Shift and arrow keys to get to other windows
 (windmove-default-keybindings)
 
+;; Use C-c w to remove word before point
+(global-set-key (kbd "C-c w") (lambda() (interactive)
+                                (backward-word)
+                                (kill-word 1)))
 ;; ---  Helm Keybindings ---
 ;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
 ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
@@ -126,6 +139,9 @@
 
 ;; --- Expand Region ---
 (global-set-key (kbd "C-c e") 'er/expand-region)
+
+;; --- PHP Mode keybindings ---
+(define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
 
 ;;; ---------- General Settings ----------
 ;; Remove Toolbar
