@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Var dump
+# --
+echo '<pre>';
+var_dump($1);
+echo '</pre>';

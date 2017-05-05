@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: css comment
+# key: cd
+# --
+/**
+ * -------- $1 --------
+ */
+$0

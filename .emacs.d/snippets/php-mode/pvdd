@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Var dump and die
+# --
+echo '<pre>';
+var_dump($1);
+echo '</pre>';
+die();

@@ -1,0 +1,6 @@
+# name: Codeblock
+# key: cbl
+# --
+\`\`\`$1
+  $0
+\`\`\`

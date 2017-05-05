@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Inline code block org mode
+# There is a zero-width space after the first tilde (Ctrl-x 8 RET 200B RET)
+# --
+~​$0~

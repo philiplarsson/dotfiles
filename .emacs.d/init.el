@@ -100,6 +100,11 @@
 (use-package php-auto-yasnippets
   :ensure t)
 
+(use-package scss-mode
+  :ensure t)
+
+(use-package rainbow-mode
+  :ensure t)
 
 ;;; ---------- Keybindings ----------
 
