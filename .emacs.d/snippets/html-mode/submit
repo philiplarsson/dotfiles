@@ -1,0 +1,3 @@
+#name submit button
+# --
+<input type="${1:submit}" value="${2:Submit}">
