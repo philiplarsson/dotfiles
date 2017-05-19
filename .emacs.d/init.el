@@ -1,5 +1,7 @@
 ;;; ---------- MELPA ----------
+
 (require 'package)
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("marmalade" . "https://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives
@@ -7,6 +9,7 @@
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
 (package-initialize)
 
 ;;; ---------- mac specific ----------
@@ -14,6 +17,11 @@
   (setq mac-option-modifier nil
   mac-command-modifier 'meta
   x-select-enable-clipboard t))
+
+;;; ---------- Bootstrap use-package ----------
+(unless (package-installed-p 'use-package)
+	(package-refresh-contents)
+	(package-install 'use-package))
 
 ;;; ---------- Plugins using use-package  ----------
 (use-package dracula-theme
@@ -23,6 +31,11 @@
   :ensure t
   :config
   (powerline-default-theme))
+
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
 
 (use-package helm
   :ensure t
@@ -105,7 +118,6 @@
 
 (use-package rainbow-mode
   :ensure t)
-
 ;;; ---------- Keybindings ----------
 
 ;; --- General Keybindings --------
@@ -145,8 +157,20 @@
 ;; --- Expand Region ---
 (global-set-key (kbd "C-c e") 'er/expand-region)
 
-;; --- PHP Mode keybindings ---
+;; --- PHP Mode Key-bindings ---
 (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
+
+;; ---------- HYPER Key-bindings ----------
+(global-set-key (kbd "C-M-s-s") 'flyspell-auto-correct-previous-word)
+
+(defun fd-switch-dictionary()
+  (interactive)
+  (let* ((dic ispell-current-dictionary)
+         (change (if (string= dic "english") "swedish" "english")))
+    (ispell-change-dictionary change)
+    (message "Dictionary switched from %s to %s" dic change)
+    ))
+(global-set-key (kbd "C-M-s-l")   'fd-switch-dictionary)
 
 ;;; ---------- General Settings ----------
 ;; Remove Toolbar
@@ -158,7 +182,7 @@
 ;; Highlight Parenthesis
 (show-paren-mode t)
 ;; Add linespacing
-(setq-default line-spacing 12)
+(setq-default line-spacing 13)
 ;; Wrap text on words
 (global-visual-line-mode t)
 ;; Remove selected text when typing
@@ -172,6 +196,10 @@
 (setq scroll-step 5)
 ;; Sort Apropos result by relevancy
 (setq apropos-sort-by-scores t)
+;; Show Trailing Whitespace
+(setq-default show-trailing-whitespace t)
+;; Use ibuffer instead of list-buffers
+(defalias 'list-buffers 'ibuffer)
 
 ;;; ---------- Plugin Settings ----------
 (add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
@@ -208,4 +236,4 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fira Code" :foundry "CTDB" :slant normal :weight normal :height 123 :width normal)))))
+ '(default ((t (:family "Fira Code" :foundry "CTDB" :slant normal :weight normal :height 112 :width normal)))))
