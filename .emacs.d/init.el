@@ -23,6 +23,15 @@
 ;;; ---------- Load Configurations File ----------
 (org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
 
+
+;;; ---------- watch_here scripts ----------
+(defun run-php-check ()
+  "Check the current PHP file using check-php.sh"
+  (interactive)
+  (shell-command (format "%s %s" "~/.scripts/check-php.sh" buffer-file-name)))
+
+(global-set-key (kbd "C-c c") 'run-php-check)
+
 ;;; ---------- Settings Set By Emacs Menu Configuration ----------
 
 (custom-set-variables
