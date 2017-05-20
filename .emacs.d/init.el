@@ -1,5 +1,6 @@
-;;; ---------- MELPA ----------
+;; --------------- Philip's Emacs Configuration ---------------
 
+;;; ---------- Packages ----------
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
@@ -12,215 +13,17 @@
 
 (package-initialize)
 
-;;; ---------- mac specific ----------
+;;; ---------- Mac Specific ----------
 (when (eq system-type 'darwin)
   (setq mac-option-modifier nil
   mac-command-modifier 'meta
   x-select-enable-clipboard t))
 
-;;; ---------- Bootstrap use-package ----------
-(unless (package-installed-p 'use-package)
-	(package-refresh-contents)
-	(package-install 'use-package))
 
-;;; ---------- Plugins using use-package  ----------
-(use-package dracula-theme
-  :ensure t)
+;;; ---------- Load Configurations File ----------
+(org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
 
-(use-package powerline
-  :ensure t
-  :config
-  (powerline-default-theme))
-
-(use-package which-key
-  :ensure t
-  :config
-  (which-key-mode))
-
-(use-package helm
-  :ensure t
-  :config
-  (require 'helm-config))
-
-(use-package helm-ag
-  :ensure t)
-
-(use-package ag
-  :ensure t)
-
-(use-package projectile
-  :ensure t
-  :config
-  (projectile-global-mode)
-  (setq projectile-completion-system 'helm))
-
-(use-package helm-projectile
-  :ensure t
-  :config
-  (setq projectile-completion-system 'helm)
-  (helm-projectile-on))
-
-(use-package php-mode
-  :ensure t)
-
-(use-package auto-complete
-  :ensure t
-  :config
-  (ac-config-default)
-  (setq ac-auto-start 4))
-
-(use-package dumb-jump
-  :ensure t
-  :config
-  (dumb-jump-mode))
-
-(use-package avy
-  :ensure t)
-
-(use-package yasnippet
-  :ensure t
-  :config
-  (yas-global-mode t))
-
-(use-package web-mode
-  :ensure t
-  :config
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-
-(use-package emmet-mode
-  :ensure t)
-
-(use-package all-the-icons
-  :ensure t)
-;; Install fonts manually for all the icons  https://github.com/domtronn/all-the-icons.el
-
-(use-package neotree
-  :ensure t
-  :config
-  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
-  (setq projectile-switch-project-action 'neotree-projectile-action))
-
-(use-package expand-region
-  :ensure t)
-
-(use-package markdown-mode
-  :ensure t)
-
-(use-package php-extras
-  :ensure t)
-
-(use-package php-auto-yasnippets
-  :ensure t)
-
-(use-package scss-mode
-  :ensure t)
-
-(use-package rainbow-mode
-  :ensure t)
-;;; ---------- Keybindings ----------
-
-;; --- General Keybindings --------
-;; Use M-o to change to other window
-(global-set-key (kbd "M-o") 'other-window)
-;; Use Shift and arrow keys to get to other windows
-(windmove-default-keybindings)
-
-;; Use C-c w to remove word before point
-(global-set-key (kbd "C-c w") (lambda() (interactive)
-                                (backward-word)
-                                (kill-word 1)))
-;; ---  Helm Keybindings ---
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-;; Replace M-x with helm-M-x
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-(global-set-key (kbd "M-x") 'helm-M-x)
-;; Helm Kill ring
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-
-;; --- Avy Keybindings ---
-(global-set-key (kbd "C-c C-SPC") 'avy-goto-word-or-subword-1)
-
-;; --- NeoTree Keybindings
-(global-set-key (kbd "C-c n t") 'neotree-toggle)
-(global-set-key (kbd "C-c n v") 'neotree-enter-vertical-split)
-(global-set-key (kbd "C-c n h") 'neotree-enter-horizontal-split)
-
-;; --- Expand Region ---
-(global-set-key (kbd "C-c e") 'er/expand-region)
-
-;; --- PHP Mode Key-bindings ---
-(define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
-
-;; ---------- HYPER Key-bindings ----------
-(global-set-key (kbd "C-M-s-s") 'flyspell-auto-correct-previous-word)
-
-(defun fd-switch-dictionary()
-  (interactive)
-  (let* ((dic ispell-current-dictionary)
-         (change (if (string= dic "english") "swedish" "english")))
-    (ispell-change-dictionary change)
-    (message "Dictionary switched from %s to %s" dic change)
-    ))
-(global-set-key (kbd "C-M-s-l")   'fd-switch-dictionary)
-
-;;; ---------- General Settings ----------
-;; Remove Toolbar
-(tool-bar-mode -1)
-;; Remove Menu Bar
-(menu-bar-mode -1)
-;; Remove Scrollbar
-(scroll-bar-mode -1)
-;; Highlight Parenthesis
-(show-paren-mode t)
-;; Add linespacing
-(setq-default line-spacing 13)
-;; Wrap text on words
-(global-visual-line-mode t)
-;; Remove selected text when typing
-(delete-selection-mode t)
-;; Use 2 spaces for tab
-(setq-default tab-width 2)
-(setq-default indent-tabs-mode nil)
-;; Allow y and n instead of yes and no
-(fset 'yes-or-no-p 'y-or-n-p)
-;; Scroll 5 lines instead of default
-(setq scroll-step 5)
-;; Sort Apropos result by relevancy
-(setq apropos-sort-by-scores t)
-;; Show Trailing Whitespace
-(setq-default show-trailing-whitespace t)
-;; Use ibuffer instead of list-buffers
-(defalias 'list-buffers 'ibuffer)
-
-;;; ---------- Plugin Settings ----------
-(add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
-
-;;; ---------- Custom Faces ----------
-(custom-set-faces
- (set-face-attribute 'neo-file-link-face nil :height 110)
- (set-face-attribute 'neo-dir-link-face nil :height 115)
-)
-;;; ---------- Hooks ----------
-(add-hook 'php-mode-hook 'electric-pair-mode)
-(add-hook 'sqml-mode-hook 'emmet-mode) ;; auto start on any markup modes
-(add-hook 'web-mode-hook 'emmet-mode)
-;; remove {} auto pairing in electric-pair-pairs for web-mode
-(add-hook
- 'web-mode-hook
- '(lambda ()
-    (setq-local electric-pair-inhibit-predicate
-                (lambda (c)
-                  (if (char-equal c ?{) t (electric-pair-default-inhibit c))))))
-;;; ---------- Settings Set By configuration ----------
+;;; ---------- Settings Set By Emacs Menu Configuration ----------
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

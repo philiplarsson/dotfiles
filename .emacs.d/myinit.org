@@ -1,0 +1,390 @@
+* Emacs Init
+
+** Introduction
+I use this file to store all emacs configurations. This file is loaded from ~​init.el~.
+
+** General Settings
+#+BEGIN_SRC emacs-lisp
+;; Remove Toolbar
+(tool-bar-mode -1)
+
+;; Remove Menu Bar
+(menu-bar-mode -1)
+
+;; Remove Scrollbar
+(scroll-bar-mode -1)
+
+;; Highlight Parenthesis
+(show-paren-mode t)
+
+;; Add linespacing
+(setq-default line-spacing 13)
+
+;; Wrap text on words
+(global-visual-line-mode t)
+
+;; Remove selected text when typing
+(delete-selection-mode t)
+
+;; Use 2 spaces for tab
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)
+
+;; Allow y and n instead of yes and no
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Scroll 5 lines instead of default
+(setq scroll-step 5)
+
+;; Sort Apropos result by relevancy
+(setq apropos-sort-by-scores t)
+
+;; Show Trailing Whitespace
+(setq-default show-trailing-whitespace t)
+
+;; Use ibuffer instead of list-buffers
+(defalias 'list-buffers 'ibuffer)
+#+END_SRC
+
+** Plugins
+*** Bootstrap Use-package
+We use /use-package/ to pull in all plugins.
+For this to work we bootstrap /use-package/ below:
+
+#+BEGIN_SRC emacs-lisp
+;;; ---------- Bootstrap use-package ----------
+(unless (package-installed-p 'use-package)
+	(package-refresh-contents)
+	(package-install 'use-package))
+#+END_SRC
+
+*** Dracula-Theme
+#+BEGIN_SRC emacs-lisp
+(use-package dracula-theme
+  :ensure t)
+#+END_SRC
+
+*** Powerline
+#+BEGIN_SRC emacs-lisp
+(use-package powerline
+  :ensure t
+  :config
+  (powerline-default-theme))
+
+#+END_SRC
+
+*** Which Key
+#+BEGIN_SRC emacs-lisp
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
+#+END_SRC
+
+*** Helm
+#+BEGIN_SRC emacs-lisp
+(use-package helm
+  :ensure t
+  :config
+  (require 'helm-config))
+#+END_SRC
+
+*** Helm Ag
+#+BEGIN_SRC emacs-lisp
+(use-package helm-ag
+  :ensure t)
+#+END_SRC
+
+*** Ag
+#+BEGIN_SRC emacs-lisp
+(use-package ag
+  :ensure t)
+#+END_SRC
+
+*** Projectile
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-global-mode)
+  (setq projectile-completion-system 'helm))
+#+END_SRC
+
+*** Helm-Projectile
+#+BEGIN_SRC emacs-lisp
+(use-package helm-projectile
+  :ensure t
+  :config
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on))
+#+END_SRC
+
+*** Helm-swoop
+#+BEGIN_SRC emacs-lisp
+(use-package helm-swoop
+  :ensure t)
+#+END_SRC
+
+*** Company
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+#+END_SRC
+
+*** Dump Jump
+#+BEGIN_SRC emacs-lisp
+(use-package dumb-jump
+  :ensure t
+  :config
+  (dumb-jump-mode))
+#+END_SRC
+
+*** Avy
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :ensure t)
+#+END_SRC
+
+*** Yasnippet
+
+#+BEGIN_SRC emacs-lisp
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode t))
+#+END_SRC
+
+*** Web-Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+    :ensure t
+    :config
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-code-indent-offset 2))
+#+END_SRC
+
+Add Twig to Web mode
+#+BEGIN_SRC emacs-lisp
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.twig\\'" . web-mode))
+#+END_SRC
+
+*** Emme-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package emmet-mode
+  :ensure t)
+#+END_SRC
+
+*** All-The-Icons
+For this package to work correctly we need to install the fonts as described [[https://github.com/domtronn/all-the-icons.el#installing-fonts][here]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+  :ensure t)
+#+END_SRC
+
+*** Neotree
+Website: [[https://github.com/jaypei/emacs-neotree][emacs-neotree]]
+Documentation: [[https://www.emacswiki.org/emacs/NeoTree][emacswiki]]
+
+#+BEGIN_SRC emacs-lisp
+(use-package neotree
+  :ensure t
+  :config
+  (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+  (setq projectile-switch-project-action 'neotree-projectile-action))
+#+END_SRC
+
+*** Expand-Region
+#+BEGIN_SRC emacs-lisp
+(use-package expand-region
+  :ensure t)
+#+END_SRC
+
+*** Markdown-Mode
+#+BEGIN_SRC emac-lisp
+(use-package markdown-mode
+  :ensure t)
+#+END_SRC
+
+*** PHP-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package php-mode
+  :ensure t)
+#+END_SRC
+
+*** PHP-Extras
+#+BEGIN_SRC emacs-lisp
+(use-package php-extras
+  :ensure t)
+#+END_SRC
+
+*** PHP-Auto-Yasnippets
+#+BEGIN_SRC emacs-lisp
+(use-package php-auto-yasnippets
+  :ensure t)
+#+END_SRC
+
+*** SCSS-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package scss-mode
+  :ensure t)
+#+END_SRC
+
+*** Rainbow-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package rainbow-mode
+  :ensure t)
+#+END_SRC
+
+*** Ace Window
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :ensure t
+  :init
+  (progn
+    (global-set-key [remap other-window] 'ace-window)
+    (custom-set-faces
+     '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+    ))
+#+END_SRC
+
+
+
+** Keybindings
+*** General Keybindings
+Use M-o to change to other window
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "M-o") 'other-window)
+#+END_SRC
+
+Use Shift and arrow keys to get to other windows
+#+BEGIN_SRC emacs-lisp
+(windmove-default-keybindings)
+#+END_SRC
+
+Use C-w to remove word before point (similar to VIM)
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-x C-k") 'kill-region)
+#+END_SRC
+
+*** Plugins Keybindings
+**** Helm
+The default /C-x c/ is quite close to /C-x C-c/, which quits Emacs.
+Changed to /C-c h/. Note: We must set "C-c h" globally, because we
+cannot change =helm-command-prefix-key= once =helm-config= is loaded.
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+#+END_SRC
+
+Use /helm mini/, /helm-M-x/ and /helm kill ring/.
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
+(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+(global-set-key (kbd "M-x") 'helm-M-x)
+
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+#+END_SRC
+
+**** Helm Swoop
+Helm Swoop doesn't work correctly when neotree is open. Therefore we close neotree when we call helm-swoop.
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "M-i") (lambda() (interactive) (neotree-hide) (helm-swoop)))
+(global-set-key (kbd "M-I") 'helm-swoop-back-to-last-point)
+
+#+END_SRC
+
+When doing isearch, hand the word over to helm-swoop
+#+BEGIN_SRC emacs-lisp
+(define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+#+END_SRC
+
+Move up and down like isearch
+#+BEGIN_SRC emacs-lisp
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+(define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+#+END_SRC
+
+Split window inside the current window
+#+BEGIN_SRC emacs-lisp
+(setq helm-swoop-split-with-multiple-windows nil)
+#+END_SRC
+
+Split direction (=split-window-vertically= or =split-window-horizontally=).
+#+BEGIN_SRC emacs-lisp
+(setq helm-swoop-split-direction 'split-window-horizontally)
+#+END_SRC
+
+**** Avy
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c C-SPC") 'avy-goto-word-or-subword-1)
+#+END_SRC
+**** NeoTree
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c n t") 'neotree-toggle)
+(global-set-key (kbd "C-c n v") 'neotree-enter-vertical-split)
+(global-set-key (kbd "C-c n h") 'neotree-enter-horizontal-split)
+#+END_SRC
+
+**** Expand Region
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-c e") 'er/expand-region)
+#+END_SRC
+**** PHP-Mode
+#+BEGIN_SRC emacs-lisp
+(define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
+#+END_SRC
+*** HYPER Keybindings
+These are keybindings that are used with the /Hyper/ key.
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-M-s-s") 'flyspell-auto-correct-previous-word)
+
+(defun fd-switch-dictionary()
+  (interactive)
+  (let* ((dic ispell-current-dictionary)
+         (change (if (string= dic "english") "swedish" "english")))
+    (ispell-change-dictionary change)
+    (message "Dictionary switched from %s to %s" dic change)
+    ))
+(global-set-key (kbd "C-M-s-l")   'fd-switch-dictionary)
+#+END_SRC
+
+** Custom Faces
+*** NeoTree
+#+BEGIN_SRC emacs-lisp
+(custom-set-faces
+ (set-face-attribute 'neo-file-link-face nil :height 110)
+ (set-face-attribute 'neo-dir-link-face nil :height 115)
+)
+#+END_SRC
+
+** Hooks
+#+BEGIN_SRC emacs-lisp
+;; Use Auto Fill Mode for all text mode buffers
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+(add-hook 'php-mode-hook 'electric-pair-mode)
+(add-hook 'sqml-mode-hook 'emmet-mode) ;; auto start on any markup modes
+(add-hook 'web-mode-hook 'emmet-mode)
+;; remove {} auto pairing in electric-pair-pairs for web-mode
+(add-hook
+ 'web-mode-hook
+ '(lambda ()
+    (setq-local electric-pair-inhibit-predicate
+                (lambda (c)
+                  (if (char-equal c ?{) t (electric-pair-default-inhibit c))))))
+#+END_SRC
+
+
