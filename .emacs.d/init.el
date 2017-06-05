@@ -29,8 +29,13 @@
   (interactive)
   (shell-command (format "%s %s" "~/.scripts/check-php.sh" buffer-file-name)))
 
-(global-set-key (kbd "C-c c") 'run-php-check)
+(defun run-phpunit-check ()
+  "Run the current file in phpunit using check-phpunit.sh"
+  (interactive)
+  (shell-command (format "%s %s" "~/.scripts/check-phpunit.sh" buffer-file-name)))
 
+(define-key php-mode-map (kbd "C-c c") 'run-php-check)
+(define-key php-mode-map (kbd "C-t o") 'run-phpunit-check)
 ;;; ---------- Settings Set By Emacs Menu Configuration ----------
 
 (custom-set-variables

@@ -142,6 +142,18 @@ User manual [[https://magit.vc/manual/magit.html#Top][here]].
   :ensure t)
 #+END_SRC
 
+*** PHP-Unit
+#+BEGIN_SRC emacs-lisp
+(use-package phpunit
+  :ensure t)
+
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(define-key php-mode-map (kbd "C-t t") 'phpunit-current-test)
+(define-key php-mode-map (kbd "C-t c") 'phpunit-current-class)
+(define-key php-mode-map (kbd "C-t p") 'phpunit-current-project)
+#+END_SRC
 *** Projectile
 #+BEGIN_SRC emacs-lisp
 (use-package projectile
