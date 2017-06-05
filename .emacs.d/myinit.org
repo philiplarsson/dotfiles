@@ -40,10 +40,18 @@ I use this file to store all emacs configurations. This file is loaded from ~​
 (setq apropos-sort-by-scores t)
 
 ;; Show Trailing Whitespace
-(setq-default show-trailing-whitespace t)
+;(setq-default show-trailing-whitespace t)
+; Comment since this is turned on for only specific packages, such as php-mode.
 
 ;; Use ibuffer instead of list-buffers
 (defalias 'list-buffers 'ibuffer)
+
+;; Auto-refresh buffer when file on disk change
+(global-auto-revert-mode t)
+
+;; Set Chrome as default browser
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
 #+END_SRC
 
 ** Plugins
@@ -58,19 +66,46 @@ For this to work we bootstrap /use-package/ below:
 	(package-install 'use-package))
 #+END_SRC
 
+*** Flycheck
+
+#+BEGIN_SRC emacs-lisp
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+#+END_SRC
+
+Only check buffer when saved.
+#+BEGIN_SRC emacs-lisp
+(setq flycheck-check-syntax-automatically '(mode-enabled save))
+
+#+END_SRC
+*** Magit
+Magit is a Git interface in emacs.
+User manual [[https://magit.vc/manual/magit.html#Top][here]].
+#+BEGIN_SRC emacs-lisp
+(use-package magit
+  :ensure t)
+#+END_SRC
+
 *** Dracula-Theme
 #+BEGIN_SRC emacs-lisp
 (use-package dracula-theme
   :ensure t)
 #+END_SRC
 
-*** Powerline
-#+BEGIN_SRC emacs-lisp
-(use-package powerline
-  :ensure t
-  :config
-  (powerline-default-theme))
+*** Spaceline
 
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline-all-the-icons
+   :ensure t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline
+  :ensure t
+  :config 
+  (require 'spaceline-config)
+  (spaceline-spacemacs-theme))
 #+END_SRC
 
 *** Which Key
@@ -98,6 +133,12 @@ For this to work we bootstrap /use-package/ below:
 *** Ag
 #+BEGIN_SRC emacs-lisp
 (use-package ag
+  :ensure t)
+#+END_SRC
+
+*** PHP-Mode
+#+BEGIN_SRC emacs-lisp
+(use-package php-mode
   :ensure t)
 #+END_SRC
 
@@ -133,6 +174,19 @@ For this to work we bootstrap /use-package/ below:
   (add-hook 'after-init-hook 'global-company-mode))
 #+END_SRC
 
+Use both ~​php-extras-company~ and ~​company-dabbrev~.
+#+BEGIN_SRC emacs-lisp
+(add-hook 'php-mode-hook
+            (lambda ()
+              (set (make-local-variable 'company-backends)
+                   '((php-extras-company company-dabbrev) company-capf company-files))))
+#+END_SRC
+
+Use 1 second delay instead of default 0.5.
+#+BEGIN_SRC emacs-lisp
+(setq company-idle-delay 1.0)
+
+#+END_SRC
 *** Dump Jump
 #+BEGIN_SRC emacs-lisp
 (use-package dumb-jump
@@ -204,14 +258,8 @@ Documentation: [[https://www.emacswiki.org/emacs/NeoTree][emacswiki]]
 #+END_SRC
 
 *** Markdown-Mode
-#+BEGIN_SRC emac-lisp
-(use-package markdown-mode
-  :ensure t)
-#+END_SRC
-
-*** PHP-Mode
 #+BEGIN_SRC emacs-lisp
-(use-package php-mode
+(use-package markdown-mode
   :ensure t)
 #+END_SRC
 
@@ -252,8 +300,22 @@ Documentation: [[https://www.emacswiki.org/emacs/NeoTree][emacswiki]]
     ))
 #+END_SRC
 
+*** HTMLize
+#+BEGIN_QUOTE
+''htmlize.el by HrvojeNiksic is a package for exporting the contents of an Emacs buffer to HTML while respecting display properties such as colors, fonts, underlining, invisibility, etc.''
+#+END_QUOTE
 
-
+#+BEGIN_SRC emacs-lisp
+(use-package htmlize
+   :ensure t)
+#+END_SRC
+*** Zeal
+Requires [[https://zealdocs.org/][zeal]].
+#+BEGIN_SRC emacs-lisp
+(use-package zeal-at-point
+    :ensure t)
+(global-set-key (kbd "C-c z") 'zeal-at-point)
+#+END_SRC
 ** Keybindings
 *** General Keybindings
 Use M-o to change to other window
@@ -270,6 +332,12 @@ Use C-w to remove word before point (similar to VIM)
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-x C-k") 'kill-region)
+#+END_SRC
+
+Use ~C-ö e~ for (dabbrev-expand) (M-/).
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-ö e") 'dabbrev-expand)
 #+END_SRC
 
 *** Plugins Keybindings
@@ -346,10 +414,15 @@ Split direction (=split-window-vertically= or =split-window-horizontally=).
 #+BEGIN_SRC emacs-lisp
 (define-key php-mode-map (kbd "C-c C-y") 'yas/create-php-snippet)
 #+END_SRC
-*** HYPER Keybindings
-These are keybindings that are used with the /Hyper/ key.
+**** Magit
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-M-s-s") 'flyspell-auto-correct-previous-word)
+(global-set-key (kbd "C-x g") 'magit-status)
+#+END_SRC
+*** HYPER Keybindings
+These are keybindings that are used with the /Hyper/ (~​C-M-S-s~)key.
+
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-M-S-s-s C-M-S-s-c") 'flyspell-auto-correct-previous-word)
 
 (defun fd-switch-dictionary()
   (interactive)
@@ -358,9 +431,51 @@ These are keybindings that are used with the /Hyper/ key.
     (ispell-change-dictionary change)
     (message "Dictionary switched from %s to %s" dic change)
     ))
-(global-set-key (kbd "C-M-s-l")   'fd-switch-dictionary)
+(global-set-key (kbd "C-M-S-s-s C-M-S-s-l")   'fd-switch-dictionary)
 #+END_SRC
 
+** Functions
+*** Comment Line
+#+BEGIN_SRC emacs-lisp
+(defun comment-or-uncomment-line-or-region ()
+  "Comments or uncomments the current line or region."
+  (interactive)
+  (if (region-active-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    )
+  )
+
+(define-key c-mode-base-map (kbd "C-c /") 'comment-or-uncomment-line-or-region)
+#+END_SRC
+
+
+*** Duplicate Line
+#+BEGIN_SRC emacs-lisp
+(defun duplicate-line()
+  (interactive)
+  (move-beginning-of-line 1)
+  (kill-line)
+  (yank)
+  (open-line 1)
+  (next-line 1)
+  (yank)
+)
+(global-set-key (kbd "C-c d") 'duplicate-line)
+#+END_SRC
+
+*** Add semicolon
+#+BEGIN_SRC emacs-lisp
+(defun add-semicolon()
+  (interactive)
+  (next-line)
+  (insert ";")
+  (previous-line)
+  (indent-for-tab-command)
+)
+
+(global-set-key (kbd "C-c ,") 'add-semicolon)
+#+END_SRC
 ** Custom Faces
 *** NeoTree
 #+BEGIN_SRC emacs-lisp
@@ -376,6 +491,11 @@ These are keybindings that are used with the /Hyper/ key.
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 (add-hook 'php-mode-hook 'electric-pair-mode)
+(add-hook 'php-mode-hook (lambda () (subword-mode 1)))
+(add-hook 'php-mode-hook (lambda () (setq show-trailing-whitespace t)))
+
+(add-hook 'javascript-mode 'electric-pair-mode)
+
 (add-hook 'sqml-mode-hook 'emmet-mode) ;; auto start on any markup modes
 (add-hook 'web-mode-hook 'emmet-mode)
 ;; remove {} auto pairing in electric-pair-pairs for web-mode
@@ -386,5 +506,4 @@ These are keybindings that are used with the /Hyper/ key.
                 (lambda (c)
                   (if (char-equal c ?{) t (electric-pair-default-inhibit c))))))
 #+END_SRC
-
 
