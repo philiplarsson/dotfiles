@@ -335,11 +335,25 @@ Use C-w to remove word before point (similar to VIM)
 #+END_SRC
 
 Use ~C-ö e~ for (dabbrev-expand) (M-/).
-
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-ö e") 'dabbrev-expand)
 #+END_SRC
 
+Delete whitespace with ~​C-ö d w~.
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-ö d w") 'delete-horizontal-space)
+#+END_SRC
+
+Use zap up to char instead of the default of zap and delete char.
+#+BEGIN_SRC emacs-lisp
+  (autoload 'zap-up-to-char "misc"
+    "Kill up to, but not including ARGth occurrence of CHAR.
+  
+  \(fn arg char)"
+    'interactive)
+
+(global-set-key (kbd "M-z") 'zap-up-to-char)
+#+END_SRC
 *** Plugins Keybindings
 **** Helm
 The default /C-x c/ is quite close to /C-x C-c/, which quits Emacs.
@@ -498,12 +512,20 @@ These are keybindings that are used with the /Hyper/ (~​C-M-S-s~)key.
 
 (add-hook 'sqml-mode-hook 'emmet-mode) ;; auto start on any markup modes
 (add-hook 'web-mode-hook 'emmet-mode)
+
 ;; remove {} auto pairing in electric-pair-pairs for web-mode
 (add-hook
- 'web-mode-hook
- '(lambda ()
-    (setq-local electric-pair-inhibit-predicate
-                (lambda (c)
-                  (if (char-equal c ?{) t (electric-pair-default-inhibit c))))))
-#+END_SRC
+   'web-mode-hook
+   '(lambda ()
+      (setq web-mode-enable-auto-pairing nil)
+      (setq-local
+       electric-pair-pairs
+       (append electric-pair-pairs '((?% . ?%))))))
 
+;(add-hook
+; 'web-mode-hook
+; '(lambda ()
+;    (setq-local electric-pair-inhibit-predicate
+;                (lambda (c)
+;                  (if (char-equal c ?{) t (electric-pair-default-inhibit c))))))
+#+END_SRC
