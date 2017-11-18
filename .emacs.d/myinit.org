@@ -1,6 +1,7 @@
 * Emacs Configuration File
 
 ** General Settings
+*** Multiple Settings
 #+BEGIN_SRC emacs-lisp
 ;; Dont Show Startup Message
 (setq inhibit-startup-message t)
@@ -57,6 +58,25 @@
 (setq-default fill-column 80)
 #+END_SRC
 
+*** Use UTF-8
+From [[https://www.masteringemacs.org/article/working-coding-systems-unicode-emacs][here]].
+
+#+BEGIN_SRC emacs-lisp
+;; Prefer UTF-8 
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+;; backwards compatibility as default-buffer-file-coding-system
+;; is deprecated in 23.2.
+(if (boundp 'buffer-file-coding-system)
+    (setq-default buffer-file-coding-system 'utf-8)
+  (setq default-buffer-file-coding-system 'utf-8))
+
+;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+#+END_SRC
 ** Bootstrap 'use-package'
 Make sure the package 'use-package' is installed.
 Idea from [[http://cestlaz.github.io/posts/using-emacs-1-setup/][here]].
@@ -79,9 +99,52 @@ Which keys brings up help on key combinations.
 *** Material Theme
 From [[https://emacsthemes.com/themes/material-theme.html][here]].
 #+BEGIN_SRC emacs-lisp
-(use-package color-theme-sanityinc-tomorrow
-  :ensure t
-  :config (load-theme 'sanityinc-tomorrow-eighties t))
+;(use-package color-theme-sanityinc-tomorrow
+;  :ensure t
+;  :config (load-theme 'sanityinc-tomorrow-eighties t))
+#+END_SRC
+*** Spacemacs Theme
+#+BEGIN_SRC emacs-lisp
+(use-package spacemacs-common
+  :ensure spacemacs-theme
+  :init
+  (load-theme 'spacemacs-dark t)
+  (setq spacemacs-theme-org-agenda-height nil)
+  (setq spacemacs-theme-org-height nil))
+#+END_SRC
+#+BEGIN_SRC emacs-lisp
+;; set sizes here to stop spacemacs theme resizing these
+(set-face-attribute 'org-level-1 nil :height 1.0)
+(set-face-attribute 'org-level-2 nil :height 1.0)
+(set-face-attribute 'org-level-3 nil :height 1.0)
+(set-face-attribute 'org-scheduled-today nil :height 1.0)
+(set-face-attribute 'org-agenda-date-today nil :height 1.1)
+(set-face-attribute 'org-table nil :foreground "#008787")
+#+END_SRC
+*** Spaceline Modeline
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline
+  :demand t
+  :init
+  (setq powerline-default-separator 'arrow)
+  :config
+  (require 'spaceline-config)
+  (spaceline-emacs-theme
+  (spaceline-helm-mode 1)))
+#+END_SRC
+*** All-The-Icons
+For this package to work correctly we need to install the fonts as described [[https://github.com/domtronn/all-the-icons.el#installing-fonts][here]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package all-the-icons
+  :ensure t)
+#+END_SRC
+
+*** Spaceline all The icons
+#+BEGIN_SRC emacs-lisp
+(use-package spaceline-all-the-icons 
+  :after spaceline
+  :config (spaceline-all-the-icons-theme))
 #+END_SRC
 *** Avy
 "Avy is a GNU Emacs package for jumping to visible text using a char-based decision tree."
@@ -193,13 +256,6 @@ Read about expand region [[https://github.com/magnars/expand-region.el][here]].
 (global-set-key (kbd "<C-down-mouse-1>") 'mouse-test)
 (global-set-key (kbd "<triple-wheel-left>") 'dumb-jump-back)
 #+END_SRC
-*** All-The-Icons
-For this package to work correctly we need to install the fonts as described [[https://github.com/domtronn/all-the-icons.el#installing-fonts][here]].
-
-#+BEGIN_SRC emacs-lisp
-(use-package all-the-icons
-  :ensure t)
-#+END_SRC
 
 *** Neotree
 Website: [[https://github.com/jaypei/emacs-neotree][emacs-neotree]]
@@ -278,9 +334,9 @@ Use both ~​php-extras-company~ and ~​company-dabbrev~.
                    '((php-extras-company company-dabbrev) company-capf company-files))))
 #+END_SRC
 
-Use 1 second delay instead of default 0.5.
+Use 0.5 second delay.
 #+BEGIN_SRC emacs-lisp
-(setq company-idle-delay 1.0)
+(setq company-idle-delay 0.5)
 #+END_SRC
 
 *** Magit
@@ -378,14 +434,24 @@ Use helm mini, helm-M-x and helm kill ring.
           (lambda () (local-set-key (kbd "C-c -") 'php-extras-insert-previous-variable)))
 (add-hook 'php-mode-hook
           (lambda () (local-set-key (kbd "C-c TAB") 'indent-entire-buffer)))
+
 ;; remove {} auto pairing in electric-pair-pairs for web-mode
-(add-hook
+  ;; remove {} auto pairing in electric-pair-pairs for web-mode
+  (add-hook
    'web-mode-hook
    '(lambda ()
-      (setq web-mode-enable-auto-pairing nil)
-      (setq-local
-       electric-pair-pairs
-       (append electric-pair-pairs '((?% . ?%))))))
+      (setq-local electric-pair-inhibit-predicate
+                  (lambda (c)
+                    (if (char-equal c ?{) t (electric-pair-default-inhibit c))))))
+;; OLD:
+;; remove {} auto pairing in electric-pair-pairs for web-mode
+;(add-hook
+;  'web-mode-hook
+;   '(lambda ()
+;      (setq web-mode-enable-auto-pairing nil)
+;      (setq-local
+;       electric-pair-pairs
+;       (append electric-pair-pairs '((?% . ?%))))))
 #+END_SRC
 ** Custom Functions
 *** Duplicate Line
