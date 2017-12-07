@@ -334,11 +334,27 @@ Use both ~​php-extras-company~ and ~​company-dabbrev~.
                    '((php-extras-company company-dabbrev) company-capf company-files))))
 #+END_SRC
 
-Use 0.5 second delay.
+**** Company Configuration
 #+BEGIN_SRC emacs-lisp
-(setq company-idle-delay 0.5)
+;;(setq company-idle-delay 0.5)
+(setq company-tooltip-limit 20)                      ; bigger popup window
+(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+(setq company-echo-delay 0)                          ; remove annoying blinking
+(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
 #+END_SRC
 
+*** Company Mode Go
+#+BEGIN_SRC emacs-lisp
+(use-package company-go
+  :ensure t)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
+#+END_SRC
 *** Magit
 Magit is a Git interface in emacs.
 User manual [[https://magit.vc/manual/magit.html#Top][here]].
@@ -356,6 +372,11 @@ User manual [[https://magit.vc/manual/magit.html#Top][here]].
 Go lang mode on github [[https://github.com/dominikh/go-mode.el][here]].
 #+BEGIN_SRC emacs-lisp
 (use-package go-mode
+  :ensure t)
+#+END_SRC
+*** Go-eldoc
+#+BEGIN_SRC emacs-lisp
+(use-package go-eldoc
   :ensure t)
 #+END_SRC
 ** Keybindings
@@ -382,6 +403,9 @@ Use C-ö G to jump down and C-ö g to jump up.
 (global-set-key (kbd "C-ö G") 'end-of-buffer)
 (global-set-key (kbd "C-ö g") 'beginning-of-buffer)
 #+END_SRC
+
+
+
 *** Plugin Keybindings
 **** Helm Keybindings
 The default C-x c is quite close to C-x C-c, which quits Emacs. Changed to C-c h. Note: We must set “C-c h” globally, because we cannot change helm-command-prefix-key once helm-config is loaded.
@@ -390,8 +414,10 @@ The default C-x c is quite close to C-x C-c, which quits Emacs. Changed to C-c h
 (global-unset-key (kbd "C-x c"))
 #+END_SRC
 Use helm mini, helm-M-x and helm kill ring.
+I missclick C-x b when I intend to do C-x C-b so use both for helm-mini
 #+BEGIN_SRC emacs-lisp
 (global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-b") 'helm-mini)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (setq helm-buffers-fuzzy-matching t
       helm-recentf-fuzzy-match    t) ; fuzzy matching helm mini
@@ -423,12 +449,14 @@ Use helm mini, helm-M-x and helm kill ring.
 (global-set-key (kbd "C-c D") 'dash-at-point)
 #+END_SRC
 ** Hooks
+*** Web Dev Hooks
 #+BEGIN_SRC emacs-lisp
 (add-hook 'sqml-mode-hook 'emmet-mode) ;; auto start on any markup modes
 (add-hook 'web-mode-hook 'emmet-mode)
 
 ;; Use Auto Fill Mode for all text mode buffers
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
 
 ;; PHP mode Hooks
 (add-hook 'php-mode-hook 'electric-pair-mode)
@@ -458,6 +486,22 @@ Use helm mini, helm-M-x and helm kill ring.
 ;      (setq-local
 ;       electric-pair-pairs
 ;       (append electric-pair-pairs '((?% . ?%))))))
+#+END_SRC
+*** Go Lang Hooks
+#+BEGIN_SRC emacs-lisp
+(defun my-go-mode-hook ()
+  (electric-pair-mode)
+  (subword-mode 1)
+  (go-eldoc-setup)
+  (setq compile-command "go build -v && go test -v && go vet")
+  ; Use goimports 
+  (setq gofmt-command "goimports")
+  ;; Use gofmt with C-c f and after save
+  (local-set-key (kbd "C-c f") 'gofmt)
+  (add-hook 'before-save-hook 'gofmt-before-save)
+ )
+(add-hook 'go-mode-hook 'my-go-mode-hook)
+
 #+END_SRC
 ** Custom Functions
 *** Duplicate Line
@@ -494,6 +538,8 @@ Use helm mini, helm-M-x and helm kill ring.
 (add-hook 'php-mode-hook
           (lambda () (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region-or-line)))
 (add-hook 'web-mode-hook
+          (lambda () (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region-or-line)))
+(add-hook 'go-mode-hook
           (lambda () (local-set-key (kbd "C-c C-c") 'comment-or-uncomment-region-or-line)))
 #+END_SRC
 *** Set emacs PATH to Shell PATH
