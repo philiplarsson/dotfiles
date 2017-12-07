@@ -499,6 +499,8 @@ I missclick C-x b when I intend to do C-x C-b so use both for helm-mini
   ;; Use gofmt with C-c f and after save
   (local-set-key (kbd "C-c f") 'gofmt)
   (add-hook 'before-save-hook 'gofmt-before-save)
+  ;; Use both C-c C-j and C-C C-f j to godef-jump
+  (local-set-key (kbd "C-c C-f j") 'godef-jump)
  )
 (add-hook 'go-mode-hook 'my-go-mode-hook)
 
