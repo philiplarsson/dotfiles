@@ -5,7 +5,17 @@ fish_history
 # vimundo files
 .nvimundo/
 
-# Created by https://www.gitignore.io/api/emacs
+### Vim ###
+# swap
+.sw[a-p]
+.*.sw[a-p]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags
 
 ### Emacs ###
 # -*- mode: gitignore; -*-
