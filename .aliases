@@ -1,10 +1,11 @@
-# Aliases file
 alias c="clear"
-alias open="xdg-open"
-alias mv="mv -i"
-alias git='LANG=en_GB git'
 alias cdc="cd; clear"
-alias cal="ncal -M -C"
-alias emnc="emacsclient -nc"
-alias emc="~/.scripts/emacs-client.sh"
-alias watch_here="clear;nc -kl 2777"
+alias gs="git status"
+alias co="composer"
+alias pu="phpunit"
+alias gogopath="cd $GOPATH"
+alias artisan="php artisan"
+alias vim="nvim"
+
+source ~/.aliases-work
+
