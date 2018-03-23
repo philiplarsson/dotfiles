@@ -8,7 +8,7 @@ set showmode				" show current mode
 " nnoremap = normal mode non-recursive
 nnoremap <silent> <CR> :noh<CR><CR>
 
-" Bind Å to :
+" Bind Q to :
 nnoremap Q :
 
 " ================= plugins ==================
