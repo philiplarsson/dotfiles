@@ -13,4 +13,21 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " =============== plugins =============== "
 call minpac#add('scrooloose/nerdtree')
+call minpac#add('arcticicestudio/nord-vim')			" theme
+call minpac#add('vim-airline/vim-airline')
+call minpac#add('ctrlpvim/ctrlp.vim')
+call minpac#add('editorconfig/editorconfig-vim')
+call minpac#add('easymotion/vim-easymotion')
+call minpac#add('w0rp/ale')					" async lint engine
+call minpac#add('tomtom/tcomment_vim')				" smart commenting
+call minpac#add('ntpeters/vim-better-whitespace')		" show and remove trailing whitespace
+
+" =============== plugin settings =============== "
+"
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+let g:EasyMotion_smartcase = 1
+
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
 
