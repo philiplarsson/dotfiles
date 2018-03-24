@@ -6,7 +6,7 @@ set showmode				" show current mode
 set encoding=utf-8
 set splitbelow
 set splitright
-set shell=/bin/bash
+set shell=/bin/zsh
 set smartcase				" smarter search, capital letters case sent
 set ignorecase				" ignore case when searching
 
@@ -28,14 +28,21 @@ source ~/.config/nvim/packages.vim
 nmap <LEADER>ev :tabedit $MYVIMRC<CR>
 
 " Ctrl-] doesn't work well with non-english keyboards.
-nmap <LEADER>jt g<C-]>		" jump to tag
-nmap <LEADER>jb <C-t>		" jump back
+" jump to tag and jump back
+nmap <LEADER>jt g<C-]>
+nmap <LEADER>jb <C-t>
 
 " Traverse buffer list
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]b :blast<CR>
+
+" neovim terminal
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <C-v><Esc> <Esc>
+endif
 
 "" NERDTree
 nmap <LEADER>nt :NERDTreeToggle<CR>
