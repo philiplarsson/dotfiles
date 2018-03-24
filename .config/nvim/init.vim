@@ -28,8 +28,14 @@ source ~/.config/nvim/packages.vim
 nmap <LEADER>ev :tabedit $MYVIMRC<CR>
 
 " Ctrl-] doesn't work well with non-english keyboards.
-nmap <LEADER>jt g<C-]>
-nmap <LEADER>jb <C-t>
+nmap <LEADER>jt g<C-]>		" jump to tag
+nmap <LEADER>jb <C-t>		" jump back
+
+" Traverse buffer list
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]b :blast<CR>
 
 "" NERDTree
 nmap <LEADER>nt :NERDTreeToggle<CR>
