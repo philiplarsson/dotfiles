@@ -32,7 +32,7 @@ source ~/.config/nvim/packages.vim
 " Use airline and ALE
 let g:airline#extensions#ale#enabled = 1
 
-" Only run ALE on filesave
+" Only run ale with LEADER A
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 0
 let g:ale_lint_on_enter = 0
