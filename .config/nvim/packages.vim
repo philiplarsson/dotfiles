@@ -21,6 +21,8 @@ call minpac#add('easymotion/vim-easymotion')
 call minpac#add('w0rp/ale')					" async lint engine
 call minpac#add('tomtom/tcomment_vim')				" smart commenting
 call minpac#add('ntpeters/vim-better-whitespace')		" show and remove trailing whitespace
+call minpac#add('tpope/vim-surround')
+call minpac#add('fatih/vim-go')
 
 " =============== plugin settings =============== "
 "
@@ -30,4 +32,5 @@ let g:EasyMotion_smartcase = 1
 
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
+
 
