@@ -12,6 +12,9 @@ set splitright
 set shell=/bin/zsh
 set smartcase				" smarter search, capital letters case sent
 set ignorecase				" ignore case when searching
+set autoindent				" apply indentation to next line
+set smartindent				" indent according to syntax/style of code
+
 
 " Use textwidth 80 for markdown files (reformat with gq)
 au BufRead,BufNewFile *.md setlocal textwidth=80
@@ -22,6 +25,21 @@ nnoremap <silent> <CR> :noh<CR>
 
 " Bind Q to :
 nnoremap Q :
+
+" Press ~ to toggle between UPPER CASE, lower case and Title Case.
+" Select word under cursor with viw
+" Found at: http://vim.wikia.com/wiki/Switching_case_of_characters#Twiddle_case
+function! TwiddleCase(str)
+  if a:str ==# toupper(a:str)
+    let result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let result = toupper(a:str)
+  endif
+  return result
+endfunction
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
 " ================= plugins ==================
 "
@@ -39,8 +57,11 @@ let g:ale_lint_on_enter = 0
 
 " ================= vim-go-settings ==================
 "
-" Only use quickfix list (instead of location list aswell) with vim-go
-let g:go_list_type = "quickfix"
+" Only use locationlint list (instead of quicklist) with vim-go
+let g:go_list_type = 'locationlist'
+
+let g:go_metalinter_autosave = 1
+
 " Import on save
 let g:go_fmt_command = "goimports"
 " Use 4 spaces as one tab
@@ -65,6 +86,12 @@ autocmd FileType go nmap <LEADER>gl  :GoMetaLinter<CR>
 " Make it easy to edit the vimrc file.
 nmap <LEADER>ev :tabedit $MYVIMRC<CR>
 
+:" Map Ctrl-A -> Start of line, Ctrl-E -> End of line
+:nmap <C-a> <Home>
+:nmap <C-e> <End>
+:inoremap <C-a> <Home>
+:inoremap <C-e> <End>
+
 " Ctrl-] doesn't work well with non-english keyboards.
 " jump to tag and jump back
 nmap <LEADER>jt g<C-]>
@@ -76,9 +103,9 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]b :blast<CR>
 
-" jump between errors in quickfix list
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
+" turn to next or previous errors, after open location list
+nmap <C-n> :lnext<CR>
+nmap <C-n> :lprevious<CR>
 nnoremap <leader>q :cclose<CR>
 
 " neovim terminal

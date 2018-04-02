@@ -23,6 +23,7 @@ call minpac#add('tomtom/tcomment_vim')				" smart commenting
 call minpac#add('ntpeters/vim-better-whitespace')		" show and remove trailing whitespace
 call minpac#add('tpope/vim-surround')
 call minpac#add('fatih/vim-go')
+call minpac#add('jiangmiao/auto-pairs')
 
 " =============== plugin settings =============== "
 "
