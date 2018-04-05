@@ -55,6 +55,11 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_save = 0
 let g:ale_lint_on_enter = 0
 
+" Ultisnipps
+" Open :UltiSnipsEdit in new tab
+let g:UltiSnipsEditSplit="tabdo"
+let g:UltiSnipsSnippetsDir="~/.config/nvim/Ultisnips"
+
 " ================= vim-go-settings ==================
 "
 " Only use locationlint list (instead of quicklist) with vim-go
@@ -146,6 +151,11 @@ nmap <LEADER><LEADER> <Plug>(easymotion-s)
 
 "" tcomment
 map <LEADER>c <C-_><C-_>
+
+"" UltiSnipps
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "" ================= visuals ==================
 
