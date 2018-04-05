@@ -153,10 +153,11 @@ nmap <LEADER><LEADER> <Plug>(easymotion-s)
 map <LEADER>c <C-_><C-_>
 
 "" UltiSnipps
+" UltiSnips will only map the jump triggers while a snippet is active to
+" interfere as little as possible with other mappings.
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
 "" ================= visuals ==================
 
 if (has("termguicolors"))
