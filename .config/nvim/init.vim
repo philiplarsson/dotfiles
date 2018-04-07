@@ -50,9 +50,9 @@ source ~/.config/nvim/packages.vim
 " Use airline and ALE
 let g:airline#extensions#ale#enabled = 1
 
-" Only run ale with LEADER A
+" Don't start ALE when entering file.
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_save = 0
+let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 0
 
 " Ultisnipps
@@ -98,7 +98,7 @@ nmap <LEADER>ev :tabedit $MYVIMRC<CR>
 :inoremap <C-e> <End>
 
 " Ctrl-] doesn't work well with non-english keyboards.
-" jump to tag and jump back
+" jump to tag and jump back (using ctags. Reload with ctags -R)
 nmap <LEADER>jt g<C-]>
 nmap <LEADER>jb <C-t>
 
@@ -107,6 +107,10 @@ nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]b :blast<CR>
+
+" Jump to alternate file
+" <C-^> is hard to use so use <LEADER>. instead.
+nnoremap <LEADER>. <C-^>
 
 " turn to next or previous errors, after open location list
 nmap <C-n> :lnext<CR>
