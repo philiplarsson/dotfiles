@@ -25,6 +25,7 @@ call minpac#add('tpope/vim-surround')
 call minpac#add('fatih/vim-go')
 call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('sirver/UltiSnips')
+call minpac#add('kylef/apiblueprint.vim')
 
 " =============== plugin settings =============== "
 "
