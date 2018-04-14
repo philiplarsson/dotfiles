@@ -15,10 +15,6 @@ set ignorecase				" ignore case when searching
 set autoindent				" apply indentation to next line
 set smartindent				" indent according to syntax/style of code
 
-
-" Use textwidth 80 for markdown files (reformat with gq)
-au BufRead,BufNewFile *.md setlocal textwidth=80
-
 " Clear hlsearch when pressing enter
 " nnoremap = normal mode non-recursive
 nnoremap <silent> <CR> :noh<CR>
@@ -59,6 +55,10 @@ let g:ale_lint_on_enter = 0
 " Open :UltiSnipsEdit in new tab
 let g:UltiSnipsEditSplit="tabdo"
 let g:UltiSnipsSnippetsDir="~/.config/nvim/Ultisnips"
+
+" ================= markdown-settings ==================
+" Use textwidth 80 for markdown files (reformat with gq)
+au BufRead,BufNewFile *.md setlocal textwidth=80
 
 " ================= vim-go-settings ==================
 "
