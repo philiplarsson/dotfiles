@@ -106,7 +106,7 @@ nmap <LEADER>jb <C-t>
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]b :blast<CR>
+nnoremap <silent> ]B :blast<CR>
 
 " Jump to alternate file
 " <C-^> is hard to use so use <LEADER>. instead.
