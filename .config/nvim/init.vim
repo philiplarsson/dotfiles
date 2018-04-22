@@ -14,6 +14,7 @@ set smartcase				" smarter search, capital letters case sent
 set ignorecase				" ignore case when searching
 set autoindent				" apply indentation to next line
 set smartindent				" indent according to syntax/style of code
+set mouse=a				" use mouse
 
 " Clear hlsearch when pressing enter
 " nnoremap = normal mode non-recursive
@@ -111,6 +112,12 @@ nnoremap <silent> ]B :blast<CR>
 " Jump to alternate file
 " <C-^> is hard to use so use <LEADER>. instead.
 nnoremap <LEADER>. <C-^>
+
+" Jump to Windows without using <C-w> first.
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 " turn to next or previous errors, after open location list
 nmap <C-n> :lnext<CR>
