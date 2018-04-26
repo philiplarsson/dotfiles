@@ -15,6 +15,9 @@ set ignorecase				" ignore case when searching
 set autoindent				" apply indentation to next line
 set smartindent				" indent according to syntax/style of code
 set mouse=a				" use mouse
+set expandtab				" use spaces for tab. Use Ctrl-V<TAB> for regular Tab.
+set tabstop=2                           " use 2 spaces for 1 tab
+set softtabstop=2
 
 " Expand %% to path of active buffer, just as %:h<Tab>
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
