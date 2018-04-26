@@ -47,6 +47,10 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 "
 source ~/.config/nvim/packages.vim
 
+" Install vim-fzf
+" must be installed using homebrew first
+set rtp+=/usr/local/opt/fzf
+
 " ================= plugin-settings ==================
 "
 " Use airline and ALE
@@ -66,6 +70,18 @@ let g:UltiSnipsSnippetsDir="~/.config/nvim/Ultisnips"
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 
+" ================= fzf-settings ==================
+nmap <LEADER>pp :GitFiles<CR>
+nmap <LEADER>pg :GitFiles?<CR>
+nmap <LEADER>PP :Files<CR>
+nmap <LEADER>pb :Buffers<CR>
+nmap <LEADER>pa :Ag<CR>
+nmap <LEADER>pl :BLines<CR>
+"nmap <LEADER>pp :CtrlP<CR>
+"nmap <LEADER>pr :CtrlPMRU<CR>
+"nmap <LEADER>pt :CtrlPBufTag<CR>
+"nmap <LEADER>pb :CtrlPBuffer<CR>
+"
 " ================= markdown-settings ==================
 " Use textwidth 80 for markdown files (reformat with gq)
 au BufRead,BufNewFile *.md setlocal textwidth=80
@@ -159,10 +175,10 @@ nmap <LEADER>a :ALEToggle<CR>
 nmap <LEADER>nt :NERDTreeToggle<CR>
 
 "" CTRLP
-nmap <LEADER>pp :CtrlP<CR>
-nmap <LEADER>pr :CtrlPMRU<CR>
-nmap <LEADER>pt :CtrlPBufTag<CR>
-nmap <LEADER>pb :CtrlPBuffer<CR>
+"nmap <LEADER>pp :CtrlP<CR>
+"nmap <LEADER>pr :CtrlPMRU<CR>
+"nmap <LEADER>pt :CtrlPBufTag<CR>
+"nmap <LEADER>pb :CtrlPBuffer<CR>
 
 "" easymotion
 map <Leader> <Plug>(easymotion-prefix)

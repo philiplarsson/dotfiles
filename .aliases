@@ -8,5 +8,7 @@ alias gogopath='cd $GOPATH'
 alias artisan="php artisan"
 alias vim="nvim"
 
+alias gco='git co $(git branch | fzf)'
+
 source ~/.aliases-work
 

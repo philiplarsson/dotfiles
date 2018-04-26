@@ -15,7 +15,6 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('scrooloose/nerdtree')
 call minpac#add('arcticicestudio/nord-vim')			" theme
 call minpac#add('vim-airline/vim-airline')
-call minpac#add('ctrlpvim/ctrlp.vim')
 call minpac#add('editorconfig/editorconfig-vim')
 call minpac#add('easymotion/vim-easymotion')
 call minpac#add('w0rp/ale')					" async lint engine
@@ -27,6 +26,7 @@ call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('sirver/UltiSnips')
 call minpac#add('kylef/apiblueprint.vim')
 call minpac#add('godlygeek/tabular')
+call minpac#add('junegunn/fzf.vim')				" Needs to load fzf with rtp first.
 
 " =============== plugin settings =============== "
 "
