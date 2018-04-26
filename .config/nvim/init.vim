@@ -56,6 +56,10 @@ source ~/.config/nvim/packages.vim
 " must be installed using homebrew first
 set rtp+=/usr/local/opt/fzf
 
+" Append --no-height
+" This solves Ctrl-R bug in neovim terminal
+" https://github.com/junegunn/fzf/issues/809
+let $FZF_DEFAULT_OPTS .= ' --no-height'
 " ================= plugin-settings ==================
 "
 " Use airline and ALE
