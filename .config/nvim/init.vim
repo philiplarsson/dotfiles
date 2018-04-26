@@ -55,11 +55,6 @@ source ~/.config/nvim/packages.vim
 " Install vim-fzf
 " must be installed using homebrew first
 set rtp+=/usr/local/opt/fzf
-
-" Append --no-height
-" This solves Ctrl-R bug in neovim terminal
-" https://github.com/junegunn/fzf/issues/809
-let $FZF_DEFAULT_OPTS .= ' --no-height'
 " ================= plugin-settings ==================
 "
 " Use airline and ALE
@@ -82,6 +77,11 @@ let g:strip_whitespace_on_save=1
 " Update git-gutter 500ms after typing. (author recommends 100ms)
 set updatetime=500
 " ================= fzf-settings ==================
+"
+" Append --no-height
+" This solves Ctrl-R bug in neovim terminal
+" https://github.com/junegunn/fzf/issues/809
+let $FZF_DEFAULT_OPTS .= ' --no-height'
 nmap <LEADER>pp :GitFiles<CR>
 nmap <LEADER>pg :GitFiles?<CR>
 nmap <LEADER>PP :Files<CR>
@@ -90,6 +90,7 @@ nmap <LEADER>pb :Buffers<CR>
 nmap <LEADER>pa :Ag<CR>
 nmap <LEADER>pl :BLines<CBLinesR>
 nmap <LEADER>pc :Commands<CR>
+nmap <LEADER>ph :Helptags<CR>
 
 " tag word under cursor
 fu! FzfTagsCurrWord()
