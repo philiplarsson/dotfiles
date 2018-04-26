@@ -75,6 +75,8 @@ let g:UltiSnipsSnippetsDir="~/.config/nvim/Ultisnips"
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
 
+" Update git-gutter 500ms after typing. (author recommends 100ms)
+set updatetime=500
 " ================= fzf-settings ==================
 nmap <LEADER>pp :GitFiles<CR>
 nmap <LEADER>pg :GitFiles?<CR>
