@@ -34,7 +34,5 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
 let g:EasyMotion_smartcase = 1
 
-let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=1
 
 

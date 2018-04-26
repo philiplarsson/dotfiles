@@ -16,11 +16,16 @@ set autoindent				" apply indentation to next line
 set smartindent				" indent according to syntax/style of code
 set mouse=a				" use mouse
 
+" Expand %% to path of active buffer, just as %:h<Tab>
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+map <leader>ew :e %%
+map <leader>et :tabe %%
+
 " Clear hlsearch when pressing enter
 " nnoremap = normal mode non-recursive
 nnoremap <silent> <CR> :noh<CR>
 
-" Bind Q to :
+" Bind Q to : in normal mode
 nnoremap Q :
 
 " Press ~ to toggle between UPPER CASE, lower case and Title Case.
@@ -56,6 +61,10 @@ let g:ale_lint_on_enter = 0
 " Open :UltiSnipsEdit in new tab
 let g:UltiSnipsEditSplit="tabdo"
 let g:UltiSnipsSnippetsDir="~/.config/nvim/Ultisnips"
+
+" vim-better-whitespace
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
 
 " ================= markdown-settings ==================
 " Use textwidth 80 for markdown files (reformat with gq)
@@ -120,9 +129,9 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " turn to next or previous errors, after open location list
-nmap <C-n> :lnext<CR>
-nmap <C-n> :lprevious<CR>
-nnoremap <leader>q :cclose<CR>
+"nmap <C-n> :lnext<CR>
+"nmap <C-n> :lprevious<CR>
+"nnoremap <leader>q :cclose<CR>
 
 " neovim terminal
 if has('nvim')
