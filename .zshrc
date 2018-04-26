@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.composer/vendor/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/tuxtux/.oh-my-zsh
+export ZSH=/home/tuxtux/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -51,7 +51,7 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-nvm autojump git-extras ssh-agent)
+plugins=(git osx autojump go)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -73,7 +73,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -83,18 +83,31 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Load Aliases
 source $HOME/.aliases
 
-# Avoid term problems in tmux
-[[ $COLORTERM = gnome-terminal && ! $TERM = screen-256color ]] && TERM=xterm-256color
+# add Composer to PATH
+PATH=$PATH:$HOME/.composer/vendor/bin
 
-# The following removes user@hostname when using agnoster theme.
-export DEFAULT_USER='tuxtux'
+# add go to path
 
-# Add composer to PATH
-if [ -d "/home/tuxtux/.config/composer/vendor/bin" ] ; then
-    export PATH="$PATH:$HOME/.config/composer/vendor/bin"
-fi
+# GOROOT should ONLY be set when installing to a custom location that isn't /usr/local/go.
+#export GOROOT=/usr/local/go
+export GOPATH=~/Dropbox/code/Go
+#export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$GOPATH/bin
 
-# Add exercism to PATH
-export PATH="$PATH:$HOME/Apps/small-apps"
+# color man pages
+# from github.com/dkarter/dotfiles
+export LESS_TERMCAP_mb=$(printf '\e[01;31m') # enter blinking mode – red
+export LESS_TERMCAP_md=$(printf '\e[01;35m') # enter double-bright mode – bold, magenta
+export LESS_TERMCAP_me=$(printf '\e[0m')     # turn off all appearance modes (mb, md, so, us)
+export LESS_TERMCAP_se=$(printf '\e[0m')     # leave standout mode
+export LESS_TERMCAP_so=$(printf '\e[01;33m') # enter standout mode – yellow
+export LESS_TERMCAP_ue=$(printf '\e[0m')     # leave underline mode
+export LESS_TERMCAP_us=$(printf '\e[04;36m') # enter underline mode – cyan
+
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
