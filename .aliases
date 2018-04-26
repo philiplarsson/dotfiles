@@ -10,7 +10,7 @@ alias vim="nvim"
 
 alias gco='git co $(git branch | fzf)'
 
-alias gfmod='git ls-files -m | fzf -m'
+alias gfmod='git ls-files -m | fzf -m --height 40%'
 alias gadd='git add $(gfmod)'
 
 source ~/.aliases-work
