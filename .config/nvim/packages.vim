@@ -13,20 +13,21 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " =============== plugins =============== "
 call minpac#add('scrooloose/nerdtree')
-call minpac#add('arcticicestudio/nord-vim')			" theme
+call minpac#add('arcticicestudio/nord-vim')       " theme
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('editorconfig/editorconfig-vim')
 call minpac#add('easymotion/vim-easymotion')
-call minpac#add('w0rp/ale')					" async lint engine
-call minpac#add('tomtom/tcomment_vim')				" smart commenting
-call minpac#add('ntpeters/vim-better-whitespace')		" show and remove trailing whitespace
+call minpac#add('w0rp/ale')                       " async lint engine
+call minpac#add('tomtom/tcomment_vim')            " smart commenting
+call minpac#add('ntpeters/vim-better-whitespace') " show and remove trailing whitespace
 call minpac#add('tpope/vim-surround')
 call minpac#add('fatih/vim-go')
 call minpac#add('jiangmiao/auto-pairs')
 call minpac#add('sirver/UltiSnips')
 call minpac#add('kylef/apiblueprint.vim')
 call minpac#add('godlygeek/tabular')
-call minpac#add('junegunn/fzf.vim')				" Needs to load fzf with rtp first.
+call minpac#add('junegunn/fzf.vim')               " Needs to load fzf with rtp first.
+call minpac#add('junegunn/limelight.vim')         " hyperfocus-writing in vim. on/off :Limelight/:Limelight!
 
 " =============== plugin settings =============== "
 "
