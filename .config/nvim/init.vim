@@ -79,14 +79,23 @@ let g:strip_whitespace_on_save=1
 nmap <LEADER>pp :GitFiles<CR>
 nmap <LEADER>pg :GitFiles?<CR>
 nmap <LEADER>PP :Files<CR>
+nmap <LEADER>pP :Files<CR>
 nmap <LEADER>pb :Buffers<CR>
 nmap <LEADER>pa :Ag<CR>
-nmap <LEADER>pl :BLines<CR>
-"nmap <LEADER>pp :CtrlP<CR>
-"nmap <LEADER>pr :CtrlPMRU<CR>
-"nmap <LEADER>pt :CtrlPBufTag<CR>
-"nmap <LEADER>pb :CtrlPBuffer<CR>
-"
+nmap <LEADER>pl :BLines<CBLinesR>
+nmap <LEADER>pc :Commands<CR>
+
+" tag word under cursor
+fu! FzfTagsCurrWord()
+  let currWord = expand('<cword>')
+  if len(currWord) > 0
+    call fzf#vim#tags(expand('<cword>'))
+  else
+    execute ':Tags'
+  endif
+endfu
+nmap <LEADER>pt :call FzfTagsCurrWord()<CR>
+
 " ================= markdown-settings ==================
 " Use textwidth 80 for markdown files (reformat with gq)
 au BufRead,BufNewFile *.md setlocal textwidth=80
