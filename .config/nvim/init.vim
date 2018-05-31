@@ -18,8 +18,9 @@ set autoindent     " apply indentation to next line
 set smartindent    " indent according to syntax/style of code
 set mouse=a        " use mouse
 set expandtab      " use spaces for tab. Use Ctrl-V<TAB> for regular Tab.
-set tabstop=2      " use 2 spaces for 1 tab
-set softtabstop=2
+set tabstop=2      " use 2 spaces (visually) for 1 tab
+set softtabstop=0  " don't simulate tab stops at widths
+set shiftwidth=4   " use 4 spaces when pressed on tab
 
 " Expand %% to path of active buffer, just as %:h<Tab>
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
@@ -55,6 +56,10 @@ source ~/.config/nvim/packages.vim
 " Install vim-fzf
 " must be installed using homebrew first
 set rtp+=/usr/local/opt/fzf
+
+" Enable matchit
+runtime macros/matchit.vim
+
 " ================= plugin-settings ==================
 "
 " Use airline and ALE
