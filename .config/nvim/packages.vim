@@ -29,6 +29,7 @@ call minpac#add('godlygeek/tabular')
 call minpac#add('junegunn/fzf.vim')               " Needs to load fzf with rtp first.
 call minpac#add('junegunn/limelight.vim')         " hyperfocus-writing in vim. on/off :Limelight/:Limelight!
 call minpac#add('airblade/vim-gitgutter')         " shows a git diff in the 'gutter' (sign column)
+call minpac#add('lervag/vimtex')                  " support for writing LaTeX document
 
 " =============== plugin settings =============== "
 "
