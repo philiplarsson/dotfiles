@@ -21,6 +21,10 @@ set expandtab      " use spaces for tab. Use Ctrl-V<TAB> for regular Tab.
 set tabstop=2      " use 2 spaces (visually) for 1 tab
 set softtabstop=0  " don't simulate tab stops at widths
 set shiftwidth=4   " use 4 spaces when pressed on tab
+set autoread       " reload file if changed outside of vim
+
+" Bind jj to escape
+inoremap jj <Esc>
 
 " Expand %% to path of active buffer, just as %:h<Tab>
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
@@ -81,6 +85,48 @@ let g:strip_whitespace_on_save=1
 
 " Update git-gutter 500ms after typing. (author recommends 100ms)
 set updatetime=500
+
+" ================= ncm2-settings ==================
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" ================= omni-complete-settings ==================
+set completeopt=noinsert,menuone,noselect
+" Enter acts as C-y
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Esc cancels and remove suggestion
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+
+" ================= phpactor-settings ==================
+" Phpactor is an intelligent code-completion and refactoring tool for PHP.
+" All phpactor commands start with <leader>P
+
+" Include use statement
+nmap <Leader>Pu :call phpactor#UseAdd()<CR>
+
+" Invoke the context menu
+nmap <Leader>PP :call phpactor#ContextMenu()<CR>
+
+" Invoke the navigation menu
+nmap <Leader>Pn :call phpactor#Navigate()<CR>
+
+" Goto definition of class or class member under the cursor
+nmap <Leader>Po :call phpactor#GotoDefinition()<CR>
+
+" Scan for all references to a class member in the project
+nmap <Leader>Pr :call phpactor#FindReferences()<CR>
+
+" Automatically add any missing properties to a class
+nmap <Leader>Pt :call phpactor#Transform()<CR>
+
+" Extract a method from a selection
+nmap <Leader>Pm :call phpactor#ExtractMethod()<CR>
+
+" Set to v:true to enable useful error messages when completion is invoked.
+let g:phpactorOmniError = v:true
+
 " ================= fzf-settings ==================
 "
 " Append --no-height
@@ -89,13 +135,14 @@ set updatetime=500
 let $FZF_DEFAULT_OPTS .= ' --no-height'
 nmap <LEADER>pp :GitFiles<CR>
 nmap <LEADER>pg :GitFiles?<CR>
-nmap <LEADER>PP :Files<CR>
 nmap <LEADER>pP :Files<CR>
 nmap <LEADER>pb :Buffers<CR>
 nmap <LEADER>pa :Ag<CR>
-nmap <LEADER>pl :BLines<CBLinesR>
+nmap <LEADER>pl :BLines<CR>
 nmap <LEADER>pc :Commands<CR>
 nmap <LEADER>ph :Helptags<CR>
+nmap <LEADER>ps :Snippets<CR>
+nmap <LEADER>pm :Maps<CR>
 
 " tag word under cursor
 fu! FzfTagsCurrWord()
@@ -112,36 +159,25 @@ nmap <LEADER>pt :call FzfTagsCurrWord()<CR>
 " Use textwidth 80 for markdown files (reformat with gq)
 au BufRead,BufNewFile *.md setlocal textwidth=80
 
-" ================= vim-go-settings ==================
-"
-" Only use locationlint list (instead of quicklist) with vim-go
-let g:go_list_type = 'locationlist'
+" ================= table-mode-settings ==================
+" Convert visual selection to table
+let g:table_mode_tableize_map = '<Leader>TT'
+" ================= gitcommit-settings ==================
+" Use spell check when git commit
+autocmd FileType gitcommit setlocal spell
 
-let g:go_metalinter_autosave = 1
+" ================= emmet-vim settings ==================
+" emmet uses C-y ,
 
-" Import on save
-let g:go_fmt_command = "goimports"
-" Use 4 spaces as one tab
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-
-"Beautify vim-go (could make it slower)
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-
-" Show info automatically
-let g:go_auto_type_info = 1
-"" ================= vim-go-mappings ==================
-"
-autocmd FileType go nmap <LEADER>gt  <Plug>(go-test)
-autocmd FileType go nmap <LEADER>gr  <Plug>(go-run)
-autocmd FileType go nmap <LEADER>gl  :GoMetaLinter<CR>
+" ================= tagbar-settings ==================
+" Toggle tagbar
+nmap <LEADER>tt :TagbarToggle<CR>
 
 "" ================= general-mappings ==================
 "
 " Make it easy to edit the vimrc file.
 nmap <LEADER>ev :tabedit $MYVIMRC<CR>
+nmap <LEADER>ep :tabedit ~/.config/nvim/packages.vim<CR>
 
 :" Map Ctrl-A -> Start of line, Ctrl-E -> End of line
 :nmap <C-a> <Home>
@@ -170,29 +206,11 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-" turn to next or previous errors, after open location list
-"nmap <C-n> :lnext<CR>
-"nmap <C-n> :lprevious<CR>
-"nnoremap <leader>q :cclose<CR>
-
 " neovim terminal
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
   tnoremap <C-v><Esc> <Esc>
 endif
-
-" run :GoBuild or :GoTestCompile based on the go file
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
-
-autocmd FileType go nmap <LEADER>gb :<C-u>call <SID>build_go_files()<CR>
-autocmd FileType go nmap <Leader>gc <Plug>(go-coverage-toggle)
 
 "" Toggle ALE (linting)
 nmap <LEADER>a :ALEToggle<CR>
@@ -200,16 +218,12 @@ nmap <LEADER>a :ALEToggle<CR>
 "" NERDTree
 nmap <LEADER>nt :NERDTreeToggle<CR>
 
-"" CTRLP
-"nmap <LEADER>pp :CtrlP<CR>
-"nmap <LEADER>pr :CtrlPMRU<CR>
-"nmap <LEADER>pt :CtrlPBufTag<CR>
-"nmap <LEADER>pb :CtrlPBuffer<CR>
-
 "" easymotion
-map <Leader> <Plug>(easymotion-prefix)
-"nmap <LEADER><SPACE> <Plug>(easymotion-s)
-nmap <LEADER><LEADER> <Plug>(easymotion-s)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_keys = 'abcdefghijklmnopqrstuvwxyz'
+" Disable default mappings
+let g:EasyMotion_do_mapping = 0
+nmap <LEADER><LEADER> <Plug>(easymotion-overwin-f)
 
 "" tcomment
 map <LEADER>c <C-_><C-_>
@@ -223,21 +237,24 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "" ================= visuals ==================
 
 if (has("termguicolors"))
- set termguicolors
+  set termguicolors
 endif
 
 " Enable cursorline number color for nord theme
-augroup NordMods
-    autocmd!
-    autocmd ColorScheme nord highlight CursorLineNr ctermfg=6 guifg=#81A1C1
-    autocmd ColorScheme nord highlight CursorLine ctermbg=NONE guibg=#2E3440
-augroup end
-set cursorline
+"augroup NordMods
+    "autocmd!
+    "autocmd ColorScheme nord highlight CursorLineNr ctermfg=6 guifg=#81A1C1
+    "autocmd ColorScheme nord highlight CursorLine ctermbg=NONE guibg=#2E3440
+"augroup end
+"set cursorline
+
+" Airline Theme
+let g:airline_theme='quantum'
 
 " Theme
 syntax enable
-colorscheme nord
-let g:nord_italic = 1				" enable italics
-let g:nord_italic_comments = 1			" enable italic comments
+colorscheme chito
+"let g:nord_italic = 1				" enable italics
+"let g:nord_italic_comments = 1			" enable italic comments
 
 
