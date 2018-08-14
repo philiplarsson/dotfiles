@@ -42,4 +42,5 @@ call minpac#add('roxma/nvim-yarp')                " Required by NCM2
 call minpac#add('phpactor/ncm2-phpactor')         " phpactor integration for ncm2
 call minpac#add('ncm2/ncm2-ultisnips')            " UltiSnips integration for ncm2
 
+call minpac#add('rizzatti/dash.vim')              " Search terms using Dash.app
 

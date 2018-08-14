@@ -23,6 +23,9 @@ set softtabstop=0  " don't simulate tab stops at widths
 set shiftwidth=4   " use 4 spaces when pressed on tab
 set autoread       " reload file if changed outside of vim
 
+" Set correct path for python2.7
+let g:python_host_prog='/usr/local/bin/python2.7'
+
 " Bind jj to escape
 inoremap jj <Esc>
 
@@ -122,7 +125,7 @@ nmap <Leader>Pr :call phpactor#FindReferences()<CR>
 nmap <Leader>Pt :call phpactor#Transform()<CR>
 
 " Extract a method from a selection
-nmap <Leader>Pm :call phpactor#ExtractMethod()<CR>
+vmap <silent><Leader>Pm :<C-U>call phpactor#ExtractMethod()<CR>
 
 " Set to v:true to enable useful error messages when completion is invoked.
 let g:phpactorOmniError = v:true
@@ -205,6 +208,9 @@ map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+
+" Dash Bindings
+:nmap <silent> <LEADER>d <Plug>DashSearch
 
 " neovim terminal
 if has('nvim')
