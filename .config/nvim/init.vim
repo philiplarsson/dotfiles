@@ -34,6 +34,11 @@ cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
 map <leader>ew :e %%
 map <leader>et :tabe %%
 
+" Paste from system clipboard with <leader>v
+" This will preserve the indentanion of the text (as if 'paste' command was
+" on).
+map <leader>v "+p
+
 " Clear hlsearch when pressing enter
 " nnoremap = normal mode non-recursive
 nnoremap <silent> <CR> :noh<CR>
