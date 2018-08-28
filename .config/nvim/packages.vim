@@ -33,14 +33,17 @@ call minpac#add('Jimeno0/vim-chito')              " chito theme
 call minpac#add('mattn/emmet-vim')                " emmet for vim
 call minpac#add('dhruvasagar/vim-table-mode')     " format tables in vim. Toggle with :TableModeToggle or <LEADER>tm
 call minpac#add('majutsushi/tagbar')              " browse tags of current file (requires tags)
+call minpac#add('rizzatti/dash.vim')              " Search terms using Dash.app
+call minpac#add('fatih/vim-go', {'do': ':GoInstallBinaries'})                   " Go development plugin for Vim
 
+"" ===== ncm2 =====
+call minpac#add('ncm2/ncm2')                      " NCM2 is a slim, fast and hackable completion framework for neovim.
+call minpac#add('roxma/nvim-yarp')                " Required by NCM2
+call minpac#add('ncm2/ncm2-ultisnips')            " UltiSnips integration for ncm2
+"" ===== php =====
 call minpac#add('StanAngeloff/php.vim')           " An up-to-date Vim syntax for PHP.
 " Phpactor is an intelligent code-completion and refactoring tool for PHP.
 call minpac#add('phpactor/phpactor', {'do': '!composer install'})
-call minpac#add('ncm2/ncm2')                      " NCM2 is a slim, fast and hackable completion framework for neovim.
-call minpac#add('roxma/nvim-yarp')                " Required by NCM2
 call minpac#add('phpactor/ncm2-phpactor')         " phpactor integration for ncm2
-call minpac#add('ncm2/ncm2-ultisnips')            " UltiSnips integration for ncm2
 
-call minpac#add('rizzatti/dash.vim')              " Search terms using Dash.app
 

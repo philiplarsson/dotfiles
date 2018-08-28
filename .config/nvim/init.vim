@@ -20,7 +20,7 @@ set mouse=a        " use mouse
 set expandtab      " use spaces for tab. Use Ctrl-V<TAB> for regular Tab.
 set tabstop=2      " use 2 spaces (visually) for 1 tab
 set softtabstop=0  " don't simulate tab stops at widths
-set shiftwidth=4   " use 4 spaces when pressed on tab
+set shiftwidth=2   " use 4 spaces when pressed on tab
 set autoread       " reload file if changed outside of vim
 
 " Set correct path for python2.7
@@ -180,6 +180,10 @@ autocmd FileType gitcommit setlocal spell
 " ================= tagbar-settings ==================
 " Toggle tagbar
 nmap <LEADER>tt :TagbarToggle<CR>
+
+" ================= vim-go settings ==================
+" import when save
+let g:go_fmt_command = "goimports"
 
 "" ================= general-mappings ==================
 "
