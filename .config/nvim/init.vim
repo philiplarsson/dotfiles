@@ -61,6 +61,9 @@ function! TwiddleCase(str)
 endfunction
 vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 
+"toggle fold with space
+nnoremap <Space> za
+
 " ================= plugins ==================
 "
 source ~/.config/nvim/packages.vim
@@ -74,14 +77,6 @@ runtime macros/matchit.vim
 
 " ================= plugin-settings ==================
 "
-" Use airline and ALE
-let g:airline#extensions#ale#enabled = 1
-
-" Don't start ALE when entering file.
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_enter = 0
-
 " Ultisnipps
 " Open :UltiSnipsEdit in new tab
 let g:UltiSnipsEditSplit="tabdo"
@@ -94,9 +89,23 @@ let g:strip_whitespace_on_save=1
 " Update git-gutter 500ms after typing. (author recommends 100ms)
 set updatetime=500
 
+" ================= ale-settings ==================
+" Use airline and ALE
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 0
+
+let g:ale_php_phpcs_standard = 'PSR2'
+
+let g:ale_fixers = {'php': ['php_cs_fixer']}
+" fix file with öf
+nmap <LEADER>f <Plug>(ale_fix)
+
 " ================= ncm2-settings ==================
 " enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+"autocmd BufEnter * call ncm2#enable_for_buffer()
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
@@ -184,6 +193,9 @@ nmap <LEADER>tt :TagbarToggle<CR>
 " ================= vim-go settings ==================
 " import when save
 let g:go_fmt_command = "goimports"
+
+" Use gohtmltmpl syntax for .gohtml files
+au BufReadPost *.gohtml set syntax=gohtmltmpl
 
 "" ================= general-mappings ==================
 "
