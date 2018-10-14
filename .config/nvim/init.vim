@@ -105,7 +105,7 @@ nmap <LEADER>f <Plug>(ale_fix)
 
 " ================= ncm2-settings ==================
 " enable ncm2 for all buffers
-"autocmd BufEnter * call ncm2#enable_for_buffer()
+autocmd BufEnter * call ncm2#enable_for_buffer()
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
