@@ -24,7 +24,7 @@ set shiftwidth=2   " use 4 spaces when pressed on tab
 set autoread       " reload file if changed outside of vim
 
 " Set correct path for python2.7
-let g:python_host_prog='/usr/local/bin/python2.7'
+let g:python_host_prog='/usr/local/bin/python2'
 
 " Bind jj to escape
 inoremap jj <Esc>
@@ -105,7 +105,7 @@ nmap <LEADER>f <Plug>(ale_fix)
 
 " ================= ncm2-settings ==================
 " enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
+"autocmd BufEnter * call ncm2#enable_for_buffer()
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
@@ -267,21 +267,11 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" Enable cursorline number color for nord theme
-"augroup NordMods
-    "autocmd!
-    "autocmd ColorScheme nord highlight CursorLineNr ctermfg=6 guifg=#81A1C1
-    "autocmd ColorScheme nord highlight CursorLine ctermbg=NONE guibg=#2E3440
-"augroup end
-"set cursorline
-
 " Airline Theme
 let g:airline_theme='quantum'
 
 " Theme
 syntax enable
 colorscheme chito
-"let g:nord_italic = 1				" enable italics
-"let g:nord_italic_comments = 1			" enable italic comments
 
 
