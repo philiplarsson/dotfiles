@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # J wrapper
-# Requires autojump and fzf
+# Requires autojump, ag and fzf
 # use with j <ENTER> for fzf list, or use j as usual.
 
 j() {
@@ -14,7 +14,7 @@ j() {
     if [[ "$#" -ne 0 ]]; then
         jumpDir="$(autojump $@)"
     else
-        jumpDir="$(autojump --complete | sed 's/__[0-9]*__//' | fzf --height 40% --reverse --inline-info)"
+        jumpDir="$(autojump -s | ag -o '(?<=\d\.\d:\s).*' | sort -r | fzf --height 40% --reverse --inline-info --preview 'ls -A {}')"
     fi
 
     if [ -t 1 ]
