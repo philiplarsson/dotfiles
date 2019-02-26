@@ -1,0 +1,5 @@
+[alias]
+	co = checkout
+	s = status
+[commit]
+	verbose = true

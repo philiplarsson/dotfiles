@@ -1,18 +1,6 @@
 alias c="clear"
 alias cdc="cd; clear"
-alias gs="git status"
-alias co="composer"
-alias pu="phpunit"
-alias puc="phpunit --coverage-text"
-alias gogopath='cd $GOPATH'
-alias artisan="php artisan"
+alias g="git"
 alias vim="nvim"
 
-alias gco='git co $(git branch | fzf)'
-
-alias gfmod='git ls-files -m | fzf -m --height 40%'
-alias gadd='git add $(gfmod)'
-
-alias noty='$HOME/Dropbox/code/PHP/console-apps/noty/noty'
-source ~/.aliases-work
-
+alias noty='$HOME/Scripts/php-noty/noty'
