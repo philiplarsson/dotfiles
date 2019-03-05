@@ -95,7 +95,6 @@ source ~/.config/nvim/packages.vim
 
 " ================= plugin-settings ==================
 "
-
 "" NERDTree
 nmap <LEADER>nt :NERDTreeToggle<CR>
 
