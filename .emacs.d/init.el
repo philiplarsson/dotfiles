@@ -1,56 +1,28 @@
-;; --------------- Philip's Emacs Configuration ---------------
-
-;;; ---------- Packages ----------
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-             '("marmalade" . "https://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+	     '("melpa" . "https://melpa.org/packages/"))
 
 (package-initialize)
 
-;;; ---------- Mac Specific ----------
-(when (eq system-type 'darwin)
-  (setq mac-option-modifier nil
-  mac-command-modifier 'meta
-  x-select-enable-clipboard t))
+; make sure that use-package is installed
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;;; ---------- Load Configurations File ----------
-(org-babel-load-file (expand-file-name "~/.emacs.d/myinit.org"))
-
-
-;;; ---------- watch_here scripts ----------
-(defun run-php-check ()
-  "Check the current PHP file using check-php.sh"
-  (interactive)
-  (shell-command (format "%s %s" "~/.scripts/check-php.sh" buffer-file-name)))
-
-(defun run-phpunit-check ()
-  "Run the current file in phpunit using check-phpunit.sh"
-  (interactive)
-  (shell-command (format "%s %s" "~/.scripts/check-phpunit.sh" buffer-file-name)))
-
-(define-key php-mode-map (kbd "C-c c") 'run-php-check)
-(define-key php-mode-map (kbd "C-t o") 'run-phpunit-check)
-;;; ---------- Settings Set By Emacs Menu Configuration ----------
+; Load configuration from org-babel config file
+(require 'org)
+(org-babel-load-file "~/.emacs.d/config.org")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(neo-window-fixed-size t)
- '(neo-window-width 40)
- '(show-paren-mode t)
- '(tool-bar-mode nil))
+ '(package-selected-packages (quote (which-key use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fira Code" :foundry "CTDB" :slant normal :weight normal :height 112 :width normal))))
- '(aw-leading-char-face ((t (:inherit ace-jump-face-foreground :height 3.0)))))
+ )
