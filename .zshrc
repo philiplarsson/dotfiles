@@ -112,3 +112,6 @@ source $HOME/.secret
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Opt out from homebrew analytics
+export HOMEBREW_NO_ANALYTICS=1
