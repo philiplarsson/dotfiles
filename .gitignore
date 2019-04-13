@@ -70,3 +70,4 @@ flycheck_*.el
 
 .emacs.d/backups
 .emacs.d/url
+.emacs.d/myconfig.el

@@ -10,9 +10,17 @@
 ;; Add linespacing
 (setq-default line-spacing 6)
 #+END_SRC
+
 * General Settings
 
 #+BEGIN_SRC emacs-lisp
+;; Mac settings.
+;; Will enable brackets and square brackets, among other things.
+(when (eq system-type 'darwin)
+(setq mac-option-modifier nil
+  mac-command-modifier 'meta              ;; use cmd as meta/alt
+  select-enable-clipboard t))             ;; cut and paste uses clipboard
+
 ;; Allow y and n instead of yes and no
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -34,6 +42,12 @@
 
 ;; Remove Scrollbar
 (scroll-bar-mode -1)
+
+;; Sort apropos results by relevancy
+(setq apropos-sort-by-scores t)
+
+;; Show current column in the mode line
+(setq column-number-mode t)
 #+END_SRC
 
 * Theme
@@ -43,7 +57,7 @@
   :ensure t)
 #+END_SRC
 * Plugins
-
+** Which key
 #+BEGIN_QUOTE
 which-key is a minor mode for Emacs that displays the key bindings following your currently entered incomplete command (a prefix) in a popup.
 #+END_QUOTE
@@ -57,7 +71,13 @@ which-key is a minor mode for Emacs that displays the key bindings following you
 ** General Keybindings
 
 #+BEGIN_SRC emacs-lisp
+;; Toggle fullscreen
 (global-set-key (kbd "<s-return>") 'toggle-frame-fullscreen)
+
+;; Prefer backward-kill-word over Backspace
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
 #+END_SRC
+
 
 
