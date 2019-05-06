@@ -48,8 +48,21 @@
 
 ;; Show current column in the mode line
 (setq column-number-mode t)
+
+;; Use zap-up-to-char instead of zap-to-char
+(global-set-key "\M-z" 'zap-up-to-char)
 #+END_SRC
 
+* IDO Mode
+Introduction [[https://www.masteringemacs.org/article/introduction-to-ido-mode][here]].
+Enable basic Ido support for files and buffers and the very useful “flex matching” as well.
+
+#+BEGIN_SRC emacs-lisp
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+(defalias 'list-buffers 'ibuffer)    ; use ibuffer as default
+#+END_SRC
 * Theme
 
 #+BEGIN_SRC emacs-lisp
@@ -67,12 +80,42 @@ which-key is a minor mode for Emacs that displays the key bindings following you
   :ensure t
   :config (which-key-mode))
 #+END_SRC
+** Ace Window
+[[https://github.com/abo-abo/ace-window][Ace-window]] helps with selecting a window when there is more than 2.
+
+#+BEGIN_SRC emacs-lisp
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . ace-window)
+  :config
+  (custom-set-faces
+    '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground :height 2.0)))))
+)
+#+END_SRC
+
+** Avy
+[[https://github.com/abo-abo/avy][Avy]] is a package for jumping to things.
+
+#+BEGIN_SRC emacs-lisp
+(use-package avy
+  :ensure t
+  :bind ("C-c C-SPC" . avy-goto-word-or-subword-1))
+#+END_SRC
+
+** htmlize
+[[https://github.com/hniksic/emacs-htmlize][emacs-htmlize]] seems to be needed for some files to be converted to html.
+
+#+BEGIN_SRC emacs-lisp
+(use-package htmlize
+  :ensure t)
+#+END_SRC
 * Keybindings
 ** General Keybindings
 
 #+BEGIN_SRC emacs-lisp
 ;; Toggle fullscreen
-(global-set-key (kbd "<s-return>") 'toggle-frame-fullscreen)
+(global-set-key (kbd "C-c F") 'toggle-frame-fullscreen)
 
 ;; Prefer backward-kill-word over Backspace
 (global-set-key "\C-w" 'backward-kill-word)
