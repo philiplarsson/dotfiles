@@ -22,7 +22,9 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
-   ["#d2ceda" "#f2241f" "#67b11d" "#b1951d" "#3a81c3" "#a31db1" "#21b8c7" "#655370"])
+   ["#454545" "#d65946" "#6aaf50" "#baba36" "#598bc1" "#ab75c3" "#68a5e9" "#bdbdb3"])
+ '(column-number-mode t)
+ '(current-language-environment "UTF-8")
  '(custom-safe-themes
    (quote
     ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" "fa2b58bb98b62c3b8cf3b6f02f058ef7827a8e497125de0254f56e373abee088" "23f1d50c7687a59aabf9773e40413e97e5c29b3b22c065f7c866cfcfc4538343" default)))
@@ -45,8 +47,12 @@
      ("XXXX" . "#dc752f")
      ("???" . "#dc752f"))))
  '(ns-use-native-fullscreen nil)
- '(package-selected-packages (quote (htmlize ace-window which-key use-package)))
- '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef"))))
+ '(package-selected-packages
+   (quote
+    (undo-tree volatile-highlights exec-path-from-shell markdown-mode htmlize ace-window which-key use-package)))
+ '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef")))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -51,6 +51,11 @@
 
 ;; Use zap-up-to-char instead of zap-to-char
 (global-set-key "\M-z" 'zap-up-to-char)
+
+;; Add JS as an org-babel-execute-funciton
+(org-babel-do-load-languages
+      'org-babel-load-languages
+      '((js . t)))
 #+END_SRC
 
 * IDO Mode
@@ -110,9 +115,55 @@ which-key is a minor mode for Emacs that displays the key bindings following you
 (use-package htmlize
   :ensure t)
 #+END_SRC
+** Markdown Mode
+"[[https://jblevins.org/projects/markdown-mode/][markdown-mode]] is a major mode for editing Markdown-formatted text."
+
+#+BEGIN_SRC emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+#+END_SRC
+** Exec-path-from-shell (macOS)
+#+BEGIN_QUOTE
+A GNU Emacs library to ensure environment variables inside Emacs look
+the same as in the user's shell.
+#+END_QUOTE
+
+#+BEGIN_SRC emacs-lisp
+(use-package exec-path-from-shell
+  :ensure t)
+
+(when (eq system-type 'darwin)
+  (exec-path-from-shell-initialize))
+#+END_SRC
+** Volatile Highlights
+[[https://github.com/k-talo/volatile-highlights.el][Volatile-highlights]] is a minor mode for visual feedback on some operations.
+#+BEGIN_SRC emacs-lisp
+(use-package volatile-highlights
+  :config
+  (volatile-highlights-mode t))
+#+END_SRC
+** Undo Tree
+[[https://elpa.gnu.org/packages/undo-tree.html][Undo Tree]] is an advanced yet simpler undo system.
+
+Bring up the visual undo tree with =C-x u=.
+
+Toggle time-stamps with =t=, while in the undo-tree visualizer.
+
+#+BEGIN_SRC emacs-lisp
+(use-package undo-tree
+  :ensure t
+  :init
+  (global-undo-tree-mode))
+(global-set-key (kbd "C-z") 'undo-tree-undo)
+(global-set-key (kbd "C-S-z") 'undo-tree-redo)
+#+END_SRC
 * Keybindings
 ** General Keybindings
-
 #+BEGIN_SRC emacs-lisp
 ;; Toggle fullscreen
 (global-set-key (kbd "C-c F") 'toggle-frame-fullscreen)
@@ -120,7 +171,77 @@ which-key is a minor mode for Emacs that displays the key bindings following you
 ;; Prefer backward-kill-word over Backspace
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
+
+;; Search word under point
+(global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
+
+;; Dabbrev Tab-Ctrl
+(global-set-key (kbd "<C-tab>") 'dabbrev-expand)
 #+END_SRC
 
+* Small Functions
+** Concat Lines
 
+Move up line below. (Vim like Shift-j).
+
+#+BEGIN_SRC emacs-lisp
+(defun concat-lines ()
+  (interactive)
+  (next-line)
+  (join-line))
+
+(global-set-key (kbd "M-j") 'concat-lines)
+#+END_SRC
+
+** Run Tests
+
+Evaluate current buffer and run ERT.
+
+#+BEGIN_SRC emacs-lisp
+(defun eval-buffer-and-run-tests ()
+  "Evaluates the current buffer and runs ERT"
+  (interactive)
+  (eval-buffer)
+  (ert t))
+
+(global-set-key (kbd "C-c T") 'eval-buffer-and-run-tests)
+#+END_SRC
+** smarter-move-beginning-of-line
+#+BEGIN_QUOTE
+Wouldn’t it be great if C-a initially took you to the first
+non-whitespace char(as back-to-indentation does) on a line, and if
+pressed again took you to the actual beginning of the line? It would
+be!
+#+END_QUOTE
+
+From [[https://emacsredux.com/blog/2013/05/22/smarter-navigation-to-the-beginning-of-a-line/][emacsredux.com]].
+
+#+BEGIN_SRC emacs-lisp
+(defun smarter-move-beginning-of-line (arg)
+  "Move point back to indentation of beginning of line.
+
+Move point to the first non-whitespace character on this line.
+If point is already there, move to the beginning of the line.
+Effectively toggle between the first non-whitespace character and
+the beginning of the line.
+
+If ARG is not nil or 1, move forward ARG - 1 lines first.  If
+point reaches the beginning or end of the buffer, stop there."
+  (interactive "^p")
+  (setq arg (or arg 1))
+
+  ;; Move lines first
+  (when (/= arg 1)
+    (let ((line-move-visual nil))
+      (forward-line (1- arg))))
+
+  (let ((orig-point (point)))
+    (back-to-indentation)
+    (when (= orig-point (point))
+      (move-beginning-of-line 1))))
+
+;; remap C-a to `smarter-move-beginning-of-line'
+(global-set-key [remap move-beginning-of-line]
+                'smarter-move-beginning-of-line)
+#+END_SRC
 
