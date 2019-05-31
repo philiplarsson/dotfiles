@@ -4,6 +4,9 @@ alias g="git"
 alias vim="nvim"
 
 alias noty='$HOME/Scripts/php-noty/noty'
-alias pp='vim $HOME/Dropbox/pp.md'
+alias pp='vim $HOME/Dropbox/pp.org'
 
 alias emacs='$HOME/Scripts/emacs.sh'
+alias ert-run='$HOME/Scripts/ert-run'
+
+
