@@ -1,7 +1,13 @@
 (require 'package)
 (setq package-enable-at-startup nil)
-(add-to-list 'package-archives
-	     '("melpa" . "https://melpa.org/packages/"))
+(setq package-archives
+      '(("gnu"     . "https://elpa.gnu.org/packages/")
+        ("melpa-stable" . "https://stable.melpa.org/packages/")
+        ("melpa"        . "https://melpa.org/packages/"))
+      package-archive-priorities
+      '(("melpa-stable" . 10)
+        ("gnu"     . 5)
+        ("melpa"        . 0)))
 
 (package-initialize)
 
@@ -46,10 +52,12 @@
      ("XXX" . "#dc752f")
      ("XXXX" . "#dc752f")
      ("???" . "#dc752f"))))
+ '(lsp-ui-doc-use-webkit t)
+ '(lsp-ui-sideline-enable nil)
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (undo-tree volatile-highlights exec-path-from-shell markdown-mode htmlize ace-window which-key use-package)))
+    (flycheck-pos-tip powerline flycheck-color-mode-line js2-mode flycheck company company-mode highlight-symbol highlight-simbyl diff-hl clean-aindent-mode duplicate-thing undo-tree volatile-highlights exec-path-from-shell markdown-mode htmlize ace-window which-key use-package)))
  '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef")))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
