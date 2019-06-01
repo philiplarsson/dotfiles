@@ -56,8 +56,38 @@
 (org-babel-do-load-languages
       'org-babel-load-languages
       '((js . t)))
-#+END_SRC
 
+;; Remember more
+(setq global-mark-ring-max 5000         ; increase mark ring to contains 5000 entries
+      mark-ring-max 5000                ; increase mark ring to contains 5000 entries
+      kill-ring-max 5000                ; increase kill-ring capacity
+      )
+#+END_SRC
+* hippie expand
+From [[https://tuhdo.github.io/emacs-tutor3.html#orgheadline30][tuhdo.github.io]].
+
+#+BEGIN_SRC emacs-lisp
+;; Hippie-Expand Tab-Ctrl
+
+;; hippie-expand is a better version of dabbrev-expand.
+;; While dabbrev-expand searches for words you already types, in current
+;; buffers and other buffers, hippie-expand includes more sources,
+;; such as filenames, klll ring...
+(global-set-key (kbd "<C-tab>") 'hippie-expand)
+(setq
+ hippie-expand-try-functions-list
+ '(try-expand-dabbrev ;; Try to expand word "dynamically", searching the current buffer.
+   try-expand-dabbrev-all-buffers ;; Try to expand word "dynamically", searching all other buffers.
+   try-expand-dabbrev-from-kill ;; Try to expand word "dynamically", searching the kill ring.
+   try-complete-file-name-partially ;; Try to complete text as a file name, as many characters as unique.
+   try-complete-file-name ;; Try to complete text as a file name.
+   try-expand-all-abbrevs ;; Try to expand word before point according to all abbrev tables.
+   try-expand-list ;; Try to complete the current line to an entire line in the buffer.
+   try-expand-line ;; Try to complete the current line to an entire line in the buffer.
+   try-complete-lisp-symbol-partially ;; Try to complete as an Emacs Lisp symbol, as many characters as unique.
+   try-complete-lisp-symbol) ;; Try to complete word as an Emacs Lisp symbol.
+ )
+#+END_SRC
 * IDO Mode
 Introduction [[https://www.masteringemacs.org/article/introduction-to-ido-mode][here]].
 Enable basic Ido support for files and buffers and the very useful “flex matching” as well.
@@ -162,6 +192,24 @@ Toggle time-stamps with =t=, while in the undo-tree visualizer.
 (global-set-key (kbd "C-z") 'undo-tree-undo)
 (global-set-key (kbd "C-S-z") 'undo-tree-redo)
 #+END_SRC
+** Duplicate thing
+[[https://github.com/ongaeshi/duplicate-thing][duplicate-thing.el]] is Emacs lisp. Easy duplicate line or region, with comment out.
+
+#+BEGIN_SRC emacs-lisp
+(use-package duplicate-thing
+  :ensure t
+  :init)
+(global-set-key (kbd "M-c") 'duplicate-thing)
+#+END_SRC
+** clean-aindent-mode
+[[https://github.com/pmarinov/clean-aindent-mode][clean-aindent-mode]] cleans up whitespace that was created by me.
+
+#+BEGIN_SRC emacs-lisp
+(use-package clean-aindent-mode
+  :ensure t
+  :init)
+(add-hook 'prog-mode-hook 'clean-aindent-mode)
+#+END_SRC
 * Keybindings
 ** General Keybindings
 #+BEGIN_SRC emacs-lisp
@@ -175,8 +223,7 @@ Toggle time-stamps with =t=, while in the undo-tree visualizer.
 ;; Search word under point
 (global-set-key (kbd "C-S-s") 'isearch-forward-symbol-at-point)
 
-;; Dabbrev Tab-Ctrl
-(global-set-key (kbd "<C-tab>") 'dabbrev-expand)
+
 #+END_SRC
 
 * Small Functions
@@ -245,3 +292,10 @@ point reaches the beginning or end of the buffer, stop there."
                 'smarter-move-beginning-of-line)
 #+END_SRC
 
+* Future Plugins to take a look at
+
+- [[https://github.com/Fuco1/smartparens][smartparens]]: Minor mode for Emacs that deals with parens pairs and tries to be smart about it.
+- [[https://github.com/joaotavora/yasnippet][yasnippet]]: Template system for Emacs.
+- [[http://company-mode.github.io/][company]]: A text completion framework for Emacs.
+- [[https://github.com/magnars/expand-region.el][expand-region]]: Increases the selected region by semantic units. Video [[http://emacsrocks.com/e09.html][here]].
+- [[https://github.com/purcell/ibuffer-vc][ibuffer-vc]]: Let ibuffer-mode group files by git project.
