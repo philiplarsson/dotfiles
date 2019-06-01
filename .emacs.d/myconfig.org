@@ -99,12 +99,21 @@ Enable basic Ido support for files and buffers and the very useful “flex match
 (defalias 'list-buffers 'ibuffer)    ; use ibuffer as default
 #+END_SRC
 * Theme
-
 #+BEGIN_SRC emacs-lisp
 (use-package nimbus-theme
   :ensure t)
 #+END_SRC
 * Plugins
+** Powerline
+[[https://github.com/milkypostman/powerline][Powerline]] is Emacs version of the Vim powerline.
+
+#+BEGIN_SRC emacs-lisp
+(use-package powerline
+  :ensure t
+  :init)
+
+(powerline-default-theme)
+#+END_SRC
 ** Which key
 #+BEGIN_QUOTE
 which-key is a minor mode for Emacs that displays the key bindings following your currently entered incomplete command (a prefix) in a popup.
@@ -210,6 +219,135 @@ Toggle time-stamps with =t=, while in the undo-tree visualizer.
   :init)
 (add-hook 'prog-mode-hook 'clean-aindent-mode)
 #+END_SRC
+** highlight-symbol
+[[https://github.com/nschum/highlight-symbol.el][highlight-symbol.el]] will highlight symbol under point and allow you to
+move to next or previous occurrence.
+
+#+BEGIN_SRC emacs-lisp
+(use-package highlight-symbol
+  :ensure t
+  :init)
+
+(setq highlight-symbol-idle-delay 0.6
+      highlight-symbol-on-navigation-p t)
+
+;; Allow navigation with M-n and M-p
+(highlight-symbol-nav-mode)
+
+;; Jump between symbol
+(global-set-key (kbd "M-n") 'highlight-symbol-next)
+(global-set-key (kbd "M-p") 'highlight-symbol-prev)
+
+;; Toggle highlight symbol on or off
+(global-set-key (kbd "C-c H") 'highlight-symbol-mode)
+#+END_SRC
+
+** JS2-mode
+[[https://github.com/mooz/js2-mode][js2-mode]] is an improved JavaScript editing mode for Emacs.
+
+#+BEGIN_SRC emacs-lisp
+(use-package js2-mode
+  :ensure t
+  :init)
+
+;; Use as major mode for JavaScript editing:
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+;; Hook it in for shell scripts
+(add-to-list 'interpreter-mode-alist '("node" . js2-mode))
+
+;; Turn off js2 mode errors & warnings (we lean on eslint/standard using via Flycheck)
+(setq js2-mode-show-parse-errors nil)
+(setq js2-mode-show-strict-warnings nil)
+#+END_SRC
+** Company-Mode
+[[http://company-mode.github.io/][company]] is a text completion framework for Emacs. The name stands for
+"complete anything". It uses pluggable back-ends and front-ends to
+retrieve and display completion candidates.
+
+For information about company-mode, use =C-h f company-mode=.
+
+#+BEGIN_SRC emacs-lisp
+(use-package company
+  :ensure t
+  :init)
+(add-hook 'after-init-hook 'global-company-mode)
+
+;; Disable for org-mode
+(setq company-global-modes '(not org-mode))
+#+END_SRC
+** Flycheck
+[[https://flycheck.readthedocs.io/en/latest/][flycheck]] is a modern on-the-fly syntax checking extension for Emacs.
+
+To verify if a syntax checker is running, use =C-c ! v= or =M-x flycheck-verify-setup=.
+
+#+BEGIN_SRC emacs-lisp
+;; Install flycheck and enable in all buffers where syntax checking is possible.
+(use-package flycheck
+  :ensure t
+  :init (global-flycheck-mode))
+
+;; Use some color in mode-line.
+(use-package flycheck-color-mode-line
+  :ensure t
+  :init)
+
+(eval-after-load "flycheck"
+  '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+
+;; Show errors under point in pos-tip popups.
+(use-package flycheck-pos-tip
+  :ensure t
+  :init)
+(flycheck-pos-tip-mode)
+
+;; Only check buffer when saved
+(setq flycheck-check-syntax-automatically '(mode-enabled save))
+#+END_SRC
+
+** Lsp-mode
+[[Emacs client/library for the Language Server Protocol ][lsp-mode]] is an Emacs client/library for the Language Server Protocol.
+
+#+BEGIN_SRC emacs-lisp
+  ;; (use-package lsp-mode
+  ;;   :hook (prog-mode . lsp)
+  ;;   :ensure t
+  ;;   :commands lsp)
+
+  ;; ;; lsp-ui is for flycheck integration and UI modules
+  ;; (use-package lsp-ui 
+  ;;    :ensure t
+  ;;    :commands lsp-ui-mode)
+
+  ;; ;; Enable lsp-ui-mode
+  ;; (add-hook 'lsp-mode-hook 'lsp-ui-mode)
+  ;; ;; Prefer flycheck
+  ;; (setq lsp-prefer-flymake nil)
+  ;; (setq lsp-ui-sideline-enable nil)
+  ;; ;; company-mode for completion  
+  ;; (use-package company-lsp 
+  ;;   :ensure t
+  ;;   :commands company-lsp)
+  ;; (push 'company-lsp company-backends)
+
+  ;; ;; Disable snippet until yasnippet is installed
+  ;; (setq lsp-enable-snippet nil)
+#+END_SRC
+
+** Projectile
+[[https://github.com/bbatsov/projectile#usage][Projectile]] is a project interaction library for Emacs.
+Manual is [[https://docs.projectile.mx/en/latest/][here]].
+
+#+BEGIN_SRC emacs-lisp
+(use-package projectile
+  :ensure t
+  :pin melpa-stable
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+#+END_SRC
+
 * Keybindings
 ** General Keybindings
 #+BEGIN_SRC emacs-lisp
@@ -294,8 +432,13 @@ point reaches the beginning or end of the buffer, stop there."
 
 * Future Plugins to take a look at
 
-- [[https://github.com/Fuco1/smartparens][smartparens]]: Minor mode for Emacs that deals with parens pairs and tries to be smart about it.
-- [[https://github.com/joaotavora/yasnippet][yasnippet]]: Template system for Emacs.
-- [[http://company-mode.github.io/][company]]: A text completion framework for Emacs.
-- [[https://github.com/magnars/expand-region.el][expand-region]]: Increases the selected region by semantic units. Video [[http://emacsrocks.com/e09.html][here]].
-- [[https://github.com/purcell/ibuffer-vc][ibuffer-vc]]: Let ibuffer-mode group files by git project.
+- [X] [[http://company-mode.github.io/][company]]: A text completion framework for Emacs. 
+- [X] [[https://flycheck.readthedocs.io/en/latest/][flycheck]]: Syntax checking
+- [ ] [[https://github.com/Fuco1/smartparens][smartparens]]: Minor mode for Emacs that deals with parens pairs and tries to be smart about it.
+- [ ] [[https://github.com/joaotavora/yasnippet][yasnippet]]: Template system for Emacs.
+- [ ] [[https://github.com/magnars/expand-region.el][expand-region]]: Increases the selected region by semantic units. Video [[http://emacsrocks.com/e09.html][here]].
+- [ ] [[https://github.com/purcell/ibuffer-vc][ibuffer-vc]]: Let ibuffer-mode group files by git project.
+- [ ] [[https://magit.vc/][magit]]: Amazing git interface.
+- [ ] [[https://framagit.org/steckerhalter/discover-my-major][discover-my-major]]: Discover key bindings for the current major mode.
+- [ ] [[https://github.com/pashinin/workgroups2][workgroups2]]: Emacs session manager. Save opened buffers to disk and restore later.
+- [ ] helm
