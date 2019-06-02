@@ -5,10 +5,13 @@
 
 * Font
 #+BEGIN_SRC emacs-lisp
-(set-frame-font "Source Code Variable 14" nil t)
-
+(set-face-attribute 'default nil
+                    :family "Iosevka Term Medium"
+                    :height 150
+                    :weight 'normal
+                    :width 'normal)
 ;; Add linespacing
-(setq-default line-spacing 6)
+(setq-default line-spacing 5)
 #+END_SRC
 
 * General Settings
