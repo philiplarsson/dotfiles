@@ -57,7 +57,7 @@
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
-    (flycheck-pos-tip powerline flycheck-color-mode-line js2-mode flycheck company company-mode highlight-symbol highlight-simbyl diff-hl clean-aindent-mode duplicate-thing undo-tree volatile-highlights exec-path-from-shell markdown-mode htmlize ace-window which-key use-package)))
+    (ag helm-ag helm-projectile helm flycheck-pos-tip powerline flycheck-color-mode-line js2-mode flycheck company company-mode highlight-symbol highlight-simbyl diff-hl clean-aindent-mode duplicate-thing undo-tree volatile-highlights exec-path-from-shell markdown-mode htmlize ace-window which-key use-package)))
  '(pdf-view-midnight-colors (quote ("#655370" . "#fbf8ef")))
  '(show-paren-mode t)
  '(tool-bar-mode nil))

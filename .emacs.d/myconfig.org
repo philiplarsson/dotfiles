@@ -6,10 +6,10 @@
 * Font
 #+BEGIN_SRC emacs-lisp
 (set-face-attribute 'default nil
-                    :family "Iosevka Term Medium"
-                    :height 150
-                    :weight 'normal
-                    :width 'normal)
+                     :family "Iosevka Term Medium"
+                     :height 150
+                     :weight 'normal
+                     :width 'normal)
 ;; Add linespacing
 (setq-default line-spacing 5)
 #+END_SRC
@@ -23,6 +23,9 @@
 (setq mac-option-modifier nil
   mac-command-modifier 'meta              ;; use cmd as meta/alt
   select-enable-clipboard t))             ;; cut and paste uses clipboard
+
+;; Dont Show Startup Message
+(setq inhibit-startup-message t)
 
 ;; Allow y and n instead of yes and no
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -96,10 +99,10 @@ Introduction [[https://www.masteringemacs.org/article/introduction-to-ido-mode][
 Enable basic Ido support for files and buffers and the very useful “flex matching” as well.
 
 #+BEGIN_SRC emacs-lisp
-(setq ido-enable-flex-matching t)
-(setq ido-everywhere t)
-(ido-mode 1)
-(defalias 'list-buffers 'ibuffer)    ; use ibuffer as default
+  ;; (setq ido-enable-flex-matching t)
+  ;; (setq ido-everywhere t)
+  ;; (ido-mode 1)
+  ;; (defalias 'list-buffers 'ibuffer)    ; use ibuffer as default
 #+END_SRC
 * Theme
 #+BEGIN_SRC emacs-lisp
@@ -148,6 +151,9 @@ which-key is a minor mode for Emacs that displays the key bindings following you
 (use-package avy
   :ensure t
   :bind ("C-c C-SPC" . avy-goto-word-or-subword-1))
+
+;; case sensitive
+(setq avy-case-fold-search nil)
 #+END_SRC
 
 ** htmlize
@@ -285,27 +291,27 @@ For information about company-mode, use =C-h f company-mode=.
 To verify if a syntax checker is running, use =C-c ! v= or =M-x flycheck-verify-setup=.
 
 #+BEGIN_SRC emacs-lisp
-;; Install flycheck and enable in all buffers where syntax checking is possible.
-(use-package flycheck
-  :ensure t
-  :init (global-flycheck-mode))
+  ;; Install flycheck and enable in all buffers where syntax checking is possible.
+  ;; (use-package flycheck
+  ;;   :ensure t
+  ;;   :init (global-flycheck-mode))
 
-;; Use some color in mode-line.
-(use-package flycheck-color-mode-line
-  :ensure t
-  :init)
+  ;; ;; Use some color in mode-line.
+  ;; (use-package flycheck-color-mode-line
+  ;;   :ensure t
+  ;;   :init)
 
-(eval-after-load "flycheck"
-  '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
+  ;; (eval-after-load "flycheck"
+  ;;   '(add-hook 'flycheck-mode-hook 'flycheck-color-mode-line-mode))
 
-;; Show errors under point in pos-tip popups.
-(use-package flycheck-pos-tip
-  :ensure t
-  :init)
-(flycheck-pos-tip-mode)
+  ;; ;; Show errors under point in pos-tip popups.
+  ;; (use-package flycheck-pos-tip
+  ;;   :ensure t
+  ;;   :init)
+  ;; (flycheck-pos-tip-mode)
 
-;; Only check buffer when saved
-(setq flycheck-check-syntax-automatically '(mode-enabled save))
+  ;; ;; Only check buffer when saved
+  ;; (setq flycheck-check-syntax-automatically '(mode-enabled save))
 #+END_SRC
 
 ** Lsp-mode
@@ -351,6 +357,79 @@ Manual is [[https://docs.projectile.mx/en/latest/][here]].
   (projectile-mode +1))
 #+END_SRC
 
+** Helm
+[[https://github.com/emacs-helm/helm][Helm]] is an incremental completion and selection narrowing framework.
+
+If you need help in a Helm session, use =C-c ?=. 
+#+BEGIN_SRC emacs-lisp
+(use-package helm
+  :ensure t
+  :config
+  (require 'helm-config))
+#+END_SRC
+
+*** Helm Configuration
+#+BEGIN_SRC emacs-lisp
+;;The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
+;;Changed to "C-c h". Note: We must set "C-c h" globally, because we
+;;cannot change `helm-command-prefix-key' once `helm-config' is loaded.
+(global-set-key (kbd "C-c h") 'helm-command-prefix)
+(global-unset-key (kbd "C-x c"))
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+
+;; enable helm-mini with fuzzy matching
+(global-set-key (kbd "C-x b") 'helm-mini)
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
+
+;; helm-find-file
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+(global-set-key (kbd "C-c h o") 'helm-occur)
+
+;; fuzzy-matching in helm-apropos (<prefix> a)
+(setq helm-apropos-fuzzy-match t)
+
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+
+(global-set-key (kbd "C-c h x") 'helm-register)
+
+(global-set-key (kbd "C-c h g") 'helm-google-suggest)
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+(helm-mode 1)
+
+#+END_SRC
+** Helm-Projectile
+[[https://github.com/bbatsov/helm-projectile][helm-projectile]] is a Helm UI for projectile.
+
+#+BEGIN_SRC emacs-lisp
+(use-package helm-projectile
+  :ensure t
+  :config
+  (setq projectile-completion-system 'helm)
+  (setq projectile-switch-project-action 'helm-projectile)
+  (helm-projectile-on))
+#+END_SRC
+
+** Helm-ag
+#+BEGIN_SRC emacs-lisp
+  ;; package ag seems required to make helm-ag work properly with
+  ;; helm-projectile
+  (use-package ag
+    :ensure t)
+
+  (use-package helm-ag
+    :ensure t)
+#+END_SRC
 * Keybindings
 ** General Keybindings
 #+BEGIN_SRC emacs-lisp
@@ -435,8 +514,9 @@ point reaches the beginning or end of the buffer, stop there."
 
 * Future Plugins to take a look at
 
-- [X] [[http://company-mode.github.io/][company]]: A text completion framework for Emacs. 
-- [X] [[https://flycheck.readthedocs.io/en/latest/][flycheck]]: Syntax checking
+- [X] [[http://company-mode.github.io/][company]]: A text completion framework for Emacs.  
+- [ ] [[https://flycheck.readthedocs.io/en/latest/][flycheck]]: Syntax checking (disabled for now)
+- [X] helm
 - [ ] [[https://github.com/Fuco1/smartparens][smartparens]]: Minor mode for Emacs that deals with parens pairs and tries to be smart about it.
 - [ ] [[https://github.com/joaotavora/yasnippet][yasnippet]]: Template system for Emacs.
 - [ ] [[https://github.com/magnars/expand-region.el][expand-region]]: Increases the selected region by semantic units. Video [[http://emacsrocks.com/e09.html][here]].
@@ -444,4 +524,4 @@ point reaches the beginning or end of the buffer, stop there."
 - [ ] [[https://magit.vc/][magit]]: Amazing git interface.
 - [ ] [[https://framagit.org/steckerhalter/discover-my-major][discover-my-major]]: Discover key bindings for the current major mode.
 - [ ] [[https://github.com/pashinin/workgroups2][workgroups2]]: Emacs session manager. Save opened buffers to disk and restore later.
-- [ ] helm
+
