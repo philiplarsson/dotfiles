@@ -1,0 +1,9 @@
+{
+	"Console Log": {
+		"prefix": "cl",
+		"body": [
+			"console.log($1)"
+		],
+		"description": "Create a console.log() statment"
+	}
+}

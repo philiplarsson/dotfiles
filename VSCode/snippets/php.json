@@ -1,0 +1,31 @@
+{
+	"Public method": {
+		"prefix": "pub",
+		"body": [
+			"public function $1($2)",
+			"{",
+			"\t$3",
+			"}"
+		],
+		"description": "New public method"
+	},
+	"Protected method": {
+		"prefix": "prot",
+		"body": [
+			"protected function $1($2)",
+			"{",
+			"\t$3",
+			"}"
+		],
+		"description": "Create a new protected method"
+	},
+	"Class": {
+		"prefix": "class",
+		"body": [
+			"class ${TM_FILENAME_BASE} {",
+			"\t$1",
+			"}"
+		],
+		"description": "Create a new php class"
+	}
+}

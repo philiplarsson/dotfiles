@@ -1,0 +1,88 @@
+{
+  // ###########################################
+  // ## EDITOR ##
+  // # Editor is the core part of Code
+  // ###########################################
+  "editor.minimap.enabled": false,
+  "editor.fontSize": 14,
+  "editor.formatOnSaveTimeout": 0,
+  "editor.fontFamily": "Fira Code, Monaco, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.tabCompletion": "on",
+  "editor.cursorSmoothCaretAnimation": true,
+
+  // ###########################################
+  // ## Workbench ##
+  // # Workbench is everything that surrounds the editor
+  // ###########################################
+  "workbench.statusBar.feedback.visible": false,
+  "workbench.activityBar.visible": false,
+  "workbench.colorTheme": "Monokai Pro",
+  "workbench.iconTheme": "Monokai Pro Icons",
+  "workbench.settings.useSplitJSON": true,
+  "workbench.editor.highlightModifiedTabs": true,
+
+  // ###########################################
+  // ## Vim ##
+  // ###########################################
+  "vim.leader": "ö",
+  "vim.hlsearch": true,
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-e>": false
+  },
+  "vim.easymotion": true,
+  "vim.easymotionMarkerFontFamily": "Fira Code",
+  // Set the font size of the marker text.
+  "vim.easymotionMarkerFontSize": "18",
+  // Set the height of the marker.
+  "vim.easymotionMarkerHeight": 18,
+  // Set the width (in pixels) allocated to each character in the match.
+  "vim.easymotionMarkerWidthPerChar": 12,
+  "vim.camelCaseMotion.enable": true,
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+        "before":["<C-n>"],
+        "after":[],
+        "commands": [
+            {
+                "command": ":nohl"
+            }
+        ]
+    },
+    {
+        "before": ["leader", "c", "c"],
+        "after": ["g", "c", "c"],
+    }
+],
+
+  // ###########################################
+  // ## Terminal ##
+  // ###########################################
+  "terminal.external.osxExec": "Iterm.app",
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.fontSize": 14,
+
+  // ###########################################
+  // ## Explorer ##
+  // ###########################################
+  "explorer.openEditors.visible": 0,
+
+  // ###########################################
+  // ## Other ##
+  // ###########################################
+  "diffEditor.renderSideBySide": false,
+  "php-cs-fixer.onsave": true,
+  "php-cs-fixer.config": ".php_cs;.php_cs.dist;~/.vscode/.php_cs",
+  "[php]": {
+    "editor.defaultFormatter": "junstyle.php-cs-fixer"
+  },
+  "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
+  "window.zoomLevel": 0,
+}
