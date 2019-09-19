@@ -5,12 +5,11 @@
   // ###########################################
   "editor.minimap.enabled": false,
   "editor.fontSize": 14,
-  "editor.formatOnSaveTimeout": 0,
+  "editor.formatOnSave": true,
   "editor.fontFamily": "Fira Code, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
   "editor.tabCompletion": "on",
   "editor.cursorSmoothCaretAnimation": true,
-
   // ###########################################
   // ## Workbench ##
   // # Workbench is everything that surrounds the editor
@@ -21,7 +20,6 @@
   "workbench.iconTheme": "Monokai Pro Icons",
   "workbench.settings.useSplitJSON": true,
   "workbench.editor.highlightModifiedTabs": true,
-
   // ###########################################
   // ## Vim ##
   // ###########################################
@@ -43,38 +41,50 @@
   "vim.camelCaseMotion.enable": true,
   "vim.insertModeKeyBindings": [
     {
-      "before": ["j", "j"],
-      "after": ["<Esc>"]
+      "before": [
+        "j",
+        "j"
+      ],
+      "after": [
+        "<Esc>"
+      ]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-        "before":["<C-n>"],
-        "after":[],
-        "commands": [
-            {
-                "command": ":nohl"
-            }
-        ]
+      "before": [
+        "<C-n>"
+      ],
+      "after": [],
+      "commands": [
+        {
+          "command": ":nohl"
+        }
+      ]
     },
     {
-        "before": ["leader", "c", "c"],
-        "after": ["g", "c", "c"],
+      "before": [
+        "leader",
+        "c",
+        "c"
+      ],
+      "after": [
+        "g",
+        "c",
+        "c"
+      ],
     }
-],
-
+  ],
   // ###########################################
   // ## Terminal ##
   // ###########################################
   "terminal.external.osxExec": "Iterm.app",
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.fontSize": 14,
-
   // ###########################################
   // ## Explorer ##
   // ###########################################
   "explorer.openEditors.visible": 0,
-
   // ###########################################
   // ## Other ##
   // ###########################################
@@ -85,6 +95,10 @@
     "editor.defaultFormatter": "junstyle.php-cs-fixer"
   },
   "php-cs-fixer.executablePath": "${extensionPath}/php-cs-fixer.phar",
-  "window.zoomLevel": 0,
   "breadcrumbs.enabled": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.trimTrailingWhitespace": true,
+  "files.trimFinalNewlines": true
 }
