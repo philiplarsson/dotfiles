@@ -5,6 +5,7 @@ alias vim="nvim"
 
 alias noty='$HOME/Scripts/php-noty/noty'
 alias pp='vim $HOME/Dropbox/pp.org'
+alias anki='vim $HOME/Dropbox/anki.md'
 
 alias emacs='$HOME/Scripts/emacs.sh'
 alias ert-run='$HOME/Scripts/ert-run'
