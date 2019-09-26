@@ -68,5 +68,10 @@
   {
     "key": "ctrl+shift+g",
     "command": "-workbench.view.scm"
+  },
+  {
+    // let cmd+p + enter go to last opened file
+    "key": "cmd+p",
+    "command": "workbench.action.quickOpenPreviousEditor"
   }
 ]

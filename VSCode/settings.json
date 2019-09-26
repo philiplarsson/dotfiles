@@ -100,5 +100,8 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "files.trimTrailingWhitespace": true,
-  "files.trimFinalNewlines": true
+  "files.trimFinalNewlines": true,
+  "cSpell.userWords": [
+    "csrf"
+  ]
 }
