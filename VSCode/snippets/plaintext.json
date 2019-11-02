@@ -5,5 +5,13 @@
 			"console.log($1)"
 		],
 		"description": "Create a console.log() statment"
+	},
+	"cbl": {
+		"prefix": "cbl",
+		"body": [
+			"```",
+			"```"
+		],
+		"description": "Create a codeblock"
 	}
 }
