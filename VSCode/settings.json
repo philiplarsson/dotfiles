@@ -10,6 +10,7 @@
   "editor.fontLigatures": true,
   "editor.tabCompletion": "on",
   "editor.cursorSmoothCaretAnimation": true,
+  "editor.quickSuggestionsDelay": 500,
   // ###########################################
   // ## Workbench ##
   // # Workbench is everything that surrounds the editor
@@ -41,20 +42,13 @@
   "vim.camelCaseMotion.enable": true,
   "vim.insertModeKeyBindings": [
     {
-      "before": [
-        "j",
-        "j"
-      ],
-      "after": [
-        "<Esc>"
-      ]
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": [
-        "<C-n>"
-      ],
+      "before": ["<C-n>"],
       "after": [],
       "commands": [
         {
@@ -63,16 +57,8 @@
       ]
     },
     {
-      "before": [
-        "leader",
-        "c",
-        "c"
-      ],
-      "after": [
-        "g",
-        "c",
-        "c"
-      ],
+      "before": ["leader", "c", "c"],
+      "after": ["g", "c", "c"]
     }
   ],
   // ###########################################
@@ -101,7 +87,10 @@
   },
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
-  "cSpell.userWords": [
-    "csrf"
-  ]
+  "cSpell.userWords": ["csrf", "mimetype", "originalname"],
+  "editor.formatOnSaveTimeout": 5000,
+  "php-cs-fixer.lastDownload": 1571432682948,
+  // Licencekey redacted
+  "intelephense.licenceKey": "",
+  "php.suggest.basic": false
 }
