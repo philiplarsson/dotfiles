@@ -10,4 +10,11 @@ alias anki='vim $HOME/Dropbox/anki.md'
 alias emacs='$HOME/Scripts/emacs.sh'
 alias ert-run='$HOME/Scripts/ert-run'
 
+alias aliases='cat $HOME/.aliases'
+alias zshconf='vim $HOME/.zshrc'
 
+alias dps='docker ps --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Command}}\t{{.Status}}"'
+
+alias ni="npm install"
+alias n="npm"
+alias docc="docker-compose"
