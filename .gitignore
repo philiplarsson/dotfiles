@@ -11,6 +11,10 @@ fish_history
 .*.sw[a-p]
 # session
 Session.vim
+
+# Neovim packages
+.config/nvim/pack/*
+
 # temporary
 .netrwhist
 *~
