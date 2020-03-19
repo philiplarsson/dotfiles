@@ -126,8 +126,6 @@
   ],
   "editor.formatOnSaveTimeout": 5000,
   "php-cs-fixer.lastDownload": 1571432682948,
-  // Licencekey redacted
-  "intelephense.licenceKey": "",
   "php.suggest.basic": false,
   "git.autofetch": true,
   "window.nativeTabs": true,
