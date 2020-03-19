@@ -4,19 +4,23 @@
   // # Editor is the core part of Code
   // ###########################################
   "editor.minimap.enabled": false,
-  "editor.fontSize": 14,
+  "editor.fontSize": 15,
   "editor.formatOnSave": true,
-  "editor.fontFamily": "Fira Code, Monaco, 'Courier New', monospace",
+  "editor.fontFamily": "Roboto Mono, Fira Code, Monaco, 'Courier New', monospace",
   "editor.fontLigatures": true,
-  "editor.tabCompletion": "on",
+  "editor.tabCompletion": true,
+  "editor.tabSize": 2,
   "editor.cursorSmoothCaretAnimation": true,
   "editor.quickSuggestionsDelay": 500,
+  "editor.detectIndentation": true,
+  "editor.parameterHints.enabled": true,
   // ###########################################
   // ## Workbench ##
   // # Workbench is everything that surrounds the editor
   // ###########################################
   "workbench.statusBar.feedback.visible": false,
-  "workbench.activityBar.visible": false,
+  "workbench.statusBar.visible": true,
+  "workbench.activityBar.visible": true,
   "workbench.colorTheme": "Monokai Pro",
   "workbench.iconTheme": "Monokai Pro Icons",
   "workbench.settings.useSplitJSON": true,
@@ -42,13 +46,20 @@
   "vim.camelCaseMotion.enable": true,
   "vim.insertModeKeyBindings": [
     {
-      "before": ["j", "j"],
-      "after": ["<Esc>"]
+      "before": [
+        "j",
+        "j"
+      ],
+      "after": [
+        "<Esc>"
+      ]
     }
   ],
   "vim.normalModeKeyBindingsNonRecursive": [
     {
-      "before": ["<C-n>"],
+      "before": [
+        "<C-n>"
+      ],
       "after": [],
       "commands": [
         {
@@ -57,8 +68,16 @@
       ]
     },
     {
-      "before": ["leader", "c", "c"],
-      "after": ["g", "c", "c"]
+      "before": [
+        "leader",
+        "c",
+        "c"
+      ],
+      "after": [
+        "g",
+        "c",
+        "c"
+      ]
     }
   ],
   // ###########################################
@@ -87,10 +106,40 @@
   },
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
-  "cSpell.userWords": ["csrf", "mimetype", "originalname"],
+  "cSpell.userWords": [
+    "Cloudfront",
+    "Cloudwatch",
+    "ENTRYPOINT",
+    "Healthcheck",
+    "Kubernetes",
+    "Linell",
+    "Pangram",
+    "Unprocessable",
+    "bodyparser",
+    "csrf",
+    "dockerfiles",
+    "graphiql",
+    "loadbalancer",
+    "mimetype",
+    "originalname",
+    "playername"
+  ],
   "editor.formatOnSaveTimeout": 5000,
   "php-cs-fixer.lastDownload": 1571432682948,
   // Licencekey redacted
   "intelephense.licenceKey": "",
-  "php.suggest.basic": false
+  "php.suggest.basic": false,
+  "git.autofetch": true,
+  "window.nativeTabs": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.format.enable": false,
+  "typescript.validate.enable": false,
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": false
+    }
+  },
 }
