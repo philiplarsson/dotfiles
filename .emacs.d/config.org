@@ -48,6 +48,16 @@ Some nice defaults 😄
 
 ;; Remove whitspace on end of lines on save.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Set width for tabs
+(setq tab-width 4)
+
+;; Stop using tabs to indent
+(setq indent-tabs-mode nil)
+
+;; Use zap-up-to-char instead of zap-to-char
+(global-set-key "\M-z" 'zap-up-to-char)
+
   #+end_src
 
 Backup settings
@@ -95,17 +105,28 @@ Backup settings
    #+end_src
 
 * Plugins
+** Enviroment Management
+By default emacs doesn't read from the same environment variables set
+in your terminal. This package fixes that.
 
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :ensure t
+    :config
+    (exec-path-from-shell-initialize))
+#+end_src
 ** Which Key
-
-Displays available keybindings in a popup.
+[[https://github.com/justbur/emacs-which-key][Which key]] displays available keybindings in a popup.
 
 #+begin_src emacs-lisp
 (use-package which-key
   :ensure t
-  :config (which-key-mode))
+  :diminish which-key-mode
+  :config
+  (which-key-mode)
+;; same as default, except all keys from local maps shown first
+  (setq which-key-sort-order 'which-key-local-then-key-order))
 #+end_src
-
 ** Avy
 [[https://github.com/abo-abo/avy][Avy]] is a package for jumping to visible text using a char-based decision tree.
 
@@ -175,7 +196,6 @@ Swiper is an enhanced version of isearch.
 #+end_src
 
 ** Projectile
-
 Projectile makes navigation in and between projects much easier.
 
 Uses ido by default, so lets change to ivy.
@@ -194,4 +214,64 @@ Uses ido by default, so lets change to ivy.
   :ensure t
   :config
   (counsel-projectile-mode))
+#+end_src
+** Dockerfile Mode
+Syntax highlighting for dockerfiles.
+
+#+begin_src emacs-lisp
+(use-package dockerfile-mode
+  :ensure t
+  :mode ("Dockerfile\\'" . dockerfile-mode))
+
+#+end_src
+
+** Typescript
+=typscript.el= is a minimalistic major-mode for editing typescript files.
+
+#+begin_src emacs-lisp
+(use-package typescript-mode
+  :ensure t
+  :config (setq typescript-indent-level 2))
+
+#+end_src
+** Git Gutter
+[[https://github.com/emacsorphanage/git-gutter][Git Gutter]] shows line status from git.
+
+#+begin_src emacs-lisp
+(use-package git-gutter
+  :ensure t
+  :diminish git-gutter-mode
+  :init
+    (global-git-gutter-mode +1))
+#+end_src
+
+** Smart Parens
+[[https://github.com/Fuco1/smartparens][Smartparens]] is a minor mode for dealing with pairs in Emacs.
+
+   #+begin_src emacs-lisp
+  (use-package smartparens
+    :ensure t
+    :diminish smartparens-mode
+    :config
+    (add-hook 'prog-mode-hook 'smartparens-mode))
+   #+end_src
+** Undo Tree
+[[http://www.dr-qubit.org/undo-tree.html][Undo-tree]] treats changes as a branching tree of changes.
+
+   #+begin_src emacs-lisp
+  (use-package undo-tree
+    :ensure t
+    :diminish undo-tree-mode
+    :config
+    (global-undo-tree-mode 1))
+   #+end_src
+
+Use C-z and C-S-z for undo and redo.
+#+begin_src emacs-lisp
+;; make ctrl-z undo
+(global-set-key (kbd "C-z") 'undo)
+;; make ctrl-Z redo
+(defalias 'redo 'undo-tree-redo)
+(global-set-key (kbd "C-S-z") 'redo)
+
 #+end_src
