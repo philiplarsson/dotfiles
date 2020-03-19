@@ -62,7 +62,7 @@ ZSH_THEME="minimal"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions zsh-syntax-highlighting colored-man-pages)
+plugins=(zsh-autosuggestions zsh-syntax-highlighting colored-man-pages fzf-docker)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -115,3 +115,6 @@ source $HOME/.secret
 
 # Opt out from homebrew analytics
 export HOMEBREW_NO_ANALYTICS=1
+
+# Change fzf prefix
+export FZF_COMPLETION_TRIGGER=','
