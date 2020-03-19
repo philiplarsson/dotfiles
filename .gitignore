@@ -70,7 +70,7 @@ flycheck_*.el
 
 .emacs.d/backups
 .emacs.d/url
-.emacs.d/myconfig.el
+.emacs.d/config.el
 .emacs.d/games/
 .emacs.d/ido.last
 .emacs.d/.cache/
