@@ -1,0 +1,128 @@
+* Resources
+
+- 10 productivity tips in emacs https://sites.google.com/site/steveyegge2/effective-emacs
+
+* Initial Config
+
+org-tempo turns on <s expansion.
+
+#+begin_src emacs-lisp
+(require 'org-tempo)
+#+end_src
+
+Make sure use-package is installed.
+#+begin_src emacs-lisp
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+#+end_src
+
+Some nice defaults 😄
+
+#+begin_src emacs-lisp
+; Disable tool bar.
+(tool-bar-mode -1)
+
+; Disable scroll bar.
+(scroll-bar-mode -1)
+
+; Turn on start up message. Instead emacs will jump into scratch.
+(setq inhibit-startup-message t)
+
+;; Disable bell
+(setq visible-bell 1)
+
+;; Confirm before exiting emacs
+(setq confirm-kill-emacs 'yes-or-no-p)
+
+;; Allow y and n instead of yes and no
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Iterate through CamelCase words
+(global-subword-mode 1)
+
+;; Remove whitspace on end of lines on save.
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+  #+end_src
+
+Backup settings
+
+#+begin_src emacs-lisp
+;; Save backups in emacs-backups folder
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+; Use version numbers on backup
+(setq version-control t)
+; Store files under version control as other files
+(setq vc-make-backup-files t)
+;; Delete excess backups
+(setq delete-old-versions t)
+; how many of the newest versions to keep
+(setq kept-new-versions 20)
+; and how many of the old
+(setq kept-old-versions 5)
+#+end_src
+** Mac Settings
+
+    #+begin_src emacs-lisp
+
+;; Will enable brackets and square brackets, among other things.
+(when (eq system-type 'darwin)
+(setq mac-option-modifier nil
+  mac-command-modifier 'meta))              ;; use cmd as meta/alt
+
+;  https://www.reddit.com/r/emacs/comments/8ph0hq/i_have_converted_from_the_mac_port_to_the_ns_port/
+(if (version< "27.0" emacs-version)
+    (set-fontset-font
+     "fontset-default" 'unicode "Apple Color Emoji" nil 'prepend)
+  (set-fontset-font
+   t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
+    #+end_src
+
+* Keybindings
+
+   #+begin_src emacs-lisp
+;; Use Ctrl-W to delete word and rebind Ctrl-X Ctrl-k to kill region.
+(global-set-key "\C-w" 'backward-kill-word)
+(global-set-key "\C-x\C-k" 'kill-region)
+
+;; Ctrl-X Ctrl-M to invoke M-x
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+   #+end_src
+
+* Plugins
+
+** Which Key
+
+Displays available keybindings in a popup.
+
+#+begin_src emacs-lisp
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
+#+end_src
+
+** Avy
+[[https://github.com/abo-abo/avy][Avy]] is a package for jumping to visible text using a char-based decision tree.
+
+#+begin_src emacs-lisp
+(use-package avy
+  :ensure t
+  :bind ("C-c C-SPC" . avy-goto-word-or-subword-1))
+
+;; case sensitive
+(setq avy-case-fold-search nil)
+#+end_src
+
+** Crux
+[[https://github.com/bbatsov/crux][Crux]], a Collection of Ridiculously Useful eXtensions for Emacs.
+
+#+begin_src emacs-lisp
+(use-package crux
+  :ensure t
+  :bind (("C-a" . crux-move-beginning-of-line)))
+#+end_src
+
+** Ivy
+
+Ivy is an interactive interface for completion. Think of it as ido with more features.
