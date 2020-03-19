@@ -1,6 +1,10 @@
 * Resources
 
+- [[https://devhints.io/org-mode][Org Mode cheatsheet]]
 - 10 productivity tips in emacs https://sites.google.com/site/steveyegge2/effective-emacs
+
+* Getting Help in Emacs
+Use =M-x describe-variable= to find what an variable does.
 
 * Initial Config
 
@@ -33,11 +37,11 @@ Some nice defaults 😄
 ;; Disable bell
 (setq visible-bell 1)
 
-;; Confirm before exiting emacs
-(setq confirm-kill-emacs 'yes-or-no-p)
-
 ;; Allow y and n instead of yes and no
 (fset 'yes-or-no-p 'y-or-n-p)
+
+;; Confirm before exiting emacs
+(setq confirm-kill-emacs 'yes-or-no-p)
 
 ;; Iterate through CamelCase words
 (global-subword-mode 1)
@@ -123,6 +127,71 @@ Displays available keybindings in a popup.
   :bind (("C-a" . crux-move-beginning-of-line)))
 #+end_src
 
-** Ivy
+** Smex
+=M-x= enhancement, which sorts M-x commands based on recency and
+frequency. Integrates with consel m-x.
 
+   #+begin_src emacs-lisp
+  (use-package smex
+    :ensure t)
+
+   #+end_src
+
+** Ivy
 Ivy is an interactive interface for completion. Think of it as ido with more features.
+
+#+begin_src emacs-lisp
+; diminish will hide ivy-mode from the mode line
+; ivy-mode will replace many of the build in ido functionality
+
+(use-package ivy
+  :ensure t
+  :diminish (ivy-mode)
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (ivy-mode t))
+#+end_src
+
+** Counsel
+Counsel provides emacs commands that make the most out of ivy.
+
+   #+begin_src emacs-lisp
+  (use-package counsel
+    :ensure t
+    :bind (("M-x" . counsel-M-x)
+	 ("C-x C-f" . counsel-find-file)))
+   #+end_src
+
+** Swiper
+Swiper is an enhanced version of isearch.
+
+#+begin_src emacs-lisp
+  (use-package swiper
+  :ensure t
+  :bind (("C-s" . swiper-isearch)
+	 ("C-r" . swiper-isearch)
+	 ("C-c C-r" . ivy-resume)))
+#+end_src
+
+** Projectile
+
+Projectile makes navigation in and between projects much easier.
+
+Uses ido by default, so lets change to ivy.
+
+#+begin_src emacs-lisp
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (setq projectile-completion-system 'ivy)
+  (projectile-mode +1))
+
+; counsel-projectile provides further ivy integration into projectile
+(use-package counsel-projectile
+  :ensure t
+  :config
+  (counsel-projectile-mode))
+#+end_src
