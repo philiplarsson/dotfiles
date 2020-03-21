@@ -275,3 +275,36 @@ Use C-z and C-S-z for undo and redo.
 (global-set-key (kbd "C-S-z") 'redo)
 
 #+end_src
+** Slime
+[[https://common-lisp.net/project/slime/][SLIME]] is a lisp interaction mode for emacs.
+
+We need to define the default Lisp to use. Since I'm using =clisp=, I
+use that (use =which clisp= to find it).
+
+#+begin_src emacs-lisp
+(use-package slime
+  :ensure t
+  :config
+  (setq inferior-lisp-program "/usr/local/bin/clisp"))
+
+#+end_src
+** Ace Window
+[[https://github.com/abo-abo/ace-window][Ace window]] makes it easier to switch between multiple windows.
+
+#+begin_src emacs-lisp
+(use-package ace-window
+  :ensure t
+  :bind ("M-o" . ace-window)
+  :config
+  (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?l ?g))
+  (custom-set-faces
+    '(aw-leading-char-face
+     ((t (:inherit ace-jump-face-foreground :height 4.0))))))
+
+;; Make M-o work in ansi-term
+(defun expose-global-binding-in-term (binding)
+   (define-key term-raw-map binding
+     (lookup-key (current-global-map) binding)))
+
+(expose-global-binding-in-term (kbd "M-o"))
+#+end_src
