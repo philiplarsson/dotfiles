@@ -1,12 +1,4 @@
-* Resources
-
-- [[https://devhints.io/org-mode][Org Mode cheatsheet]]
-- 10 productivity tips in emacs https://sites.google.com/site/steveyegge2/effective-emacs
-
-* Getting Help in Emacs
-Use =M-x describe-variable= to find what an variable does.
-
-* Initial Config
+* General Configuration
 
 org-tempo turns on <s expansion.
 
@@ -294,19 +286,35 @@ use that (use =which clisp= to find it).
 [[https://github.com/abo-abo/ace-window][Ace window]] makes it easier to switch between multiple windows.
 
 #+begin_src emacs-lisp
-(use-package ace-window
-  :ensure t
-  :bind ("M-o" . ace-window)
-  :config
-  (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?l ?g))
-  (custom-set-faces
-    '(aw-leading-char-face
-     ((t (:inherit ace-jump-face-foreground :height 4.0))))))
+  (use-package ace-window
+    :ensure t
+    :bind ("M-o" . ace-window)
+    :config
+    (setq aw-keys '(?a ?o ?e ?u ?h ?t ?n ?l ?g))
+    (custom-set-faces
+      '(aw-leading-char-face
+       ((t (:inherit ace-jump-face-foreground :height 4.0))))))
 
 ;; Make M-o work in ansi-term
-(defun expose-global-binding-in-term (binding)
-   (define-key term-raw-map binding
-     (lookup-key (current-global-map) binding)))
+;; We need to load it after "term", otherwise 'term-*-map won't exist.
+(with-eval-after-load "term"
+    (define-key term-raw-map (kbd "M-o") 'ace-window)
+    (define-key term-mode-map (kbd "M-o") 'ace-window))
 
-(expose-global-binding-in-term (kbd "M-o"))
+#+end_src
+
+** Markdown-mode
+[[https://jblevins.org/projects/markdown-mode/][Markdown mode]] is a major mode for editing Markdown-formatted text.
+
+To show markdown preview (with for instance =C-c C-c l=), install
+markdown with =brew install markdown=.
+
+#+begin_src emacs-lisp
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "markdown"))
 #+end_src
