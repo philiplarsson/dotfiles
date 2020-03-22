@@ -50,6 +50,8 @@ Some nice defaults 😄
 ;; Use zap-up-to-char instead of zap-to-char
 (global-set-key "\M-z" 'zap-up-to-char)
 
+;; Save bookmarks file each time a change is made
+(setq bookmark-save-flag 1)
   #+end_src
 
 Backup settings
@@ -57,6 +59,8 @@ Backup settings
 #+begin_src emacs-lisp
 ;; Save backups in emacs-backups folder
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+; Safest but slowest - make backups by copying
+(setq backup-by-copying t)
 ; Use version numbers on backup
 (setq version-control t)
 ; Store files under version control as other files
