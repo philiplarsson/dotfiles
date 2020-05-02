@@ -42,16 +42,22 @@ Some nice defaults 😄
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Set width for tabs
-(setq tab-width 4)
+(setq tab-width 2)
 
 ;; Stop using tabs to indent
-(setq indent-tabs-mode nil)
+;;(setq indent-tabs-mode nil)
 
 ;; Use zap-up-to-char instead of zap-to-char
 (global-set-key "\M-z" 'zap-up-to-char)
 
 ;; Save bookmarks file each time a change is made
 (setq bookmark-save-flag 1)
+
+;; Reload file if changed on disc
+(global-auto-revert-mode 1)
+
+;; Auto refresh dired when file changes
+(add-hook 'dired-mode-hook 'auto-revert-mode)
   #+end_src
 
 Backup settings
@@ -211,7 +217,8 @@ Uses ido by default, so lets change to ivy.
   :config
   (counsel-projectile-mode))
 #+end_src
-** Dockerfile Mode
+** Docker
+*** Dockerfile Mode
 Syntax highlighting for dockerfiles.
 
 #+begin_src emacs-lisp
@@ -219,6 +226,13 @@ Syntax highlighting for dockerfiles.
   :ensure t
   :mode ("Dockerfile\\'" . dockerfile-mode))
 
+#+end_src
+
+*** Docker Compose
+
+#+begin_src emacs-lisp
+(use-package docker-compose-mode
+  :ensure t)
 #+end_src
 
 ** Typescript
@@ -321,4 +335,23 @@ markdown with =brew install markdown=.
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "markdown"))
+#+end_src
+** Golden Ratio
+
+   #+begin_src emacs-lisp
+(use-package golden-ratio
+  :ensure t
+  :config
+  ;; make ace-window trigger golden-ratio
+  (add-to-list 'golden-ratio-extra-commands 'ace-window)
+  :init
+  (golden-ratio-mode 1))
+   #+end_src
+** Golang
+
+#+begin_src emacs-lisp
+(use-package go-mode
+  :ensure t
+)
+
 #+end_src
