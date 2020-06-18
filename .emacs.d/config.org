@@ -1,11 +1,5 @@
 * General Configuration
 
-org-tempo turns on <s expansion.
-
-#+begin_src emacs-lisp
-(require 'org-tempo)
-#+end_src
-
 Make sure use-package is installed.
 #+begin_src emacs-lisp
 (unless (package-installed-p 'use-package)
@@ -58,6 +52,12 @@ Some nice defaults 😄
 
 ;; Auto refresh dired when file changes
 (add-hook 'dired-mode-hook 'auto-revert-mode)
+
+;; suppress auto-revert messages
+(setq auto-revert-verbose nil)
+
+;; Hightlight parenthesis
+(show-paren-mode 1)
   #+end_src
 
 Backup settings
@@ -95,7 +95,40 @@ Backup settings
    t 'symbol (font-spec :family "Apple Color Emoji") nil 'prepend))
     #+end_src
 
-* Keybindings
+* Org Mode
+Use ~C-c C-,~ to insert a template. Replaces ~<s~.
+
+~C-c l~ is used to store links. Useful when linking notes in org
+mode. Store link using ~C-c l~ then insert the link using ~C-c C-l~.
+
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c l") 'org-store-link)
+#+end_src
+
+* Mixed Settings
+
+** Vi-like paren mathing
+
+#+begin_quote
+Here is some Emacs Lisp that will make the % key show the matching
+parenthesis, like in vi. In addition, if the cursor isn't over a
+parenthesis, it simply inserts a % like normal.
+#+end_quote
+[[https://www.gnu.org/software/emacs/manual/html_node/efaq/Matching-parentheses.html][source]]
+
+#+begin_src emacs-lisp
+(global-set-key "%" 'match-paren)
+
+(defun match-paren (arg)
+"Go to the matching paren if on a paren; otherwise insert %."
+(interactive "p")
+(cond ((looking-at "\\s(") (forward-list 1) (backward-char 1))
+((looking-at "\\s)") (forward-char 1) (backward-list 1))
+(t (self-insert-command (or arg 1)))))
+
+#+end_src
+
+* General Keybindings
 
    #+begin_src emacs-lisp
 ;; Use Ctrl-W to delete word and rebind Ctrl-X Ctrl-k to kill region.
@@ -115,6 +148,7 @@ in your terminal. This package fixes that.
   (use-package exec-path-from-shell
     :ensure t
     :config
+    (setq exec-path-from-shell-check-startup-files nil)
     (exec-path-from-shell-initialize))
 #+end_src
 ** Which Key
@@ -349,9 +383,59 @@ markdown with =brew install markdown=.
    #+end_src
 ** Golang
 
+Setup [[https://github.com/dominikh/go-mode.el][go-mode]]. Also use goimports instead of gofmt. [[https://pkg.go.dev/golang.org/x/tools/cmd/goimports?tab=doc][goimports]] will fix
+imports as well as format your code, so it's basically gofmt but with
+added import fix.
+
 #+begin_src emacs-lisp
 (use-package go-mode
   :ensure t
+  :config
+  (setq gofmt-command "goimports")
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (add-hook 'go-mode-hook (lambda () (setq tab-width 4)))
 )
-
 #+end_src
+
+Once [[https://github.com/golang/tools/blob/master/gopls/doc/emacs.md][gopls]] has left alpha I should probably look into using that instead.
+
+** Web-mode
+
+   #+begin_src emacs-lisp
+(defun turnoff-smartparens ()
+  (turn-off-smartparens-mode))
+
+(use-package web-mode
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.gohtml\\'" . web-mode))
+  ;; Disable smartparens when in web-mode.
+  (add-hook 'web-mode 'turnoff-smartparens)
+)
+   #+end_src
+** Dash-at-point
+Run dash with the word under point.
+
+#+begin_src emacs-lisp
+(use-package dash-at-point
+  :ensure t
+  :config
+  (global-set-key "\C-cd" 'dash-at-point)
+)
+#+end_src
+
+** Par edit
+#+begin_src emacs-lisp
+(use-package paredit
+  :ensure t
+  :config
+  ;; Use paredit with emacs lisp modes
+  (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
+  (add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
+  (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
+  (add-hook 'ielm-mode-hook             #'enable-paredit-mode)
+  (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
+  (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
+  (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+)
+  #+end_src
