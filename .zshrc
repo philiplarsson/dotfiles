@@ -1,8 +1,12 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# -------------------------
+# OH MY ZSH CONFIG
+# -------------------------
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/philiplarsson/.oh-my-zsh"
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -66,55 +70,10 @@ plugins=(zsh-autosuggestions zsh-syntax-highlighting colored-man-pages fzf-docke
 
 source $ZSH/oh-my-zsh.sh
 
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-source $HOME/.aliases
-
-# Set CLICOLOR if you want Ansi Colors in iTerm2 
-export CLICOLOR=1
-
-# Set colors to match iTerm2 Terminal Colors
-#export TERM=xterm-256color
-
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-
-source $HOME/.secret
-
 # Autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Opt out from homebrew analytics
-export HOMEBREW_NO_ANALYTICS=1
-
-# Change fzf prefix
-export FZF_COMPLETION_TRIGGER=','
+# User configuration
+source $HOME/.aliases
