@@ -102,7 +102,7 @@ Use ~C-c C-,~ to insert a template. Replaces ~<s~.
 mode. Store link using ~C-c l~ then insert the link using ~C-c C-l~.
 
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-c l") 'org-store-link)
+(define-key org-mode-map (kbd "C-c l") 'org-store-link)
 #+end_src
 
 * Mixed Settings
@@ -381,7 +381,7 @@ markdown with =brew install markdown=.
   :init
   (golden-ratio-mode 1))
    #+end_src
-** Golang
+** Go-Mode
 
 Setup [[https://github.com/dominikh/go-mode.el][go-mode]]. Also use goimports instead of gofmt. [[https://pkg.go.dev/golang.org/x/tools/cmd/goimports?tab=doc][goimports]] will fix
 imports as well as format your code, so it's basically gofmt but with
@@ -391,14 +391,67 @@ added import fix.
 (use-package go-mode
   :ensure t
   :config
-  (setq gofmt-command "goimports")
-  (add-hook 'before-save-hook 'gofmt-before-save)
   (add-hook 'go-mode-hook (lambda () (setq tab-width 4)))
 )
 #+end_src
 
-Once [[https://github.com/golang/tools/blob/master/gopls/doc/emacs.md][gopls]] has left alpha I should probably look into using that instead.
+Don't forget to install gopls.
 
+#+begin_src shell
+go get golang.org/x/tools/gopls@latest
+#+end_src
+
+lsp-mode, company-lsp, lsp-ui and flycheck
+
+** LSP Mode
+
+#+begin_src emacs-lisp
+;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+(setq lsp-keymap-prefix "C-c l")
+
+(use-package lsp-mode
+    :ensure t
+    :hook (
+            (go-mode . lsp)
+            ;; if you want which-key integration
+            (lsp-mode . lsp-enable-which-key-integration))
+    :commands lsp lsp-deferred)
+
+;; if you are ivy user
+(use-package lsp-ivy
+  :ensure t
+  :bind ("C-c l f" . lsp-ivy-workspace-symbol)
+  :commands lsp-ivy-workspace-symbol)
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+;; optionally
+;(use-package lsp-ui :commands lsp-ui-mode)
+
+#+end_src
+** Company Mode
+
+Company mode is a completion package that works well with lsp mode.
+
+Note that *lsp-go and company-lsp should not be installed* according
+to gopls github [[https://github.com/golang/tools/blob/master/gopls/doc/emacs.md#troubleshooting][page]].
+
+For company documentation, use ~M-x describe-function RET company-mode~.
+
+#+begin_src emacs-lisp
+(use-package company
+  :ensure t
+  :config
+  ;; Optionally enable completion-as-you-type behavior.
+  (setq company-idle-delay 0.5)
+  (setq company-minimum-prefix-length 2))
+
+#+end_src
 ** Web-mode
 
    #+begin_src emacs-lisp
