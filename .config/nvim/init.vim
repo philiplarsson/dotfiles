@@ -18,9 +18,9 @@ set autoindent     " apply indentation to next line
 set smartindent    " indent according to syntax/style of code
 set mouse=a        " use mouse
 set expandtab      " use spaces for tab. Use Ctrl-V<TAB> for regular Tab.
-set tabstop=2      " use 2 spaces (visually) for 1 tab
+set tabstop=4      " use 4 spaces (visually) for 1 tab
 set softtabstop=0  " don't simulate tab stops at widths
-set shiftwidth=2   " use 4 spaces when pressed on tab
+set shiftwidth=4   " use 4 spaces when pressed on tab
 set autoread       " reload file if changed outside of vim
 
 " Set correct path for python2.7
@@ -117,3 +117,17 @@ let g:UltiSnipsSnippetsDir="~/.config/nvim/Ultisnips"
 let g:table_mode_corner = '+'
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
+
+" ================= fzf-settings ==================
+"
+nmap <LEADER>pp :GitFiles<CR>
+nmap <LEADER>pg :GitFiles?<CR>
+nmap <LEADER>pP :Files<CR>
+nmap <LEADER>pb :Buffers<CR>
+nmap <LEADER>pa :Ag<CR>
+nmap <LEADER>pl :BLines<CR>
+nmap <LEADER>pc :Commands<CR>
+nmap <LEADER>ph :Helptags<CR>
+nmap <LEADER>ps :Snippets<CR>
+nmap <LEADER>pm :Maps<CR>
+
