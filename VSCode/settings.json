@@ -21,7 +21,7 @@
   "workbench.statusBar.feedback.visible": false,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Monokai Pro",
+  "workbench.colorTheme": "Noctis Lux",
   "workbench.iconTheme": "Monokai Pro Icons",
   "workbench.settings.useSplitJSON": true,
   "workbench.editor.highlightModifiedTabs": true,
@@ -140,4 +140,6 @@
       "source.fixAll.eslint": false
     }
   },
+  "go.formatTool": "goimports",
+  "go.useLanguageServer": true,
 }
