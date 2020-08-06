@@ -6,7 +6,7 @@ syntax on          " syntax highlighting
 
 set autowrite      " write to file if make
 let mapleader="ö"
-set number         " show line number
+" set number         " show line number
 set showmode       " show current mode
 set encoding=utf-8
 set splitbelow
@@ -39,12 +39,18 @@ nmap <LEADER>ev :tabedit $MYVIMRC<CR>
 nmap <LEADER>ep :tabedit ~/.config/nvim/packages.vim<CR>
 
 " Paste from system clipboard with <leader>v
-" This will preserve the indentanion of the text (as if 'paste' command was
+" This will preserve the indentation of the text (as if 'paste' command was
 " on).
 map <leader>v "+p
 
 " Use spell check when git commit
 autocmd FileType gitcommit setlocal spell
+
+" Use spell check for OpenAPI (yaml) files
+autocmd FileType yaml setlocal spell
+
+" Use spell check for org files
+autocmd FileType org setlocal spell
 
 " Clear hlsearch when pressing enter
 " nnoremap = normal mode non-recursive
@@ -108,11 +114,6 @@ nmap <LEADER><LEADER> <Plug>(easymotion-overwin-f)
 "" tcomment
 map <LEADER>c <C-_><C-_>
 
-" Ultisnipps
-" Open :UltiSnipsEdit in new tab
-let g:UltiSnipsEditSplit="tabdo"
-let g:UltiSnipsSnippetsDir="~/.config/nvim/Ultisnips"
-
 " Table-Mode
 let g:table_mode_corner = '+'
 let g:table_mode_corner_corner='+'
@@ -130,4 +131,74 @@ nmap <LEADER>pc :Commands<CR>
 nmap <LEADER>ph :Helptags<CR>
 nmap <LEADER>ps :Snippets<CR>
 nmap <LEADER>pm :Maps<CR>
+
+" ================= ultisnipps-settings ==================
+" Open :UltiSnipsEdit in new tab
+let g:UltiSnipsEditSplit="tabdo"
+let g:UltiSnipsSnippetsDir="~/.config/nvim/Ultisnips"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+" let g:UltiSnipsEditSplit="vertical"
+
+" ================= vim-go-settings ==================
+"
+" let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save     
+" let g:go_auto_type_info = 1           " Automatically get signature/type info for object under cursor     
+" ================= vim-gitgutter-settings ==================
+"
+set updatetime=500         " vim-gitgutter recommends a faster update time
+
+" ================= vim-airline-settings ==================
+"
+" let g:airline#extensions#ale#enabled = 1
+let g:airline_theme='hybrid'
+
+" ================= ale-settings ==================
+"
+nmap <silent> <C-k> <Plug>(ale_previous)
+nmap <silent> <C-j> <Plug>(ale_next)
+
+" ================= scratch-settings ==================
+"
+let g:scratch_autohide=1
+
+" ================= vim-orgmode-settings ==================
+"
+" Set emacs path. Used for exporting org files
+let g:org_export_emacs="/usr/local/bin/emacs"
+
+" Defines if leading stars are displayed in the color of the heading or if a
+" special NonText highlighting is used that hides them from user.
+let g:org_heading_shade_leading_stars = 0
+
+" ================= vim-which-key-settings ==================
+"
+nnoremap <silent> <leader> :WhichKey 'ö'<CR>
+set timeoutlen=700
+" Disable floating windows
+" let g:which_key_use_floating_win = 0
+
+" Define prefix dictionary
+let g:which_key_map =  {}
+autocmd VimEnter * call which_key#register('ö', "g:which_key_map")
+
+" Second level dictionaries:
+" 'name' is a special field. It will define the name of the group, e.g., leader-p is the "+fzf" group.
+" Unnamed groups will show a default empty string.
+
+" =======================================================
+" Create menus based on existing mappings
+" =======================================================
+" You can pass a descriptive text to an existing mapping.
+"
+let g:which_key_map.p = { 'name' : 'Projects' }
+let g:which_key_map.h = { 'name' : 'Git Gutter' }
+let g:which_key_map.e = { 'name':  'Edit configuration'}
+let g:which_key_map.n = { 'name':  'NERDTree'}
+let g:which_key_map.e.v = 'edit vimrc'
+let g:which_key_map.e.p = 'edit packages'
+let g:which_key_map.c = 'toggle comment'
 
