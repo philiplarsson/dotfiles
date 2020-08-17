@@ -19,5 +19,6 @@ Plug 'liuchengxu/vim-which-key'
 Plug 'jceb/vim-orgmode'
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
+Plug 'mbbill/undotree'
 
 call plug#end()

@@ -87,6 +87,8 @@ endif
 " <C-^> is hard to use so use <LEADER>. instead
 nnoremap <LEADER>. <C-^>
 
+" Smart Home
+noremap <expr> <silent> <Home> col('.') == match(getline('.'),'\S')+1 ? '0' : '^'
 :" Map Ctrl-A -> Start of line, Ctrl-E -> End of line
 :nmap <C-a> <Home>
 :nmap <C-e> <End>
@@ -144,6 +146,7 @@ nmap <LEADER>ph :Helptags<CR>
 nmap <LEADER>ps :Snippets<CR>
 nmap <LEADER>pm :Maps<CR>
 
+" Install bat to display colored preview
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
@@ -160,9 +163,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 " ================= coc.nvim settings ==================
 "
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 " <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
@@ -183,11 +183,10 @@ nmap <leader>gy <Plug>(coc-type-definition)
 nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
 " nmap <leader>rr <Plug>(coc-rename)
-nmap <leader>g[ <Plug>(coc-diagnostic-prev)
-nmap <leader>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-
+nmap <leader>gp <Plug>(coc-diagnostic-prev)
+nmap <leader>gn <Plug>(coc-diagnostic-next)
+" nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
+" nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 
 " :CocDiagnostics will bring up a new window that can be used to navigate and review diagnostic detections.
 " ================= coc-go-settings ==================
@@ -199,10 +198,18 @@ nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 
 " Don't forget to add "coc.preferences.formatOnSaveFiletypes": ["go"] to
 " :CocConfig
+" ================= gofmt.vim-settings ==================
+"
+" use goimports instead of gofmt
 let g:gofmt_exe = 'goimports'
+
 " ================= scratch-settings ==================
 "
 let g:scratch_autohide=1
+
+" ================= undotree-settings ==================
+"
+nnoremap <leader>u :UndotreeShow<CR>
 
 " ================= vim-orgmode-settings ==================
 "
@@ -238,6 +245,7 @@ let g:which_key_map.h = { 'name' : 'Git Gutter' }
 let g:which_key_map.e = { 'name':  'Edit configuration'}
 let g:which_key_map.n = { 'name':  'NERDTree'}
 let g:which_key_map.g = { 'name':  'Coc'}
+let g:which_key_map.u = { 'name':  'UndoTreeShow'}
 let g:which_key_map.e.v = 'edit vimrc'
 let g:which_key_map.e.p = 'edit packages'
 let g:which_key_map.c = 'toggle comment'
