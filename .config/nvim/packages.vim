@@ -1,29 +1,23 @@
-command! PackUpdate packadd minpac | source $MYVIMRC | call minpac#update('', {'do': 'call minpac#status()'})
-command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
-command! PackStatus packadd minpac | source $MYVIMRC | call minpac#status()
-
-if !exists('*minpac#init')
-  finish
-endif
-
-call minpac#init()
-
-" minpac must have {'type': 'opt'} so that it can be loaded with `packadd`.
-call minpac#add('k-takata/minpac', {'type': 'opt'})
+call plug#begin('~/.vim/plugged')
 
 " =============== plugins =============== "
-call minpac#add('scrooloose/nerdtree')
-call minpac#add('easymotion/vim-easymotion')
-call minpac#add('tomtom/tcomment_vim')            " smart commenting
-call minpac#add('cocopon/iceberg.vim')
-call minpac#add('dhruvasagar/vim-table-mode')     " automatic table creator & formatter. <leader>tm to toggle
-call minpac#add('sirver/UltiSnips')
-call minpac#add('junegunn/fzf.vim')
-call minpac#add('airblade/vim-gitgutter')
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('mtth/scratch.vim')
-call minpac#add('liuchengxu/vim-which-key')
-call minpac#add('jceb/vim-orgmode')
-call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
-call minpac#add('vim-airline/vim-airline')
-call minpac#add('mhinz/vim-startify')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tweekmonster/gofmt.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'sheerun/vim-polyglot'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'easymotion/vim-easymotion'
+Plug 'tomtom/tcomment_vim'            " smart commenting
+Plug 'cocopon/iceberg.vim'
+Plug 'dhruvasagar/vim-table-mode'     " automatic table creator & formatter. <leader>tm to toggle
+Plug 'sirver/UltiSnips'
+Plug 'airblade/vim-gitgutter'
+Plug 'mtth/scratch.vim'
+Plug 'liuchengxu/vim-which-key'
+Plug 'jceb/vim-orgmode'
+Plug 'vim-airline/vim-airline'
+Plug 'mhinz/vim-startify'
+
+call plug#end()

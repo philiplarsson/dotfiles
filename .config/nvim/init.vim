@@ -6,7 +6,7 @@ syntax on          " syntax highlighting
 
 set autowrite      " write to file if make
 let mapleader="ö"
-" set number         " show line number
+set number         " show line number
 set showmode       " show current mode
 set encoding=utf-8
 set splitbelow
@@ -30,7 +30,7 @@ set cmdheight=2
 let g:python_host_prog='/usr/bin/python2.7'
 
 " To use fzf in Vim, add the following line to your .vimrc:
-set rtp+=/usr/local/opt/fzf
+" set rtp+=/usr/local/opt/fzf
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -39,6 +39,11 @@ set updatetime=300
 " Always show signcolumn. Otherwise the text shifts each time diagnostics
 " appear/become resolved.
 set signcolumn=yes
+
+" ================= plugins ==================
+"
+source ~/.config/nvim/packages.vim
+
 " ================= general bindings ==================
 "
 " Bind jj to escape
@@ -102,12 +107,9 @@ syntax on
 colorscheme iceberg
 
 " ================= markdown-settings ==================
+"
 " Use textwidth 80 for markdown files (reformat with gq)
 au BufRead,BufNewFile *.md setlocal textwidth=80
-
-" ================= plugins ==================
-"
-source ~/.config/nvim/packages.vim
 
 " ================= plugin-settings ==================
 "
@@ -142,6 +144,9 @@ nmap <LEADER>ph :Helptags<CR>
 nmap <LEADER>ps :Snippets<CR>
 nmap <LEADER>pm :Maps<CR>
 
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
+
 " ================= ultisnipps-settings ==================
 " Open :UltiSnipsEdit in new tab
 let g:UltiSnipsEditSplit="tabdo"
@@ -150,8 +155,8 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-" If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
+" Split window when editing snippets
+let g:UltiSnipsEditSplit="vertical"
 
 " ================= coc.nvim settings ==================
 "
@@ -171,16 +176,30 @@ try
     nmap <silent> <C-k> :call CocAction('diagnosticNext')<cr>
     nmap <silent> <C-j> :call CocAction('diagnosticPrevious')<cr>
 endtry
+
+" GoTo code navigation.
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gy <Plug>(coc-type-definition)
+nmap <leader>gi <Plug>(coc-implementation)
+nmap <leader>gr <Plug>(coc-references)
+" nmap <leader>rr <Plug>(coc-rename)
+nmap <leader>g[ <Plug>(coc-diagnostic-prev)
+nmap <leader>g] <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
+nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
+
+
 " :CocDiagnostics will bring up a new window that can be used to navigate and review diagnostic detections.
 " ================= coc-go-settings ==================
 "
 " Add missing imports on save
 " NOTE: This outputs some ugly text in :messages but can't find a way to
 " disable...
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
 " Don't forget to add "coc.preferences.formatOnSaveFiletypes": ["go"] to
 " :CocConfig
+let g:gofmt_exe = 'goimports'
 " ================= scratch-settings ==================
 "
 let g:scratch_autohide=1
@@ -218,6 +237,7 @@ let g:which_key_map.p = { 'name' : 'Projects' }
 let g:which_key_map.h = { 'name' : 'Git Gutter' }
 let g:which_key_map.e = { 'name':  'Edit configuration'}
 let g:which_key_map.n = { 'name':  'NERDTree'}
+let g:which_key_map.g = { 'name':  'Coc'}
 let g:which_key_map.e.v = 'edit vimrc'
 let g:which_key_map.e.p = 'edit packages'
 let g:which_key_map.c = 'toggle comment'
