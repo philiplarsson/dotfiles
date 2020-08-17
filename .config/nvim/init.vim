@@ -23,12 +23,22 @@ set softtabstop=0  " don't simulate tab stops at widths
 set shiftwidth=4   " use 4 spaces when pressed on tab
 set autoread       " reload file if changed outside of vim
 
+" Give more space for displaying messages.
+set cmdheight=2
+
 " Set correct path for python2.7
 let g:python_host_prog='/usr/bin/python2.7'
 
 " To use fzf in Vim, add the following line to your .vimrc:
 set rtp+=/usr/local/opt/fzf
 
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Always show signcolumn. Otherwise the text shifts each time diagnostics
+" appear/become resolved.
+set signcolumn=yes
 " ================= general bindings ==================
 "
 " Bind jj to escape
@@ -143,24 +153,34 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " If you want :UltiSnipsEdit to split your window.
 " let g:UltiSnipsEditSplit="vertical"
 
-" ================= vim-go-settings ==================
+" ================= coc.nvim settings ==================
 "
-" let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save     
-" let g:go_auto_type_info = 1           " Automatically get signature/type info for object under cursor     
-" ================= vim-gitgutter-settings ==================
-"
-set updatetime=500         " vim-gitgutter recommends a faster update time
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
 
-" ================= vim-airline-settings ==================
-"
-" let g:airline#extensions#ale#enabled = 1
-let g:airline_theme='hybrid'
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
-" ================= ale-settings ==================
+try
+    nmap <silent> <C-k> :call CocAction('diagnosticNext')<cr>
+    nmap <silent> <C-j> :call CocAction('diagnosticPrevious')<cr>
+endtry
+" :CocDiagnostics will bring up a new window that can be used to navigate and review diagnostic detections.
+" ================= coc-go-settings ==================
 "
-nmap <silent> <C-k> <Plug>(ale_previous)
-nmap <silent> <C-j> <Plug>(ale_next)
+" Add missing imports on save
+" NOTE: This outputs some ugly text in :messages but can't find a way to
+" disable...
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 
+" Don't forget to add "coc.preferences.formatOnSaveFiletypes": ["go"] to
+" :CocConfig
 " ================= scratch-settings ==================
 "
 let g:scratch_autohide=1
@@ -202,3 +222,19 @@ let g:which_key_map.e.v = 'edit vimrc'
 let g:which_key_map.e.p = 'edit packages'
 let g:which_key_map.c = 'toggle comment'
 
+" ================= vim-polygot-settings ==================
+" stolen from https://github.com/erkrnt/awesome-streamerrc/blob/master/ThePrimeagen/init.vim
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+" let g:go_auto_sameids = 1
