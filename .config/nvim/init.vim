@@ -22,6 +22,7 @@ set tabstop=4      " use 4 spaces (visually) for 1 tab
 set softtabstop=0  " don't simulate tab stops at widths
 set shiftwidth=4   " use 4 spaces when pressed on tab
 set autoread       " reload file if changed outside of vim
+set relativenumber
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -40,6 +41,9 @@ set updatetime=300
 " appear/become resolved.
 set signcolumn=yes
 
+" Move and reformat
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 " ================= plugins ==================
 "
 source ~/.config/nvim/packages.vim
@@ -128,10 +132,13 @@ nmap <LEADER><LEADER> <Plug>(easymotion-overwin-f)
 "" tcomment
 map <LEADER>c <C-_><C-_>
 
-" Table-Mode
+"" Table-Mode
 let g:table_mode_corner = '+'
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
+
+"" Dash
+nmap <LEADER>d :Dash<CR>
 
 " ================= fzf-settings ==================
 "
@@ -160,6 +167,13 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Split window when editing snippets
 let g:UltiSnipsEditSplit="vertical"
+
+" ================= vim-fugitive-settings ==================
+"
+nmap <leader>gs :G<CR>
+" In dv (:Gvdiffsplit), gu for select left, gh for select right
+nmap <leader>gu :diffget //2<CR>
+nmap <leader>gh :diffget //3<CR>
 
 " ================= coc.nvim settings ==================
 "
