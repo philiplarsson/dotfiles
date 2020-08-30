@@ -71,6 +71,9 @@ autocmd FileType yaml setlocal spell
 " Use spell check for org files
 autocmd FileType org setlocal spell
 
+" Use spell check for markdown files
+autocmd FileType markdown setlocal spell
+
 " Clear hlsearch when pressing enter
 " nnoremap = normal mode non-recursive
 nnoremap <silent> <CR> :noh<CR>
@@ -130,7 +133,7 @@ let g:EasyMotion_do_mapping = 0
 nmap <LEADER><LEADER> <Plug>(easymotion-overwin-f)
 
 "" tcomment
-map <LEADER>c <C-_><C-_>
+map <LEADER>C <C-_><C-_>
 
 "" Table-Mode
 let g:table_mode_corner = '+'
@@ -138,7 +141,7 @@ let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
 
 "" Dash
-nmap <LEADER>d :Dash<CR>
+nmap <LEADER>D :Dash<CR>
 
 " ================= fzf-settings ==================
 "
@@ -192,26 +195,32 @@ try
 endtry
 
 " GoTo code navigation.
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gy <Plug>(coc-type-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
-" nmap <leader>rr <Plug>(coc-rename)
-nmap <leader>gp <Plug>(coc-diagnostic-prev)
-nmap <leader>gn <Plug>(coc-diagnostic-next)
+nmap <leader>cd <Plug>(coc-definition)
+nnoremap <silent><nowait> <leader>cD  :<C-u>CocList diagnostics<cr>
+nmap <leader>ct <Plug>(coc-type-definition)
+nmap <leader>ci <Plug>(coc-implementation)
+nmap <leader>cr <Plug>(coc-references)
+nmap <leader>cR <Plug>(coc-rename)
+nmap <leader>cp <Plug>(coc-diagnostic-prev)
+nmap <leader>cn <Plug>(coc-diagnostic-next)
+nmap <leader>ca <Plug>(coc-codeaction)
+nnoremap <silent><nowait> <leader>cm  :<C-u>CocList outline<cr>
 " nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 " nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 
 " :CocDiagnostics will bring up a new window that can be used to navigate and review diagnostic detections.
-" ================= coc-go-settings ==================
-"
-" Add missing imports on save
-" NOTE: This outputs some ugly text in :messages but can't find a way to
-" disable...
-" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+" Use K to show documentation in preview window.
+" nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> <leader>d :call <SID>show_documentation()<CR>
 
-" Don't forget to add "coc.preferences.formatOnSaveFiletypes": ["go"] to
-" :CocConfig
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 " ================= gofmt.vim-settings ==================
 "
 " use goimports instead of gofmt
@@ -258,11 +267,11 @@ let g:which_key_map.p = { 'name' : 'Projects' }
 let g:which_key_map.h = { 'name' : 'Git Gutter' }
 let g:which_key_map.e = { 'name':  'Edit configuration'}
 let g:which_key_map.n = { 'name':  'NERDTree'}
-let g:which_key_map.g = { 'name':  'Coc'}
+let g:which_key_map.c = { 'name':  'Code / Coc'}
 let g:which_key_map.u = { 'name':  'UndoTreeShow'}
 let g:which_key_map.e.v = 'edit vimrc'
 let g:which_key_map.e.p = 'edit packages'
-let g:which_key_map.c = 'toggle comment'
+let g:which_key_map.C = 'toggle comment'
 
 " ================= vim-polygot-settings ==================
 " stolen from https://github.com/erkrnt/awesome-streamerrc/blob/master/ThePrimeagen/init.vim
