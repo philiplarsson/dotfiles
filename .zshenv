@@ -1,5 +1,7 @@
 # -------------------------
-# MIX CONFIG
+# This file should not contain any slow instructions as this file is always sourced.
+# .zshenv should not contain commands that produce output or assume the shell is attached to a tty.
+# $PATH, $EDITOR, and $PAGER are often set in .zshenv.
 # -------------------------
 
 # Set CLICOLOR if you want Ansi Colors in iTerm2
