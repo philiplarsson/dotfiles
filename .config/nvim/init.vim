@@ -111,6 +111,15 @@ nmap <LEADER>jb <C-t>
 " Use an undo file
 set undofile
 set undodir=~/.vimundo/
+
+" Change windows with hjkl
+:nmap <silent> <C-h> :wincmd h<CR>
+:nmap <silent> <C-j> :wincmd j<CR>
+:nmap <silent> <C-k> :wincmd k<CR>
+:nmap <silent> <C-l> :wincmd l<CR>
+
+" Help me misstyping
+:command W w
 " ================= theme ==================
 "
 syntax on
