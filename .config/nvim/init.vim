@@ -23,6 +23,7 @@ set softtabstop=0  " don't simulate tab stops at widths
 set shiftwidth=4   " use 4 spaces when pressed on tab
 set autoread       " reload file if changed outside of vim
 set relativenumber
+set hidden         " allow changing of files without saving it first
 
 " Give more space for displaying messages.
 set cmdheight=2
@@ -190,8 +191,8 @@ else
 endif
 
 try
-    nmap <silent> <C-k> :call CocAction('diagnosticNext')<cr>
-    nmap <silent> <C-j> :call CocAction('diagnosticPrevious')<cr>
+    nmap <silent> <C-n> :call CocAction('diagnosticNext')<cr>
+    nmap <silent> <C-p> :call CocAction('diagnosticPrevious')<cr>
 endtry
 
 " GoTo code navigation.
