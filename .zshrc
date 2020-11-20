@@ -109,3 +109,8 @@ function ggn() {
 
   echo -e "\n\e[1;32mDone! \e[0m"
 }
+
+# Open current git project in browser
+function gh() {
+  open $(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")/$1$2
+}
