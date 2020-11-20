@@ -21,7 +21,7 @@
   "workbench.statusBar.feedback.visible": false,
   "workbench.statusBar.visible": true,
   "workbench.activityBar.visible": true,
-  "workbench.colorTheme": "Noctis Lux",
+  "workbench.colorTheme": "Noctis Minimus",
   "workbench.iconTheme": "Monokai Pro Icons",
   "workbench.settings.useSplitJSON": true,
   "workbench.editor.highlightModifiedTabs": true,
@@ -125,7 +125,7 @@
     "playername"
   ],
   "editor.formatOnSaveTimeout": 5000,
-  "php-cs-fixer.lastDownload": 1571432682948,
+  "php-cs-fixer.lastDownload": 1597746124095,
   "php.suggest.basic": false,
   "git.autofetch": true,
   "window.nativeTabs": true,

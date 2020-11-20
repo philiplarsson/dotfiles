@@ -85,3 +85,27 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 source $HOME/.aliases
+
+# Upload notes
+function ggn() {
+  echo -e "\e[1;32mGo Go Notes! \e[0m\n"
+
+  # Copy files
+  rm -rf /Users/philiplarsson/Dropbox/code/Go/note-converter/notes
+  rm -rf /Users/philiplarsson/Dropbox/code/Go/note-converter/output
+  cp -r /Users/philiplarsson/Dropbox/Notes-online /Users/philiplarsson/Dropbox/code/Go/note-converter/notes
+
+  # Convert
+  /Users/philiplarsson/Dropbox/code/Go/note-converter/main --input notes --output output > /dev/null
+
+  # Push to repo
+  cd /Users/philiplarsson/Dropbox/code/Go/note-converter/
+  git add .
+  git commit -am "Update notes 📓"
+  git push
+
+  # Move back to starting repo
+  cd "$OLDPWD"
+
+  echo -e "\n\e[1;32mDone! \e[0m"
+}

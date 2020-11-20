@@ -20,7 +20,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'vim-airline/vim-airline'
 Plug 'mhinz/vim-startify'
 Plug 'mbbill/undotree'
-Plug 'ThePrimeagen/vim-be-good', {'do': './install.sh'}
+" Plug 'ThePrimeagen/vim-be-good'
 Plug 'rizzatti/dash.vim'
 
 call plug#end()

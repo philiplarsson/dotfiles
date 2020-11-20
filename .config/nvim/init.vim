@@ -120,6 +120,9 @@ set undodir=~/.vimundo/
 
 " Help me misstyping
 :command W w
+
+" Insert data
+nnoremap <LEADER>T "=strftime("%c")<CR>p
 " ================= theme ==================
 "
 syntax on
@@ -134,6 +137,7 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 "
 "" NERDTree
 nmap <LEADER>nt :NERDTreeToggle<CR>
+nmap <LEADER>nf :NERDTreeFind<CR>
 
 "" easymotion
 let g:EasyMotion_smartcase = 1
