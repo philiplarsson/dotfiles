@@ -22,5 +22,6 @@ Plug 'mhinz/vim-startify'
 Plug 'mbbill/undotree'
 " Plug 'ThePrimeagen/vim-be-good'
 Plug 'rizzatti/dash.vim'
+Plug 'mattn/emmet-vim'
 
 call plug#end()

@@ -21,3 +21,5 @@ alias docc="docker-compose"
 
 alias note="vim ~/Dropbox/Notes-online/personal.md"
 alias notes="note"
+
+alias gt="go test ./..."

@@ -96,7 +96,7 @@ function ggn() {
   cp -r /Users/philiplarsson/Dropbox/Notes-online /Users/philiplarsson/Dropbox/code/Go/note-converter/notes
 
   # Convert
-  /Users/philiplarsson/Dropbox/code/Go/note-converter/main --input notes --output output > /dev/null
+  /Users/philiplarsson/Dropbox/code/Go/note-converter/main --input notes --output /Users/philiplarsson/Dropbox/code/Go/note-converter/output > /dev/null
 
   # Push to repo
   cd /Users/philiplarsson/Dropbox/code/Go/note-converter/
