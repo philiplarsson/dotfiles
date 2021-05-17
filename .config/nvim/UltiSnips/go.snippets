@@ -1,0 +1,31 @@
+snippet ife "Common error check" b
+if err != nil {
+	$1
+}
+
+endsnippet
+
+snippet ttest "Table tests" b
+func Test${1:ToUpper}(t *testing.T) {
+	tests := []struct {
+		name string
+		in   string
+		want string
+	}{
+		{
+			name: "Test single word",
+			in:   "Hello",
+			want: "HELLO",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := $1(tt.in)
+			if got != tt.want {
+				t.Errorf("Expected:\n\t%q\nGot:\n\t%q", tt.want, got)
+			}
+		})
+	}
+}
+endsnippet

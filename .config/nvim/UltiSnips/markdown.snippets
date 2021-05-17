@@ -5,20 +5,23 @@ $1
 $0
 endsnippet
 
-snippet pcbl "Pandoc Code Block"
-\`\`\` {.${1:go}}
-$2
-\`\`\`
-$0
+snippet icbl "Inline codeblock"
+\`$1\`$0
 endsnippet
 
 snippet <s "Code Block"
-\`\`\` {.${1:go}}
+\`\`\`${1:go}
 $2
 \`\`\`
 $0
 endsnippet
 
-snippet icbl "Inline codeblock"
+snippet ilc "Inline codeblock"
 \`$1\`$0
+endsnippet
+
+snippet nn "New note"
+## ${1:`date "+%a %d %b %Y %T%z"`}
+
+
 endsnippet
