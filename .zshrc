@@ -111,6 +111,6 @@ function ggn() {
 }
 
 # Open current git project in browser
-function gh() {
+function open-gh() {
   open $(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")/$1$2
 }
